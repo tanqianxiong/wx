@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "classpath://config/hibernate/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="">
+
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<!-- <property name="hibernate.connection.password">cbms</property> <property 
+			name="hibernate.connection.url"> jdbc:oracle:thin:@192.168.136.133:1521:orcl 
+			</property> <property name="hibernate.connection.username">cbms</property> -->
+
+		<!-- book -->
+		<mapping class="com.book.entity.User" />
+		
+
+	</session-factory>
+</hibernate-configuration>
