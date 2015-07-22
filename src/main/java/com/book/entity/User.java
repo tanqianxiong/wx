@@ -16,12 +16,10 @@ import org.hibernate.annotations.GenericGenerator;
 public class User  implements Serializable{
 
 	// Fields
-
 	private String id;
 	private String username;
 	private String password;
 	private String gender;
-
 	// Constructors
 
 	/** default constructor */
