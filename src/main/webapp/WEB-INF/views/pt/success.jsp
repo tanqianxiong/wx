@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>中移物联网员工服务</title>
-</head>
 <body>
-<jsp:forward page="/admin/login.do"></jsp:forward>
+	普通用户的账号绑定成功！
 </body>
 </html>

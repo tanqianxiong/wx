@@ -1,21 +1,19 @@
-package com.book.service.imp;
+package com.service.imp;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import com.book.dao.UserDao;
-import com.book.entity.User;
-import com.book.service.UserService;
+import com.dao.UserDao;
+import com.entity.User;
+import com.service.UserService;
 
-@Repository("userService")
+@Service("userService")
 public class UserServiceImp implements UserService{
-
 	
 	@Autowired
-	public UserDao userDao;
-	
+	UserDao userDao;
 	@Override
 	public List<User> getAll() {
 		// TODO Auto-generated method stub

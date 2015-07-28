@@ -1,20 +1,20 @@
-package com.book.dao.imp;
+package com.dao.imp;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.book.dao.UserDao;
-import com.book.entity.User;
+import com.dao.UserDao;
+import com.entity.User;
 import com.common.db.HibernateDaoImp;
-
 @Repository("userDao")
 public class UserDaoImp extends HibernateDaoImp<User> implements UserDao{
 
-	public List<User> getAll() {		
+	@Override
+	public List<User> getAll() {
+		// TODO Auto-generated method stub
 		return this.getAll(null);
 	}
 
-
+	
 }

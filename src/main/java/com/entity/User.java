@@ -1,4 +1,4 @@
-package com.book.entity;
+package com.entity;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "user", schema = "wx")
+@Table(name = "USER", schema = "wx")
 public class User  implements Serializable{
 
 	// Fields

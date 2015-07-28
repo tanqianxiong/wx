@@ -7,6 +7,6 @@
 <title>中移物联网员工服务</title>
 </head>
 <body>
-<jsp:forward page="/admin/login.do"></jsp:forward>
+	<h2>你没有执行该功能的权限！</h2>
 </body>
 </html>
