@@ -13,7 +13,7 @@ public class SessionFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // 不过滤的uri
-        String[] notFilter = new String[] { "/login.do", "/logout.do", "/bound.do" ,"/noAccessRight.do"};
+        String[] notFilter = new String[] { "/login.do", "/logout.do", "/bound.do" , "/authorize.do" ,"/noAccessRight.do"};
         // 请求的uri
         String uri = request.getRequestURI();
         String basePath=request.getContextPath();
