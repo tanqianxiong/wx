@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.entity.Book;
-import com.service.BookService;
+import com.entity.Welfare;
+import com.service.WelfareService;
 
 @Controller
-@RequestMapping("/admin/book")
-public class BookController {
+@RequestMapping("/admin/welfare")
+public class WelfareController {
 	@Autowired
-	public BookService bookService;
+	public WelfareService welfareService;
 	//全查
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("admin/book/list");
+		ModelAndView mv = new ModelAndView("admin/welfare/list");
 		
-		List<Book> list=this.bookService.getAll();
+		List<Welfare> list=this.welfareService.getAll();
 		System.out.println(list);
 		mv.addObject("list", list);
 		return mv;
@@ -30,11 +30,11 @@ public class BookController {
 	//按字段查询
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView getByProperty(HttpServletRequest request) throws IOException{
-		ModelAndView mv = new ModelAndView("admin/book/result");
+		ModelAndView mv = new ModelAndView("admin/welfare/result");
 		String propertyValue = request.getParameter("propertyValue");
 		System.out.println(propertyValue);		
-		List<Book> r1 = this.bookService.getLikeProperty("name",propertyValue);
-		List<Book> r2 = this.bookService.getLikeProperty("author", propertyValue);
+		List<Welfare> r1 = this.welfareService.getLikeProperty("name",propertyValue);
+		List<Welfare> r2 = this.welfareService.getLikeProperty("id", propertyValue);
 		
 		mv.addObject("list", r1);
 		mv.addObject("list2", r2);
@@ -43,39 +43,32 @@ public class BookController {
 	}
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView add(HttpServletRequest request,Book book){
-		book.setPoints((float) 0);
-		book.setOutNum(0);
-		this.bookService.add(book);
+	public ModelAndView add(HttpServletRequest request,Welfare welfare){
+		this.welfareService.add(welfare);
 		return this.list(request);
 		
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView deleteById(HttpServletRequest request,String id){
-		//String id = request.getParameter("id");
-		System.out.println(id);
-		this.bookService.delete(id);
+		this.welfareService.delete(id);
 		return this.list(request);
 	}
 	
 	
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
-	public ModelAndView modify(String id){
+	public ModelAndView get(String id){
 		System.out.println(id);
-		ModelAndView mv = new ModelAndView("admin/book/update");
-		Book book=this.bookService.get(id);
-		System.out.println(book.getName());
-		
-		mv.addObject("item",book);
+		ModelAndView mv = new ModelAndView("admin/welfare/update");
+		Welfare welfare=this.welfareService.get(id);
+		mv.addObject("item",welfare);
 		return mv;
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView update(HttpServletRequest request,Book book){
-		
-		this.bookService.alter(book);
+	public ModelAndView update(HttpServletRequest request,Welfare welfare){
+		this.welfareService.alter(welfare);
 		
 		return this.list(request);
 	}
