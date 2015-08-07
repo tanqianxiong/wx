@@ -1,6 +1,7 @@
 package com.dao.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -13,27 +14,32 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 	@Override
 	public List<Book> getAll() {
 		// TODO Auto-generated method stub
-		return this.getAll(null);
+		return this.doGetAll(null);
 	}
 	@Override
 	public void add(Book book){
-		this.insert(book);
+		this.doInsert(book);
 	}
 	@Override
-	public List<Book> getLikeProperty(String propertyName,Object propertyValue){
+	public List<Book> getListByLikeProperties(Map<String,Object> map){
 		
-		return this.getListLikeProperty(propertyName,propertyValue,null);
+		return this.doGetListByLikeProperties(map);
 	}
 	@Override
 	public void delete(String id){
-		this.deleteById(id);
+		this.doDeleteById(id);
 	}
 	@Override
 	public Book get(String id){
-		return this.getById(id);
+		return this.doGetById(id);
 	}
 	@Override
 	public void alter(Book book){
-		this.update(book);
+		this.doUpdate(book);
+	}
+	@Override
+	public List<Book> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+		// TODO Auto-generated method stub
+		return this.doGetListByLikeProperties(map, map2);
 	}
 }

@@ -1,6 +1,7 @@
 package com.dao.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -13,27 +14,27 @@ public class WelfareDaoImp extends HibernateDaoImp<Welfare> implements WelfareDa
 	@Override
 	public List<Welfare> getAll() {
 		// TODO Auto-generated method stub
-		return this.getAll(null);
+		return this.doGetAll(null);
 	}
 	@Override
 	public void add(Welfare welfare){
-		this.insert(welfare);
+		this.doInsert(welfare);
 	}
 	@Override
-	public List<Welfare> getLikeProperty(String propertyName,Object propertyValue){
+	public List<Welfare> getLikeProperties(Map<String,Object> map){
 		
-		return this.getListLikeProperty(propertyName,propertyValue,null);
+		return this.doGetListByLikeProperties(map);
 	}
 	@Override
 	public void delete(String id){
-		this.deleteById(id);
+		this.doDeleteById(id);
 	}
 	@Override
 	public Welfare get(String id){
-		return this.getById(id);
+		return this.doGetById(id);
 	}
 	@Override
 	public void alter(Welfare welfare){
-		this.update(welfare);
+		this.doUpdate(welfare);
 	}
 }

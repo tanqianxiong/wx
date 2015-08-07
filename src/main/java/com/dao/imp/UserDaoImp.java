@@ -13,7 +13,7 @@ public class UserDaoImp extends HibernateDaoImp<User> implements UserDao{
 	@Override
 	public List<User> getAll() {
 		// TODO Auto-generated method stub
-		return this.getAll(null);
+		return this.doGetAll(null);
 	}
 
 	

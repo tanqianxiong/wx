@@ -1,6 +1,7 @@
 package com.service.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class WelfareServiceImp implements WelfareService{
 	}
 	
 	@Override
-	public List<Welfare> getLikeProperty(String propertyName,Object propertyValue){
-		return welfareDao.getLikeProperty(propertyName,propertyValue);
+	public List<Welfare> getLikeProperty(Map<String,Object> map){
+		return welfareDao.getLikeProperties(map);
 	}
 	@Override
 	public void delete(String id){

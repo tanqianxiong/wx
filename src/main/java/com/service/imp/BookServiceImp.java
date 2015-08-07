@@ -1,6 +1,7 @@
 package com.service.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class BookServiceImp implements BookService{
 	}
 	
 	@Override
-	public List<Book> getLikeProperty(String propertyName,Object propertyValue){
-		return bookDao.getLikeProperty(propertyName,propertyValue);
+	public List<Book> getLikeProperty(Map<String,Object> map){
+		return bookDao.getListByLikeProperties(map);
 	}
 	@Override
 	public void delete(String id){
@@ -39,6 +40,11 @@ public class BookServiceImp implements BookService{
 	@Override
 	public void alter(Book book){
 		bookDao.alter(book);
+	}
+	@Override
+	public List<Book> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+		// TODO Auto-generated method stub
+		return this.bookDao.getLikeProperty(map, map2);
 	}
 
 }
