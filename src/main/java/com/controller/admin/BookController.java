@@ -1,7 +1,10 @@
 package com.controller.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +35,17 @@ public class BookController {
 	public ModelAndView getByProperty(HttpServletRequest request) throws IOException{
 		ModelAndView mv = new ModelAndView("admin/book/result");
 		String propertyValue = request.getParameter("propertyValue");
+		propertyValue="老";
 		System.out.println(propertyValue);		
-		List<Book> r1 = this.bookService.getLikeProperty("name",propertyValue);
-		List<Book> r2 = this.bookService.getLikeProperty("author", propertyValue);
-		
-		mv.addObject("list", r1);
-		mv.addObject("list2", r2);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("name", "%"+propertyValue+"%");
+		map.put("author", "%"+propertyValue+"%");
+		map.put("publisher", "%"+propertyValue+"%");
+		List<Book> list=this.bookService.getLikeProperty(map);
+		Map<String,Object> map2=new HashMap<String,Object>();
+		map2.put("type", "文学类");
+		List<Book> list2=this.bookService.getLikeProperty(map,map2);
+		mv.addObject("list", list);
 		mv.addObject("propertyValue", propertyValue);
 		return mv;
 	}

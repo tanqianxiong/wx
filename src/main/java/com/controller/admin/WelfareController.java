@@ -1,7 +1,10 @@
 package com.controller.admin;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.entity.Book;
 import com.entity.Welfare;
 import com.service.WelfareService;
 
@@ -32,12 +36,12 @@ public class WelfareController {
 	public ModelAndView getByProperty(HttpServletRequest request) throws IOException{
 		ModelAndView mv = new ModelAndView("admin/welfare/result");
 		String propertyValue = request.getParameter("propertyValue");
-		System.out.println(propertyValue);		
-		List<Welfare> r1 = this.welfareService.getLikeProperty("name",propertyValue);
-		List<Welfare> r2 = this.welfareService.getLikeProperty("id", propertyValue);
-		
-		mv.addObject("list", r1);
-		mv.addObject("list2", r2);
+		System.out.println(propertyValue);	
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("name", propertyValue);
+		map.put("author", propertyValue);
+		List<Welfare> list=this.welfareService.getLikeProperty(map);
+		mv.addObject("list", list);
 		mv.addObject("propertyValue", propertyValue);
 		return mv;
 	}
