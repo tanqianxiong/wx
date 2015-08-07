@@ -435,18 +435,22 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 		logger.info(hql);
 		return query.list();
 	}
-	
+	public List<T> doGetListByLikeProperties(Map<String, Object> likeProps){
+		return doGetListByLikeProperties(likeProps,null);
+	}
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	public List<T> doGetListByLikeProperties(Map<String, Object> listProp){
-		List<SimpleExpression> seList=new ArrayList<SimpleExpression>();
+	public List<T> doGetListByLikeProperties(Map<String, Object> likeProps,Map<String, Object> andProps){
 		Criteria criteria = this.getSession(true).createCriteria(this.entityName);
-		if(listProp!=null && !listProp.isEmpty()){
-			for (String key : listProp.keySet()) {
-				seList.add(Restrictions.like(key,listProp.get(key)));
+		if(likeProps!=null && !likeProps.isEmpty()){
+			List<SimpleExpression> seList=new ArrayList<SimpleExpression>();
+			for (String key : likeProps.keySet()) {
+				seList.add(Restrictions.like(key,likeProps.get(key)));
 			}
+			criteria.add(orExpressionLink(seList));
 		}
-		criteria.add(orExpressionLink(seList));
-		//criteria.add(Restrictions.or(seList.get(0),seList.get(1)));
+		if(andProps!=null && !andProps.isEmpty()){
+			criteria.add(Restrictions.allEq(andProps));
+		}
 		return criteria.list();
 	}
 
