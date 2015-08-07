@@ -1,0 +1,130 @@
+body{
+	font-family: "Microsoft YaHei",arial,sans-serif;
+	font-size: 14px;
+	background-color: #ededef;
+	/*background-image: url("../img/bg.jpg");
+	background-size: cover;
+	background-attachment:fixed;*/
+}
+
+/*slim类 左右距离屏幕20像素*/
+.slim{
+	margin-left:20px;
+	margin-right: 20px;
+	line-height: 1.5em;
+}
+.likebtn{
+	width: 40%;
+	height: 40%;
+	margin-top: 20%;
+	text-align: center;
+	color: #fff;
+	font-size: 3rem;
+	margin: 0 auto;
+	background-color: #ee3e80;
+	border-radius: 10px;
+}
+.likebtn a{
+	color: #fff;
+	outline: none;
+	text-decoration:none;
+}
+h1{
+	margin-top: 50px;
+}
+h3{
+	margin-bottom: 10px;
+}
+.category{
+	height: 30%;
+}
+.thumbnail{
+	border-radius: 10px;
+}
+img{
+	width:80%;
+}
+.go-popup{
+	padding: 5px 8px;
+	cursor: pointer;
+}
+#goback{
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	padding: 5px;
+	background-color: #5AD0C3;
+	opacity: 0.7;
+	cursor: pointer;
+	border-radius:5px;
+}
+#masker,#masker-ind{
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 1000;
+	background-color: rgba(0,0,0,.6);
+	display: none;
+}
+#showdetail{
+	width: 200px;
+	height: 250px;
+	position: fixed;
+	background-color: #eee;
+	left: 50%;
+	top: 50%;
+	margin: -180px 0 0 -100px;
+	z-index: 1002;
+	font-size: 1.5rem;
+	text-align: center;
+	display: none;
+}
+#borrow,#escheat-yes,#escheat-no{
+	background-color: #5cb85c;
+	color: #eee;
+	font-weight: bolder;
+	letter-spacing: .2em;
+}
+#escheat-yes{
+	margin-right: 30px;
+}
+.table td{
+	padding: 2px;
+}
+.escheat{
+	padding: 3px 0;
+}
+#escheat-no{
+	background-color: #aaa;
+}
+#bindcontainer{
+	text-align: center;
+	color: #fff;
+	font-size: 2.5rem;
+}
+
+
+.individual{
+	font-size: 2rem;
+}
+.individual-table{
+	font-size: 1.5rem;
+}
+.panel-title a{
+	display: block;
+}
+#popup-ind{
+	width: 300px;
+	height: 250px;
+	position: fixed;
+	background-color: #eee;
+	left: 50%;
+	top: 50%;
+	margin: -150px 0 0 -150px;
+	z-index: 1002;
+	font-size: 1.5rem;
+	text-align: center;
+	display: none;	
+}
