@@ -1,8 +1,12 @@
 package com.controller.admin;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.util.JsonUtil;
 import com.entity.User;
 import com.service.UserService;
 
@@ -35,14 +40,16 @@ public class SecurityController {
 		return mv;
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView doLogin(String username,String password,HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
-	//	mv.addObject(new LoginForm());
-		request.getSession().setAttribute("user", "admin");
-		List<User> list=this.userService.getAll();
-		mv.addObject("list", list);
-		mv.setViewName("/admin/user/list");
-		return mv;
+	public void doLogin(String username,String password,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		Map<String,Object> map=new HashMap<String,Object>();
+		if(username.equals("admin") && password.equals("123")){
+			request.getSession().setAttribute("user", "admin");
+			map.put("success", true);
+		}
+		else{
+			map.put("success", false);
+		}
+		JsonUtil.writeCommonJson(response, map);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

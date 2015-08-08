@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>中移物联网员工服务</title>
+<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
+<script src="/wx/js/jquery.js"></script>
+<script src="/wx/js/bootstrap.js"></script>
+
+</head>
+<body>
+	<div id="loginForm">
+		<div>
+			<label> 用户名： </label> <input type="text" id="username"
+				name="username" />
+		</div>
+
+		<div>
+			<label> 密&nbsp;&nbsp;码： </label> <input type="password" id="password"
+				name="password" />
+		</div>
+		<div>
+			<button id="loginBtn">登录</button>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			$('#loginBtn').click(function(){
+				$.ajax({
+				    type: "POST", 	
+					url: "/wx/admin/login.do",
+					data: {
+						username:$("#username").val(),
+						password:$("#password").val()
+					},
+					dataType: "json",
+					success: function(result){
+						if (result.success) {
+							setTimeout(function(){
+								window.location.href="/wx/admin/book/list.do";
+							},1000);
+						} else {
+							alert("抱歉，信息不匹配，请重新输入");
+						}  
+					},
+					error: function(jqXHR){     
+					   alert("发生错误：" + jqXHR.status);  
+					},     
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>

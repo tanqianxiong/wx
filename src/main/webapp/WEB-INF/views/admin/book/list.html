@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>中移物联网员工服务</title>
+<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="/wx/css/bootstrap-theme.css" rel="stylesheet"
+	type="text/css">
+<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
+<script src="/wx/js/jquery.js"></script>
+<script src="/wx/js/bootstrap.js"></script>
+<script src="/wx/js/app/book.js"></script>
+<script src="/wx/js/app/common.js"></script>
+<style type="text/css">
+th {
+	min-width: 80px;
+}
+.main{
+	margin: 20px;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+		<div>
+			<p class="button-area">
+		        <a href="#" id="addBtn" class="btn btn-default btn-sm btn-pop" title="新增">新增</a>
+		    </p>
+			
+		</div>
+		<div id="listDiv">
+			<div class="form-search">
+				<div class="search-main">
+					<input name="keyword" id="keyword" type="text" placeholder="请输入书名/作者/出版社进行搜索">
+					<button id="searchBtn" type="button"
+						class="btn btn-default btn-search">
+						<i class="fa fa-search"></i> 搜索
+					</button>
+				</div>
+			</div>
+			<table id="bookTable">
+				<thead>
+					<tr>
+						<th>ISBN</th>
+						<th>书名</th>
+						<th>作者</th>
+						<th>出版社</th>
+						<th>出版年份</th>
+						<th>类型</th>
+						<th>总本数</th>
+						<th>借出数</th>
+						<th>评分</th>
+						<th>简介</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+		<form id="saveModal"  enctype="multipart/form-data" class="hide">
+			<input class="control validate[required]" id="id" name="id" type="hidden">
+			<div class="form-line">
+		    	<label class="title" for="ISBN">ISBN</label>
+		    	<input class="control validate[required]" id="ISBN" name="ISBN" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="name">书名</label>
+		    	<input class="control validate[required]" id="name" name="name" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="author">作者</label>
+		    	<input class="control validate[required]" id="author" name="author" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="publisher">出版社</label>
+		    	<input class="control validate[required]" id="publisher" name="publisher" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="year">出版年份</label>
+		    	<input class="control validate[required]" id="year" name="year" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="type">类型</label>
+		    	<input class="control validate[required]" id="type" name="type" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="totalNum">总本书</label>
+		    	<input class="control validate[required]" id="totalNum" name="totalNum" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="outNum">借出数</label>
+		    	<input class="control validate[required]" id="outNum" name="outNum" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="points">评分</label>
+		    	<input class="control validate[required]" id="points" name="points" type="text">
+		    </div>
+		    <div class="form-line">
+		    	<label class="title" for="brief">简介</label>
+		    	<input class="control validate[required]" id="brief" name="brief" type="text">
+		    </div>
+		    <div>
+		    	<button id="saveBtn">保存</button>		    	
+		    	<button class="cancel" id="cancelBtn">取消</button>
+		    </div>
+		</form>
+	</div>
+
+</body>
+</html>
