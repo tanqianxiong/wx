@@ -16,11 +16,23 @@
 		<context:exclude-filter type="regex"
 			expression="com.controller.*" />
 	</context:component-scan>
-
+	<context:component-scan base-package="com.common.Global"/>
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+            	<!-- 微信常量配置 -->
+                <value>classpath*:/config/wx.properties</value>                
+            	<!-- DB常量配置 -->
+                <value>classpath*:/config/db.properties</value>
+                <!--要配置文件需继续添加即 -->
+            </list>
+        </property>
+    </bean>
+	
 	<!-- db配置 -->
-	<context:property-placeholder
+	<!-- <context:property-placeholder
 		ignore-unresolvable="true" location="classpath*:/config/db.properties" />
-
+ -->
 	<!-- 采用proxool的jdbc数据源配置 -->
 	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
 		<property name="alias">
@@ -55,6 +67,9 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.entity.User</value>
+				<value>com.entity.Book</value>
+				<value>com.entity.Welfare</value>
+				<value>com.entity.Borrow</value>				
 			</list>
 		</property>
 
