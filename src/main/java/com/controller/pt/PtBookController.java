@@ -34,7 +34,7 @@ public class PtBookController {
 		map.put("success", true);
 		List<Book> list=new ArrayList<Book>();
 		Book book=new Book();
-		book.setName("西游记");
+		book.setBookName("西游记");
 		book.setAuthor("吴承恩");
 		list.add(book);
 		map.put("list", list);
