@@ -18,14 +18,14 @@ public class Book  implements Serializable{
 	
 	private String id;
 	private String ISBN;
-	private String name;
+	private String bookName;
 	private String author;
 	private String publisher;
-	private Integer year;
+	private int publishTime;
 	private String type;
-	private Integer totalNum;
-	private Integer outNum;
-	private Float points;
+	private int amount;
+	private int borrowed;
+	private double points;
 	private String brief;
 	
 	// Constructors
@@ -40,15 +40,15 @@ public class Book  implements Serializable{
 	}
 
 	/** full constructor */
-	public Book(String ISBN,String name,String author, String publisher,Integer year,String type,Integer totalNum,int outNum,float points,String brief) {
+	public Book(String ISBN,String bookName,String author, String publisher,int publishTime,String type,int amount,int borrowed,double points,String brief) {
 		this.ISBN = ISBN;
-		this.name = name;
+		this.bookName = bookName;
 		this.author = author;
 		this.publisher = publisher;
-		this.year=year;
+		this.publishTime=publishTime;
 		this.type=type;
-		this.totalNum=totalNum;
-		this.outNum=outNum;
+		this.amount=amount;
+		this.borrowed=borrowed;
 		this.points=points;
 		this.brief=brief;
 	}
@@ -76,12 +76,12 @@ public class Book  implements Serializable{
 	}
 
 	@Column(name = "Book_Name", nullable = true, length = 100)
-	public String getName() {
-		return this.name;
+	public String getBookName() {
+		return this.bookName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
 	}
 
 	@Column(name = "Book_Author", nullable = true, length = 100)
@@ -103,12 +103,12 @@ public class Book  implements Serializable{
 	}
 
 	@Column(name = "Book_Year", nullable = true, length = 11)
-	public Integer getYear() {
-		return this.year;
+	public int getPublishTime() {
+		return this.publishTime;
 	}
 
-	public void setYear(Integer year) {
-		this.year = year;
+	public void setPublishTime(int publishTime) {
+		this.publishTime = publishTime;
 	}
 	
 	@Column(name = "Book_Type", nullable = true, length = 20)
@@ -119,24 +119,24 @@ public class Book  implements Serializable{
 		this.type = type;
 	}
 	@Column(name = "Book_Total_Num", nullable = true, length = 11)
-	public Integer getTotalNum(){
-		return this.totalNum;
+	public int getAmount(){
+		return this.amount;
 	}
-	public void setTotalNum(Integer totalNum){
-		this.totalNum=totalNum;
+	public void setAmount(int amount){
+		this.amount=amount;
 	}
 	@Column(name = "Book_Out_Num", nullable = true, length =11)
-	public Integer getOutNum(){
-		return this.outNum;
+	public int getBorrowed(){
+		return this.borrowed;
 	}
-	public void setOutNum(Integer outNum){
-		this.outNum = outNum;
+	public void setBorrowed(int borrowed){
+		this.borrowed = borrowed;
 	}
 	@Column(name = "Book_Points", nullable = true, length = 4)
-	public Float getPoints(){
+	public double getPoints(){
 		return this.points;
 	}
-	public void setPoints(Float points){
+	public void setPoints(double points){
 		this.points = points;
 	}
 	@Column(name = "Book_Brief", nullable = true, length = 1000)

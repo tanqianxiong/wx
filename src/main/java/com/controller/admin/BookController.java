@@ -63,30 +63,11 @@ public class BookController {
 		return null;
 	}
 	
-	//按字段查询
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView getByProperty(HttpServletRequest request) throws IOException{
-		ModelAndView mv = new ModelAndView("admin/book/result");
-		String propertyValue = request.getParameter("propertyValue");
-		propertyValue="老";
-		System.out.println(propertyValue);		
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("name", "%"+propertyValue+"%");
-		map.put("author", "%"+propertyValue+"%");
-		map.put("publisher", "%"+propertyValue+"%");
-		List<Book> list=this.bookService.getLikeProperty(map);
-		Map<String,Object> map2=new HashMap<String,Object>();
-		map2.put("type", "文学类");
-		List<Book> list2=this.bookService.getLikeProperty(map,map2);
-		mv.addObject("list", list);
-		mv.addObject("propertyValue", propertyValue);
-		return mv;
-	}
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public void add(HttpServletResponse response,Book book) throws IOException{
 		book.setPoints((float) 0);
-		book.setOutNum(0);
+		book.setBorrowed(0);
 		this.bookService.add(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
@@ -110,7 +91,7 @@ public class BookController {
 	public void get(HttpServletResponse response,String id) throws IOException{
 		System.out.println(id);
 		Book book=this.bookService.get(id);
-		System.out.println(book.getName());
+		System.out.println(book.getBookName());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", book);

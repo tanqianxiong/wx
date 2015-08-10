@@ -22,8 +22,8 @@ function update(id){
 					case 'ISBN':
 						$(this).val(item.ISBN);
 						break;
-					case 'name':
-						$(this).val(item.name);
+					case 'bookName':
+						$(this).val(item.bookName);
 						break;
 					case 'author':
 						$(this).val(item.author);
@@ -31,17 +31,17 @@ function update(id){
 					case 'publisher':
 						$(this).val(item.publisher);
 						break;
-					case 'year':
-						$(this).val(item.year);
+					case 'publishTime':
+						$(this).val(item.publishTime);
 						break;
 					case 'type':
 						$(this).val(item.type);
 						break;
-					case 'totalNum':
-						$(this).val(item.totalNum);
+					case 'amount':
+						$(this).val(item.amount);
 						break;
-					case 'outNum':
-						$(this).val(item.outNum);
+					case 'borrowed':
+						$(this).val(item.borrowed);
 						break;
 					case 'points':
 						$(this).val(item.points);
@@ -67,13 +67,13 @@ function setData2Table(bookList){
 	for (var i = 0; i < bookList.length; i++) {
 		var tr = $("<tr/>");
 		tr.html('<td>' + bookList[i].ISBN + '</td><td>'
-				+ bookList[i].name + '</td><td>'
+				+ bookList[i].bookName + '</td><td>'
 				+ bookList[i].author + '</td><td>'
 				+ bookList[i].publisher + '</td><td>'
-				+ bookList[i].year + '</td><td>'
+				+ bookList[i].publishTime + '</td><td>'
 				+ bookList[i].type + '</td><td>'
-				+ bookList[i].totalNum + '</td><td>'
-				+ bookList[i].outNum + '</td><td>'
+				+ bookList[i].amount + '</td><td>'
+				+ bookList[i].borrowed + '</td><td>'
 				+ bookList[i].points + '</td><td>'
 				+ bookList[i].brief + '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''
