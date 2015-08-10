@@ -1,7 +1,7 @@
 /*
  * 图书的私有js代码
  */
-url;//用于add与update的转换		
+window.url="";//用于add与update的转换		
 function update(id){
 	$.ajax({
 		type : "GET",
@@ -52,7 +52,7 @@ function update(id){
 					}
 					$('#saveModal').removeClass('hide');
 					$('#listDiv').addClass('hide');
-					url="update.do";
+					window.url="update.do";
 				});
 			}
 		},

@@ -24,7 +24,7 @@ function del(id){
 function addOrUpdate(){
 	$.ajax({
 		type : "POST",
-		url : url,
+		url : window.url,
 		dataType : "json",
 		data:$("#saveModal").serialize(),
 		success : function(result) {
@@ -42,7 +42,7 @@ $(function() {
 	$('#addBtn').click(function(){
 		$('#saveModal').removeClass('hide');
 		$('#listDiv').addClass('hide');
-		url="add.do";
+		window.url="add.do";
 	});
 	$('#saveBtn').click(function(){
 		addOrUpdate();
