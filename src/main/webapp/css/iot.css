@@ -7,7 +7,7 @@ body{
 	background-attachment:fixed;*/
 }
 
-/*slimç±» å·¦å³è·ç¦»å±å¹•20åƒç´ */
+/*slimÀà ×óÓÒ¾àÀëÆÁÄ»20ÏñËØ*/
 .slim{
 	margin-left:20px;
 	margin-right: 20px;
@@ -81,6 +81,11 @@ img{
 	text-align: center;
 	display: none;
 }
+/*Í¼ÊéËÑË÷½á¹û±í¸ñÖĞ Òş²ØÔİÊ±²»ĞèÒªµÄĞÅÏ¢*/
+.hide_td{
+	display:none;
+}
+
 #borrow,#escheat-yes,#escheat-no{
 	background-color: #5cb85c;
 	color: #eee;
@@ -116,15 +121,52 @@ img{
 	display: block;
 }
 #popup-ind{
-	width: 300px;
+	width: 200px;
 	height: 250px;
 	position: fixed;
 	background-color: #eee;
 	left: 50%;
 	top: 50%;
-	margin: -150px 0 0 -150px;
+	margin: -180px 0 0 -100px;
 	z-index: 1002;
 	font-size: 1.5rem;
 	text-align: center;
-	display: none;	
+	display: none;
+}
+/*indexÒ³ÃæÖĞ·µ»Øä¯ÀÀ·ÖÀà²ãµÄÑùÊ½*/
+.tocategory{
+	display: none;
+	width: 100%;
+	height: 6%;
+	background-color: #6c9;
+	text-align: center;
+	color: #fff;
+	font-size: 1.6rem;
+	line-height: 3rem;
+	position: fixed;
+	bottom: 0px;
+}
+.tocategory:before{
+	content:'';
+	position: absolute;
+	top: -10px;
+	left: 0;
+	width: 0px;
+	height: 0px;
+    border-left:20px solid #6c9;
+    border-bottom: 5px solid #6c9;
+    border-right:20px solid transparent;
+    border-top: 5px solid transparent;
+}
+.tocategory:after{
+	content:'';
+	position: absolute;
+	top: -10px;
+	right: 0;
+	width: 0px;
+	height: 0px;
+    border-right:20px solid #6c9;
+    border-bottom: 5px solid #6c9;
+    border-left:20px solid transparent;
+    border-top: 5px solid transparent;
 }
