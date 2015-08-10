@@ -1,112 +1,329 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>中移物联网员工服务</title>
-<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="/wx/css/bootstrap-theme.css" rel="stylesheet"
-	type="text/css">
-<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
-<script src="/wx/js/jquery.js"></script>
-<script src="/wx/js/bootstrap.js"></script>
-<script src="/wx/js/app/book.js"></script>
-<script src="/wx/js/app/common.js"></script>
-<style type="text/css">
-th {
-	min-width: 80px;
-}
-.main{
-	margin: 20px;
-}
-</style>
-</head>
-<body>
-	<div class="main">
-		<div>
-			<p class="button-area">
-		        <a href="#" id="addBtn" class="btn btn-default btn-sm btn-pop" title="新增">新增</a>
-		    </p>
-			
-		</div>
-		<div id="listDiv">
-			<div class="form-search">
-				<div class="search-main">
-					<input name="keyword" id="keyword" type="text" placeholder="请输入书名/作者/出版社进行搜索">
-					<button id="searchBtn" type="button"
-						class="btn btn-default btn-search">
-						<i class="fa fa-search"></i> 搜索
-					</button>
-				</div>
-			</div>
-			<table id="bookTable">
-				<thead>
-					<tr>
-						<th>ISBN</th>
-						<th>书名</th>
-						<th>作者</th>
-						<th>出版社</th>
-						<th>出版年份</th>
-						<th>类型</th>
-						<th>总本数</th>
-						<th>借出数</th>
-						<th>评分</th>
-						<th>简介</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
+	<head>
+		<meta charset="utf-8">
+		<title>系统管理</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+		<meta name="format-detection" content="telphone=no, email=no"/>
+		<meta name="renderer" content="webkit">
+		<meta name="theme-color" content="#ee3e80">
+		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+		<link href="/wx/css/manage.css" rel="stylesheet" type="text/css">
 
-				</tbody>
-			</table>
+		<script src="/wx/js/jquery.js"></script>
+		<script src="/wx/js/bootstrap.js"></script>
+		<script src="/wx/js/app/book.js"></script>
+	</head>
+	<body>
+
+      <!-- Static navbar -->
+      <div class="book_container">
+
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <h2 class="margin-top-5"><span class="label label-success">中移物联网</span></h2>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="manage_book.html">图书管理</a></li>
+                <li><a href="manage_book.html">用户管理</a></li>
+                <li><a href="manage_order.html">预约办理</a></li>
+				<li><a href="manage_welfare.html">福利管理</a></li>
+                <li><a href="manage_policy.html">政策管理</a></li>
+				
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">这里显示时间</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#exitModal">退出</a>
+						
+				</li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+        </nav> 
+		<div><h2 align="center" class="font-yahei" >图书管理</h2></div>
+		<div>
+			<div class="float-left">
+				<button type="button" class="btn btn-info " data-toggle="modal" data-target="#myModal2">添加新图书</button>
+				<h5 style="float:right"> &nbsp;&nbsp;当前馆藏数目：<kbd>189</kbd></h5>
+			</div>
+			<div class="float-right ">
+			     <form class="navbar-form navbar-left search-margin" role="search" >
+					<div class="form-group">
+					  <input type="text" class="form-control " placeholder="Search....">
+					</div>
+					<button type="submit" class="btn btn-danger">搜索</button>
+				</form>
+			  
+			</div>
 		</div>
-		<form id="saveModal"  enctype="multipart/form-data" class="hide">
-			<input class="control validate[required]" id="id" name="id" type="hidden">
-			<div class="form-line">
-		    	<label class="title" for="ISBN">ISBN</label>
-		    	<input class="control validate[required]" id="ISBN" name="ISBN" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="name">书名</label>
-		    	<input class="control validate[required]" id="name" name="name" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="author">作者</label>
-		    	<input class="control validate[required]" id="author" name="author" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="publisher">出版社</label>
-		    	<input class="control validate[required]" id="publisher" name="publisher" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="year">出版年份</label>
-		    	<input class="control validate[required]" id="year" name="year" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="type">类型</label>
-		    	<input class="control validate[required]" id="type" name="type" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="totalNum">总本书</label>
-		    	<input class="control validate[required]" id="totalNum" name="totalNum" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="outNum">借出数</label>
-		    	<input class="control validate[required]" id="outNum" name="outNum" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="points">评分</label>
-		    	<input class="control validate[required]" id="points" name="points" type="text">
-		    </div>
-		    <div class="form-line">
-		    	<label class="title" for="brief">简介</label>
-		    	<input class="control validate[required]" id="brief" name="brief" type="text">
-		    </div>
-		    <div>
-		    	<button id="saveBtn">保存</button>		    	
-		    	<button class="cancel" id="cancelBtn">取消</button>
-		    </div>
-		</form>
+		<br><br>
+		<div class="float-right">
+				<font class="font-songti">排序方式: </font>
+				  
+				  <select  name="order">
+					<option value="name"  selected="selected">书名</option>
+					<option value="author">作者</option>
+					<option value="publisher">出版社</option>
+					<option value="year">发行时间</option>
+					<option value="totalNum">总数</option>
+					<option value="points">评分</option>
+				 
+				 </select>	
+		</div>
+		
+        <table class="table table-striped table-hover " id="table-book-list">
+          <tr>
+			<th hidden>ID</th>
+            <th>书名</th>
+			<th>ISBN</th>
+			<th>作者</th>
+            <th>出版社</th>
+            <th>发行时间</th>
+            <th>所属分类</th>
+			<th>总本数</th>
+            <th>借出数</th>
+            <th>评分</th>
+            <th class="col-sm-2">图书简介</th>
+            <th>操作</th>
+          </tr>
+          <tr>
+			<td hidden>隐藏ID</td>
+            <td>心灵鸡汤</td>
+			<td>ISBN</td>
+            <td>老谭</td>
+            <td>广东出版射</td>
+			<td>2005</td>
+            <td>文学</td>
+            <td>10</td>
+			<td>9</td>
+            <td>4</td>
+            <td>是一本文笔天下无双的五杀集锦顶顶顶顶顶顶顶顶</td>
+            <td>
+				<button type="button" class="btn btn-primary btn-sm btn-book-update" data-toggle="modal" data-target="#myModal">修改</button>
+				<button type="button" class="btn btn-default btn-sm btn-book-delete"  data-toggle="modal" data-target="#delModal">删除</button>
+			</td>
+          </tr>         
+          <tr>
+			<td hidden>隐藏ID2</td>
+            <td>xxx</td>
+            <td>xxx</td>
+			<td>xxx</td>
+            <td>xxx</td>
+            <td>xxx</td>          
+            <td>xxx</td>
+            <td>xxx</td>
+            <td>xxx</td>
+            <td>xxx</td>
+            <td>xxx</td>
+			<td>
+				<button type="button" class="btn btn-primary btn-sm  btn-book-update" data-toggle="modal" data-target="#myModal">修改</button>
+				<button type="button" class="btn btn-default btn-sm  btn-book-delete"  data-toggle="modal" data-target="#delModal">删除</button>
+			</td>
+          </tr>  
+		  
+        </table>
+		<div align="center">
+			<nav>
+			  <ul class="pagination">
+				<li>
+				  <a href="#" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				  </a>
+				</li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li>
+				  <a href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				  </a>
+				</li>
+			  </ul>
+			</nav>
+		</div>
+		
+	</div>
+	
+	
+
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-sm" id="delModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="font-yahei">删除</h4>
+				</div>
+				<div class="modal-body">
+				    <h2 align="center" class="font-yahei">确认删除这条记录?<h2>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-book-delete-confirm" data-dismiss="modal">确定</button>
+					<button type="button" class="btn btn-default btn-book-delete-quit" data-dismiss="modal">取消</button>
+       			</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bs-example-modal-sm" id="exitModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="font-yahei">退出</h4>
+				</div>
+				<div class="modal-body">
+				    <h2 align="center" class="font-yahei">确认退出?<h2>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-book-delete-confirm" data-dismiss="modal">确定</button>
+					<button type="button" class="btn btn-default btn-book-delete-quit" data-dismiss="modal">取消</button>
+       			</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div clases="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h2 class="modal-title font-yahei" id="myModalLabel" align="center" >修改图书信息</h2>
+		  </div>
+			<div class="modal-body">
+		  
+				<form class="form-horizontal">
+					<div class="form-group " hidden>
+						<label for="name" class="col-sm-3 control-label">ID</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="ID" name="ID" >
+						</div>
+					</div>
+					<div class="form-group form-margin-bottom" >
+						<label for="name" class="col-sm-3 control-label">书名</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" id="name" name="name" >
+						</div>
+					</div>
+					<div class="form-group  form-margin-bottom" >
+						<label for="ISBN" class="col-sm-3 control-label">ISBN</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="ISBN" name="ISBN" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="author" class="col-sm-3 control-label">作者</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="author" name="author" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="publisher" class="col-sm-3 control-label">出版社</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="publisher" name="publisher" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="year" class="col-sm-3 control-label">发行时间</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="year" name="year" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="type" class="col-sm-3 control-label">所属分类</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="type" name="type" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="totalNum" class="col-sm-3 control-label">总本数</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="totalNum" name="totalNum" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="outNum" class="col-sm-3 control-label">借出数</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="outNum" name="outNum"></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="points" class="col-sm-3 control-label">评分</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="points" name="4points" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="brief" class="col-sm-3 control-label">简介</label>
+						<div class="col-sm-7"><textarea rows="4" class="form-control" id="brief" name="brief" ></textarea></div>
+					</div>
+				</form>
+			</div>
+		
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">保存</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div clases="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h2 class="modal-title font-yahei" id="myModalLabel" align="center">新增图书</h2>
+		  </div>
+			<div class="modal-body">		  
+				<form class="form-horizontal" id="form-book-add">
+					
+					<div class="form-group form-margin-bottom">
+						<label for="name" class="col-sm-3 control-label">书名</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addName" name="name" >
+						</div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="ISBN" class="col-sm-3 control-label">ISBN</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addISBN" name="ISBN" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="author" class="col-sm-3 control-label">作者</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addAuthor" name="author"></div>
+					</div>					
+					<div class="form-group form-margin-bottom">
+						<label for="publisher" class="col-sm-3 control-label">出版社</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addPublisher" name="publisher" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="year" class="col-sm-3 control-label">发行时间</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addYear" name="year" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="type" class="col-sm-3 control-label">所属分类</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addType" name="type" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="totalNum" class="col-sm-3 control-label">总本数</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="addTotalNum" name="totalNum"></div>
+					</div>
+					<!--新增里不用借出数与评分
+					<div class="form-group form-margin-bottom">
+						<label for="outNum" class="col-sm-3 control-label">借出数</label>
+						<div class="col-sm-6"><input type="text" class="form-control" id="addOutNum" name="outNum" ></div>
+					</div>
+					<div class="form-group form-margin-bottom">
+						<label for="points" class="col-sm-3 control-label">评分</label>
+						<div class="col-sm-6"><input type="text" class="form-control" id="addPoints" name="4points"></div>
+					</div>-->
+					<div class="form-group form-margin-bottom">
+						<label for="brief" class="col-sm-3 control-label">简介</label>
+						<div class="col-sm-7"><textarea rows="5" class="form-control" id="addBrief" name="brief" ></textarea></div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary " id="btn-book-add" data-dismiss="modal">保存</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	  </div>
+	  
 	</div>
 
-</body>
+
+
+
+
+	</body>
 </html>
