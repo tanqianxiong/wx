@@ -1,7 +1,7 @@
 /*
- * å›¾ä¹¦çš„ç§æœ‰jsä»£ç 
+ * Í¼ÊéµÄË½ÓĞjs´úÂë
  */
-window.url="";//ç”¨äºaddä¸updateçš„è½¬æ¢		
+window.url="";//ÓÃÓÚaddÓëupdateµÄ×ª»»		
 function update(id){
 	$.ajax({
 		type : "GET",
@@ -57,7 +57,7 @@ function update(id){
 			}
 		},
 		error : function(jqXHR) {
-			alert("å‘ç”Ÿé”™è¯¯ï¼š" + jqXHR.status);
+			alert("·¢Éú´íÎó£º" + jqXHR.status);
 		},
 	});
 }
@@ -76,10 +76,10 @@ function setData2Table(bookList){
 				+ bookList[i].outNum + '</td><td>'
 				+ bookList[i].points + '</td><td>'
 				+ bookList[i].brief + '</td><td>'
-				+ '<a title="ç‚¹å‡»ä¿®æ”¹" href="#" onclick="javascript:update(\''
-				+ bookList[i].id + '\');">ä¿®æ”¹</a>'
-				+ '<a title="ç‚¹å‡»åˆ é™¤" href="#" onclick="javascript:del(\''
-				+ bookList[i].id + '\');">åˆ é™¤</a></td>');
+				+ '<a title="µã»÷ĞŞ¸Ä" href="#" onclick="javascript:update(\''
+				+ bookList[i].id + '\');">ĞŞ¸Ä</a>'
+				+ '<a title="µã»÷É¾³ı" href="#" onclick="javascript:del(\''
+				+ bookList[i].id + '\');">É¾³ı</a></td>');
 		tr.appendTo(bookTBody);
 	}
 }
