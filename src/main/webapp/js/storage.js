@@ -4,7 +4,7 @@ function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + escape(cvalue) + "; " + expires;
+    document.cookie = cname + "=" + escape(cvalue) + "; " + expires + + "; path=/";
 }
 //获取cookie
 function getCookie(cname) {
@@ -22,6 +22,8 @@ function clearCookie(name) {
     setCookie(name, "", -1);  
 }
 
+
+/*
 function checkCookie() {
     var user = getCookie("username");
     if (user != "") {
@@ -34,6 +36,9 @@ function checkCookie() {
         }
     }
 }
+*/
+
+
 
 $(function(){
 	if (localStorage.pagecount){

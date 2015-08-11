@@ -5,11 +5,16 @@ $(function(){
 
 	//在进入任何菜单页面后，先判断浏览器中是否已经存在cookie，if no 那么跳转致i账号绑定页面。
 	
+	
+	//先搞个假的openId 
+	setCookie("openId","defaultOpenId",100);
+	setCookie("username","defaultUserName",100);
+	
 	if (getCookie("username")==""){
-		if(window.location.href == "http://localhost/Mini-IOT/2/tobind.html"||window.location.href == "http://localhost/Mini-IOT/2/binding.html"){
+		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
 
 		}else{
-			window.location.href="tobind.html";			
+			window.location.href="tobind.do";			
 		}
 	}
 	
@@ -25,7 +30,7 @@ $(function(){
 		var openId = getCookie("openId");
 		$.ajax({
 		    type: "POST", 	
-			url: "ajax_server.php",
+			url: "binding.do",
 			data: {
 				ajaxid:"bind",
 				openId: openId,
@@ -38,12 +43,13 @@ $(function(){
 				console.log(result);
 				if (result.success) {
 					setCookie("username",name,100);
-					setCookie("openId","iammasker",100);
+					setCookie("username",name,100);
+					setCookie("jobNumber",jobNumber,100);
 					$("#bindbtn").hide();
 					$("<span class='btn btn-lg btn-success btn-block'>绑定成功！<br/>现在开始借阅吧~</span>").appendTo("#bindcontainer");
 					setTimeout(function(){
 						window.location.href="index.html";
-					},1000);
+					},500);
 				} else {
 					alert("抱歉，信息不匹配，请重新输入");
 				}  
@@ -69,7 +75,7 @@ $(function(){
 		
 		$.ajax({
 		    type: "POST",
-			url: "ajax_server.php",
+			url: "book/bookSearch.do",
 			data: {
 				ajaxid : "searchBook",
 				bookName :  $("#user_search").val()
@@ -118,6 +124,7 @@ $(function(){
 			tr.html('<td>'+td_array[0]+'</td><td>'+td_array[1]+'</td><td>'+td_array[2]+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_array[3]+'</td><td class="hide_td">'+td_array[4]+'</td><td class="hide_td">'+td_array[5]+'</td><td class="hide_td">'+td_array[6]+'</td><td class="hide_td">'+td_array[7]+'</td>');
 			tr.appendTo(table);
 		});
+		
 
 
 	}
@@ -174,7 +181,7 @@ $(function(){
 
 		$.ajax({
 		    type: "POST", 	
-			url: "ajax_server.php",
+			url: "book/borrow.do",
 			data: {
 				ajaxid : "borrow",
 				bookId : bookId,
@@ -188,7 +195,7 @@ $(function(){
 					$("#borrow").hide();
 					$("<span>借阅成功</span>").appendTo("#showdetail");
 					setTimeout(function(){
-						window.location.href="index.html";
+						window.location.href="index.do";
 					},1000);
 				} else {
 					alert("系统错误");
@@ -219,12 +226,12 @@ $(function(){
 
 
 	//在category页面发起ajax请求：
-	if(window.location.href=="http://localhost/Mini-IOT/2/category.html"){
+	if(window.location.href=="http://localhost:8080/wx/pt/book/category.do"){
 		var selected_category = getCookie("selected_category");
 		$(".category_info").prepend(selected_category);
 		$.ajax({
 			type:"POST",
-			url:"ajax_server.php",
+			url:"book/category.do",
 			data:{
 				ajaxid : "searchByCategory",
 				selected_category:selected_category
@@ -238,7 +245,7 @@ $(function(){
 				}
 			},
 			error: function(jqXHR){
-			   alert("图书ajax发生错误：" + jqXHR.status);  
+			   alert("分类页面加载ajax发生错误：" + jqXHR.status);  
 			},
 		});
 	}
@@ -282,11 +289,11 @@ $(function(){
 //图书归还模块
 
 	//在individual页面发起ajax请求：
-	if(window.location.href=="http://localhost/Mini-IOT/2/individual.html"){
+	if(window.location.href=="http://localhost:8080/wx/pt/book/individual.do"){
 		var openId = getCookie("openId");
 		$.ajax({
 			type:"POST",
-			url:"ajax_server.php",
+			url:"individual/individual.do",
 			data:{
 				ajaxid : "borrowRecord",
 				openId:openId
@@ -406,16 +413,7 @@ $(function(){
 		$("tr").removeClass("choosing");		
 	});
 
-	//模拟ajax动态添加tr元素
-	$("#yumy").click(function(){
-		var book="半城烟沙";
-		var author="鲁迅";
-		var publish="ABC";
-		var newli = $("<tr><td>"+book+"</td><td>"+author+"</td><td>"+publish+"</td><td><span class='go-popup escheat btn-success'>归还</span>"+"</tr>");
-		newli.appendTo("#borrowing");	
-	});
-	// 六大类图书浏览页面中的返回按钮，回到搜索页面。
-	$("#goback").click(function(){
-		window.history.back();
-	});
+	
+	
+
 });
