@@ -10,7 +10,7 @@ import com.dao.WelfareDao;
 import com.entity.Welfare;
 import com.service.WelfareService;
 
-@Service("WelfareService")
+@Service("welfareService")
 public class WelfareServiceImp implements WelfareService{
 	
 	@Autowired
