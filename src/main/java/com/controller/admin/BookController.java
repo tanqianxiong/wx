@@ -38,7 +38,7 @@ public class BookController {
 		String bookType=request.getParameter("bookType");
 		if(keyword!=null && !keyword.isEmpty()){
 			Map<String,Object> like=new HashMap<String,Object>();
-			like.put("name", "%"+keyword+"%");
+			like.put("bookName", "%"+keyword+"%");
 			like.put("author", "%"+keyword+"%");
 			like.put("publisher", "%"+keyword+"%");
 			if(bookType!=null && !bookType.isEmpty()){

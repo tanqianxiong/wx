@@ -1,60 +1,22 @@
-$(function(){
-	
-	//
-	$(".btn-book-update").click(function(){
-		var c =$(this).closest("tr");
-		var td=c.find("td");
-		
-		var form=$("#name").closest("form");
-		var input=form.find("input");
-		
-		
-		for(var i=0;i<input.length;i++){
-		var val=td.eq(i).text();
-		
-		input.eq(i).val(val);
-		//input.eq(i).attr("value",val);
-		}
-		$("#brief").text(td.eq(input.length).text());
-		
-	});
-	$(".btn-book-delete").click(function(){
-		var tr=$(this).closest("tr");
-		tr.attr("class","predelete");
-		var td=tr.find("td");
-		var id=td.eq(0).text();
-		alert(id);
-		
-	});
-	$(".btn-book-delete-confirm").click(function(){
-		$(".predelete").remove();
-	});
-	$(".btn-book-delete-quit").click(function(){
-		$(".predelete").attr("class","");
-	});
-	$("#btn-book-add").click(function(){
-		
-	});
-});
 
 /*
  * 图书的私有js代码
  */
-window.url="";//用于add与update的转换		
-function update(id){
+window.url = "";// 用于add与update的转换
+function update(id) {
 	$.ajax({
 		type : "GET",
 		url : "get.do",
 		dataType : "json",
-		data:{
-			id:id
+		data : {
+			id : id
 		},
 		success : function(result) {
 			if (result.success) {
-				var item=result.item;
-				var arr=$('#saveModal input');
-				arr.each(function(){
-					switch($(this).attr('id')){
+				var item = result.item;
+				var arr = $('#auModal form input');
+				arr.each(function() {
+					switch ($(this).attr('id')) {
 					case 'id':
 						$(this).val(item.id);
 						break;
@@ -89,40 +51,39 @@ function update(id){
 						$(this).val(item.brief);
 						break;
 					}
-					$('#saveModal').removeClass('hide');
-					$('#listDiv').addClass('hide');
-					window.url="update.do";
+					$("#brief").text(item.brief);
+					window.url = "update.do";
 				});
 			}
 		},
 		error : function(jqXHR) {
-			alert("发生错误：" + jqXHR.status);
+			window.Modal.alert({msg:"发生错误：" + jqXHR.status});
 		},
 	});
 }
-function setData2Table(bookList){
-	var bookTBody = $('#bookTable tbody');
+function setData2Table(bookList) {
+	var bookTBody = $('#listTable tbody');
 	bookTBody.html('');
+	var j=1;
 	for (var i = 0; i < bookList.length; i++) {
 		var tr = $("<tr/>");
-		tr.html('<td>' + bookList[i].ISBN + '</td><td>'
-				+ bookList[i].bookName + '</td><td>'
-				+ bookList[i].author + '</td><td>'
-				+ bookList[i].publisher + '</td><td>'
-				+ bookList[i].publishTime + '</td><td>'
-				+ bookList[i].type + '</td><td>'
-				+ bookList[i].amount + '</td><td>'
-				+ bookList[i].borrowed + '</td><td>'
-				+ bookList[i].points + '</td><td>'
-				+ bookList[i].brief + '</td><td>'
+		tr.html('<td>' +j
+				+ '</td><td>' + bookList[i].ISBN 
+				+ '</td><td>' + bookList[i].bookName
+				+ '</td><td>' + bookList[i].author 
+				+ '</td><td>' + bookList[i].publisher 
+				+ '</td><td>' + bookList[i].publishTime
+				+ '</td><td>' + bookList[i].type 
+				+ '</td><td>' + bookList[i].amount 
+				+ '</td><td>' + bookList[i].borrowed
+				+ '</td><td>' + bookList[i].points 
+				+ '</td><td>' + window.simplifyBrief(bookList[i].brief) + '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''
-				+ bookList[i].id + '\');">修改</a>'
-				+ '<a title="点击删除" href="#" onclick="javascript:del(\''
+				+ bookList[i].id + '\');" data-toggle="modal" data-target="#auModal">修改</a>'
+				+ '&nbsp;&nbsp;<a title="点击删除" href="#" onclick="javascript:del(\''
 				+ bookList[i].id + '\');">删除</a></td>');
 		tr.appendTo(bookTBody);
+		j++;
 	}
 }
-		
-		
-		
-		
+
