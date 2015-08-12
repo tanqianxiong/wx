@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "BORROW", schema = "wx")
+@Table(name = "BORROW_RECORD", schema = "wx")
 public class Borrow  implements Serializable{
 
 	// Fields
@@ -26,6 +26,7 @@ public class Borrow  implements Serializable{
 	private Book book;
 	private Date borrowTime;
 	private Date returnTime;
+	private int tag;
 	// Constructors
 
 	/** default constructor */
@@ -38,18 +39,19 @@ public class Borrow  implements Serializable{
 	}
 
 	/** full constructor */
-	public Borrow(Employee employee, Book book, Date borrowTime,Date returnTime) {
+	public Borrow(Employee employee, Book book, Date borrowTime,Date returnTime,int tag) {
 		this.employee = employee;
 		this.book = book;
 		this.borrowTime = borrowTime;
 		this.returnTime=returnTime;
+		this.tag=tag;
 	}
 
 	// Property accessors
 	@GenericGenerator(name = "generator", strategy = "uuid.hex")
 	@Id
 	@GeneratedValue(generator = "generator")
-	@Column(name = "ID", unique = true, nullable = false, length = 36)
+	@Column(name = "BORROW_ID", unique = true, nullable = false, length = 36)
 	public String getId() {
 		return this.id;
 	}
@@ -78,7 +80,7 @@ public class Borrow  implements Serializable{
 		this.book = book;
 	}
 
-	@Column(name = "BORROW_TIME", nullable = false)
+	@Column(name = "BORROW_DATE", nullable = false)
 	public Date getBorrowTime() {
 		return this.borrowTime;
 	}
@@ -86,12 +88,20 @@ public class Borrow  implements Serializable{
 	public void setBorrowTime(Date borrowTime) {
 		this.borrowTime = borrowTime;
 	}
-	@Column(name = "RETURN_TIME", nullable = false)
+	@Column(name = "RETURN_DATE", nullable = false)
 	public Date getReturnTime() {
 		return this.returnTime;
 	}
 
 	public void setReturnTime(Date returnTime) {
 		this.returnTime = returnTime;
+	}
+	@Column(name = "BORROW_TAG", nullable = false)
+	public int getTag() {
+		return this.tag;
+	}
+
+	public void setTag(int tag) {
+		this.tag = tag;
 	}
 }
