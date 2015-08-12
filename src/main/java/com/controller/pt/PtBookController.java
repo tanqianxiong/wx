@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.entity.Book;
 import com.entity.User;
+import com.service.BookService;
 import com.service.UserService;
 import com.common.util.JsonUtil;
 
@@ -26,7 +27,7 @@ import com.common.util.JsonUtil;
 @RequestMapping("/pt/book")
 public class PtBookController {
 	@Autowired
-	public UserService userService;
+	public BookService bookService;
 
 	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
 	public ModelAndView showIndexPage(HttpServletRequest request) {
@@ -35,14 +36,21 @@ public class PtBookController {
 	}
 	
 	@RequestMapping(value = "/bookSearch", method = RequestMethod.POST)
-	public void doSearch(String bookName,HttpServletRequest request,HttpServletResponse response) {
+	public void doSearch(HttpServletRequest request,HttpServletResponse response) {
+		List<Book> list=new ArrayList<Book>();
+		String keyword=request.getParameter("keyword");
+		if(keyword!=null && !keyword.isEmpty()){
+			Map<String,Object> like=new HashMap<String,Object>();
+			like.put("bookName", "%"+keyword+"%");
+			like.put("author", "%"+keyword+"%");
+			like.put("publisher", "%"+keyword+"%");
+			list=this.bookService.getLikeProperty(like);
+		}
+		else{
+			list=this.bookService.getAll();
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		List<Book> list=new ArrayList<Book>();
-		Book book=new Book();
-		book.setBookName("西游记");
-		book.setAuthor("吴承恩");
-		list.add(book);
 		map.put("list", list);
 		try {
 			JsonUtil.writeCommonJson(response, map);
