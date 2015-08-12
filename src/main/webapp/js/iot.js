@@ -124,7 +124,7 @@ $(function(){
 				console.log(k1+'  '+v1);
 			});
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.rowId+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.rowId+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
 			tr.appendTo(table);
 		});
 		
@@ -146,19 +146,21 @@ $(function(){
 		var borrowed = tds.eq(7).text();
 		var available = parseInt(tds.eq(6).text()) - parseInt(tds.eq(7).text());
 		var points = tds.eq(8).text();
+		var brief = tds.eq(9).text();
 
 		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 
-		showDetail(tds.eq(0).text(),amount,available,points);
+		showDetail(tds.eq(0).text(),amount,available,points,brief);
 
 	});
 
 	//点击图书详情按钮中用到的显示弹出层函数
-	function showDetail(bookName,total,available,points){
+	function showDetail(bookName,total,available,points,brief){
 		$("#bookName").text(bookName);
 		$("#points").text(points);
 		$("#totalnumber").text(total);
 		$("#availablenumber").text(available);
+		$("#brief").text(brief);
 		$("#masker").fadeIn(100);
 		$("#showdetail").fadeIn(100);
 	}
@@ -262,7 +264,7 @@ $(function(){
 				console.log(k1+'  '+v1);
 			});
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.rowId+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.rowId+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
 			tr.appendTo(table);
 		});
 		
