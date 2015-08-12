@@ -10,6 +10,8 @@ $(function(){
 	setCookie("openId","defaultOpenId",100);
 	//setCookie("username","defaultUserName",100);
 	
+	
+	
 	if (getCookie("username")==""){
 		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
 
