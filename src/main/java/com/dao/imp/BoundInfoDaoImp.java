@@ -38,7 +38,7 @@ public class BoundInfoDaoImp extends HibernateDaoImp<BoundInfo> implements Bound
 	@Override
 	public BoundInfo get(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.doGetById(id);
 	}
 
 	@Override

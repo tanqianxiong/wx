@@ -53,7 +53,7 @@ public class BoundInfo  implements Serializable{
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "Employee_ID", nullable = false)
+	@JoinColumn(name = "USER_ID", nullable = false)
 	public Employee getEmployee() {
 		return this.employee;
 	}
