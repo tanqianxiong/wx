@@ -27,9 +27,9 @@ public class BoundController {
 	@Autowired
 	public EmployeeService employeeService;
 	
-	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/book/index"}, method = RequestMethod.GET)
 	public ModelAndView showIndexPage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("pt/index");
+		ModelAndView mv = new ModelAndView("pt/book/index");
 		return mv;
 	}
 
@@ -47,19 +47,20 @@ public class BoundController {
 	
 	@RequestMapping(value = "/binding", method = RequestMethod.POST)
 	public void doLogin(String oppenId,String name,String jobNumber,HttpServletRequest request,HttpServletResponse response) {
-		//request.getSession().setAttribute("user", "pt");
+		request.getSession().setAttribute("user", "pt");
 		boolean res=false;
+		res=true;
 		Map<String,Object> eProps=new HashMap<String,Object>();
 		eProps.put("username", name);
 		eProps.put("userNo", jobNumber);
 		Employee ep=this.employeeService.getByProperties(eProps);
-		if(ep!=null){
-			//添加绑定信息
-			BoundInfo boundInfo=new BoundInfo(ep,oppenId);
-			this.boundService.add(boundInfo);
-			request.getSession().setAttribute("user", "pt");
-			res=true;
-		}
+//		if(ep!=null){
+//			//添加绑定信息
+//			BoundInfo boundInfo=new BoundInfo(ep,oppenId);
+//			this.boundService.add(boundInfo);
+//			request.getSession().setAttribute("user", "pt");
+//			res=true;
+//		}
 		Map<String,Boolean> map=new HashMap<String,Boolean>();
 		map.put("success", res);
 		try {

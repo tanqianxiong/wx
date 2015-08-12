@@ -8,7 +8,7 @@ $(function(){
 	
 	//先搞个假的openId 
 	setCookie("openId","defaultOpenId",100);
-	setCookie("username","defaultUserName",100);
+	//setCookie("username","defaultUserName",100);
 	
 	if (getCookie("username")==""){
 		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
@@ -42,7 +42,7 @@ $(function(){
 				//var data = JSON.parse(data);
 				console.log(result);
 				if (result.success) {
-					setCookie("username",name,100);
+					setCookie("openId",openId,100);
 					setCookie("username",name,100);
 					setCookie("jobNumber",jobNumber,100);
 					$("#bindbtn").hide();
