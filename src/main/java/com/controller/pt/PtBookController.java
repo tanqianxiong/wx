@@ -2,6 +2,7 @@ package com.controller.pt;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.entity.Book;
+import com.entity.Borrow;
+import com.entity.BoundInfo;
+import com.entity.Employee;
 import com.entity.User;
 import com.service.BookService;
+import com.service.BorrowService;
+import com.service.BoundInfoService;
 import com.service.UserService;
 import com.common.util.JsonUtil;
 
@@ -29,10 +35,33 @@ public class PtBookController {
 	@Autowired
 	public BookService bookService;
 
+	@Autowired
+	public BorrowService borrowService;
+	@Autowired
+	public BoundInfoService boundInfoService;
+	
 	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
 	public ModelAndView showIndexPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/book/index");
 		return mv;
+	}
+
+	@RequestMapping(value = {"/borrow"}, method = RequestMethod.POST)
+	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		Boolean res=false;
+		Borrow br=new Borrow();
+		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
+		Employee el=bi.getEmployee();
+		Book book=this.bookService.get(bookId);
+		br.setBook(book);
+		br.setEmployee(el);
+		br.setBorrowTime(new Date());
+		br.setReturnTime(new Date());
+		this.borrowService.add(br);
+		res=true;
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", res);
+		JsonUtil.writeCommonJson(response, map);
 	}
 	
 	@RequestMapping(value = "/bookSearch", method = RequestMethod.POST)

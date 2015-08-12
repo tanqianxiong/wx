@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.WelfareDao;
+import com.entity.Book;
 import com.entity.Welfare;
 import com.service.WelfareService;
 
@@ -40,6 +41,11 @@ public class WelfareServiceImp implements WelfareService{
 	@Override
 	public void alter(Welfare welfare){
 		welfareDao.alter(welfare);
+	}
+	@Override
+	public List<Welfare> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+		// TODO Auto-generated method stub
+	    return this.welfareDao.getLikeProperty(map, map2);	
 	}
 
 }

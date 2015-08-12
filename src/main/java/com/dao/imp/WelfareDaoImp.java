@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.dao.WelfareDao;
+import com.entity.Book;
 import com.entity.Welfare;
 import com.common.db.HibernateDaoImp;
 @Repository("welfareDao")
@@ -36,5 +37,10 @@ public class WelfareDaoImp extends HibernateDaoImp<Welfare> implements WelfareDa
 	@Override
 	public void alter(Welfare welfare){
 		this.doUpdate(welfare);
+	}
+	@Override
+	public List<Welfare> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+		// TODO Auto-generated method stub
+		return this.doGetListByLikeProperties(map, map2);
 	}
 }

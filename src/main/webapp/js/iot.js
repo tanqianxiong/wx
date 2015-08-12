@@ -7,7 +7,7 @@ $(function(){
 	
 	
 	//先搞个假的openId 
-	setCookie("openId","defaultOpenId",100);
+	setCookie("openId","abcd1234",100);
 	//setCookie("username","defaultUserName",100);
 	
 	
@@ -186,7 +186,7 @@ $(function(){
 
 		$.ajax({
 		    type: "POST", 	
-			url: "book/borrow.do",
+			url: "borrow.do",
 			data: {
 				ajaxid : "borrow",
 				bookId : bookId,

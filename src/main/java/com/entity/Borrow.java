@@ -22,7 +22,7 @@ public class Borrow  implements Serializable{
 	// Fields
 	
 	private String id;
-	private User user;
+	private Employee employee;
 	private Book book;
 	private Date borrowTime;
 	private Date returnTime;
@@ -38,8 +38,8 @@ public class Borrow  implements Serializable{
 	}
 
 	/** full constructor */
-	public Borrow(User user, Book book, Date borrowTime,Date returnTime) {
-		this.user = user;
+	public Borrow(Employee employee, Book book, Date borrowTime,Date returnTime) {
+		this.employee = employee;
 		this.book = book;
 		this.borrowTime = borrowTime;
 		this.returnTime=returnTime;
@@ -58,17 +58,17 @@ public class Borrow  implements Serializable{
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", nullable = false)
-	public User getUser() {
-		return this.user;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "User_ID", nullable = false)
+	public Employee getEmployee() {
+		return this.employee;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BOOK_ID", nullable = false)
 	public Book getBook() {
 		return this.book;
