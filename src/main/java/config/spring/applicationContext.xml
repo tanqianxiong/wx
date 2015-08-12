@@ -69,7 +69,8 @@
 				<value>com.entity.User</value>
 				<value>com.entity.Book</value>
 				<value>com.entity.Welfare</value>
-				<value>com.entity.Borrow</value>				
+				<value>com.entity.Borrow</value>
+				<value>com.entity.Employee</value>			
 			</list>
 		</property>
 
