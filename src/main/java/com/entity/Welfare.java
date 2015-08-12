@@ -1,6 +1,7 @@
 package com.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,9 @@ public class Welfare  implements Serializable{
 	private String id;
 	private String name;
 	private String introduction;
-		
+	private String state;
+	private Integer outNum;
+	private Float points;	
 	// Constructors
 
 	/** default constructor */
@@ -32,9 +35,12 @@ public class Welfare  implements Serializable{
 	}
 
 	/** full constructor */
-	public Welfare(String name,String introduction) {
+	public Welfare(String name,String introduction,String state,int outNum,float points) {
 		this.name = name;
 		this.introduction=introduction;
+		this.state=state;
+		this.outNum= outNum;
+		this.points= points;
 	}
 
 	// Property accessors
@@ -65,4 +71,17 @@ public class Welfare  implements Serializable{
 		this.introduction = introduction;
 	}
 
+	@Column(name = "Welfare_State", nullable = true , length = 10)
+	public String getState(){
+		return this.state;
+	}
+	public void setState(String state){
+		this.state = state;
+	}	
+	public void setPoints(Float points){
+		this.points = points;
+	}
+	public void setOutNum(Integer outNum){
+		this.outNum = outNum;
+	}
 }
