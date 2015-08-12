@@ -23,7 +23,7 @@
 		  <br/>
 		  <div class="col-sm-12">
 		    <div class="input-group">
-		      <input type="text" id="user_search" class="form-control" placeholder="搜索图书...">
+		      <input type="text" id="user_search" class="form-control" placeholder="书名/作者/出版社..." onkeypress="trigleS()">
 		      <span class="input-group-btn">
 		        <button class="btn btn-success search_book_btn" type="button">Go!</button>
 		      </span>
@@ -38,37 +38,37 @@
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="manege" class="thumbnail">
 			      管理类
-			      <img src="img/books.png" alt="...">
+			      <img src="/wx/img/books.png" alt="...">
 			    </a>
 			  </div>
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="finance" class="thumbnail">
 			      经济类
-			      <img src="img/books.png" alt="...">
+			      <img src="/wx/img/books.png" alt="...">
 			    </a>
 			  </div>
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="literature" class="thumbnail">
 			      文学类
-			      <img src="img/books.png" alt="...">
+			      <img src="/wx/img/books.png" alt="...">
 			    </a>
 			  </div>
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="technical" class="thumbnail">
 			      技术类
-			      <img src="img/books.png" alt="...">
+			      <img src="/wx/img/books.png" alt="...">
 			    </a>
 			  </div>
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="complex" class="thumbnail">
 			      综合类
-			      <img src="img/books.png" alt="...">
+			      <img src="/wx/img/books.png" alt="...">
 			    </a>
 			  </div>
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="other" class="thumbnail">
 			      其他
-			      <img src="img/books.png" alt="...">
+			      <img src="/wx/img/books.png" alt="...">
 			    </a>
 			  </div>
 			</div>
@@ -105,15 +105,26 @@
 			<b id="bookName"></b><hr style="border-bottom:1px solid #999;"/>
 			<div>
 				<p>评分：<span id="points"></span></p>
-				<p>馆藏数量：<span id="totalnumber"></span></p>
+				<!-- <p>馆藏数量：<span id="totalnumber"></span></p> -->
 				<p>可借数量：<span id="availablenumber"></span></p>
-				<br/>
 				<span id="borrow" class="btn goodbtn">现在借阅</span>
-			</div>	
+				<p style="text-align:left;margin:10px;">图书简介：<span id="brief"></span></p>
+			</div>
 		</div>
+
 
 		<div class="tocategory">返回浏览分类</div>
 
-	</body>
 
+
+
+	<script>
+		function trigleS(){
+			if(event.keyCode == 13) { 
+				$(".search_book_btn").click();
+				return false; 
+			} 
+		}
+	</script>
+	</body>
 </html>

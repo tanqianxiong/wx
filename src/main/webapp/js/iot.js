@@ -8,13 +8,13 @@ $(function(){
 	
 	//先搞个假的openId 
 	setCookie("openId","defaultOpenId",100);
-	setCookie("username","defaultUserName",100);
+	//setCookie("username","defaultUserName",100);
 	
 	if (getCookie("username")==""){
 		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
 
 		}else{
-			window.location.href="tobind.do";			
+			window.location.href="/wx/pt/tobind.do";			
 		}
 	}
 	
@@ -28,6 +28,9 @@ $(function(){
 		var name = $("#username").val();
 		var jobNumber = $("#jobNumber").val();
 		var openId = getCookie("openId");
+		if( name=='' || jobNumber==''){
+			return ;
+		}
 		$.ajax({
 		    type: "POST", 	
 			url: "binding.do",
@@ -42,13 +45,13 @@ $(function(){
 				//var data = JSON.parse(data);
 				console.log(result);
 				if (result.success) {
-					setCookie("username",name,100);
+					setCookie("openId",openId,100);
 					setCookie("username",name,100);
 					setCookie("jobNumber",jobNumber,100);
 					$("#bindbtn").hide();
 					$("<span class='btn btn-lg btn-success btn-block'>绑定成功！<br/>现在开始借阅吧~</span>").appendTo("#bindcontainer");
 					setTimeout(function(){
-						window.location.href="index.html";
+						window.location.href="/wx/pt/book/index.do";
 					},500);
 				} else {
 					alert("抱歉，信息不匹配，请重新输入");
@@ -70,15 +73,15 @@ $(function(){
 			console.log("搜索内容为空");
 			return ;
 		}
-		var bookName = $("#user_search").val();
-		console.log("搜索内容为:" + bookName);
+		var keyword = $("#user_search").val();
+		console.log("搜索内容为:" + keyword);
 		
 		$.ajax({
 		    type: "POST",
-			url: "book/bookSearch.do",
+			url: "bookSearch.do",
 			data: {
 				ajaxid : "searchBook",
-				bookName :  $("#user_search").val()
+				keyword :  $("#user_search").val()
 			},
 			dataType: "json",
 			success: function(result){
@@ -114,19 +117,17 @@ $(function(){
 		var table = $("#show_search_result table");
 
 		$.each(result.list,function(k,v){
-
-			var td_array=[];
+					
+			var td_object={};
 			$.each(v, function(k1, v1) {
-				td_array.push(v1);
+				td_object[''+k1+'']=v1;
+				console.log(k1+'  '+v1);
 			});
-			console.log(td_array);
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_array[0]+'</td><td>'+td_array[1]+'</td><td>'+td_array[2]+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_array[3]+'</td><td class="hide_td">'+td_array[4]+'</td><td class="hide_td">'+td_array[5]+'</td><td class="hide_td">'+td_array[6]+'</td><td class="hide_td">'+td_array[7]+'</td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.rowId+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
 			tr.appendTo(table);
 		});
 		
-
-
 	}
 
 
@@ -145,19 +146,21 @@ $(function(){
 		var borrowed = tds.eq(7).text();
 		var available = parseInt(tds.eq(6).text()) - parseInt(tds.eq(7).text());
 		var points = tds.eq(8).text();
+		var brief = tds.eq(9).text();
 
 		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 
-		showDetail(tds.eq(0).text(),amount,available,points);
+		showDetail(tds.eq(0).text(),amount,available,points,brief);
 
 	});
 
 	//点击图书详情按钮中用到的显示弹出层函数
-	function showDetail(bookName,total,available,points){
+	function showDetail(bookName,total,available,points,brief){
 		$("#bookName").text(bookName);
 		$("#points").text(points);
 		$("#totalnumber").text(total);
 		$("#availablenumber").text(available);
+		$("#brief").text(brief);
 		$("#masker").fadeIn(100);
 		$("#showdetail").fadeIn(100);
 	}
@@ -195,7 +198,7 @@ $(function(){
 					$("#borrow").hide();
 					$("<span>借阅成功</span>").appendTo("#showdetail");
 					setTimeout(function(){
-						window.location.href="index.do";
+						window.location.href="/wx/pt/book/index.do";
 					},1000);
 				} else {
 					alert("系统错误");
@@ -253,19 +256,18 @@ $(function(){
 		$("#category_table tr:gt(0)").remove();
 
 		var table = $("#category_table");
-
+		
 		$.each(result.list,function(k,v){
-
-			var td_array=[];
+			var td_object={};
 			$.each(v, function(k1, v1) {
-				td_array.push(v1);
+				td_object[''+k1+'']=v1;
+				console.log(k1+'  '+v1);
 			});
-			console.log(td_array);
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_array[0]+'</td><td>'+td_array[1]+'</td><td>'+td_array[2]+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_array[3]+'</td><td class="hide_td">'+td_array[4]+'</td><td class="hide_td">'+td_array[5]+'</td><td class="hide_td">'+td_array[6]+'</td><td class="hide_td">'+td_array[7]+'</td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.rowId+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
 			tr.appendTo(table);
 		});
-
+		
 	}
 
 
