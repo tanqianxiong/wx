@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "USERINFO", schema = "wx")
+@Table(name = "EMPLOYEE", schema = "wx")
 public class Employee  implements Serializable{
 
 	// Fields
@@ -51,7 +51,7 @@ public class Employee  implements Serializable{
 	@GenericGenerator(name = "generator", strategy = "uuid.hex")
 	@Id
 	@GeneratedValue(generator = "generator")
-	@Column(name = "USER_ID", unique = true, nullable = false, length = 36)
+	@Column(name = "Employee_ID", unique = true, nullable = false, length = 36)
 	public String getId() {
 		return this.id;
 	}
@@ -59,7 +59,7 @@ public class Employee  implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	@Column(name = "User_NO", unique = true, nullable = false, length = 10)
+	@Column(name = "Employee_NO", unique = true, nullable = false, length = 10)
 	public String getUserNo() {
 		return this.userNo;
 	}
@@ -68,7 +68,7 @@ public class Employee  implements Serializable{
 		this.userNo = userNo;
 	}
 
-	@Column(name = "USER_NAME", nullable = false, length = 30)
+	@Column(name = "Employee_NAME", nullable = false, length = 30)
 	public String getUsername() {
 		return this.username;
 	}
@@ -77,7 +77,7 @@ public class Employee  implements Serializable{
 		this.username = username;
 	}
 	
-	@Column(name = "USER_SEX", length = 4)
+	@Column(name = "Employee_SEX", length = 4)
 	public String getGender() {
 		return this.gender;
 	}
@@ -85,7 +85,7 @@ public class Employee  implements Serializable{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	@Column(name = "USER_DEPARTMENT", length = 20)
+	@Column(name = "Employee_DEPARTMENT", length = 20)
 	public String getDepartment() {
 		return this.department;
 	}
@@ -93,7 +93,7 @@ public class Employee  implements Serializable{
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-	@Column(name = "USER_POINT")
+	@Column(name = "Employee_POINT")
 	public int getPoint() {
 		return this.point;
 	}
@@ -101,7 +101,7 @@ public class Employee  implements Serializable{
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	@Column(name = "USER_POSITION", length = 36)
+	@Column(name = "Employee_POSITION", length = 36)
 	public String getPosition() {
 		return this.position;
 	}

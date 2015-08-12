@@ -20,15 +20,35 @@ public class EmployeeServiceImp implements EmployeeService{
 		// TODO Auto-generated method stub
 		return employeeDao.getAll();
 	}
+	
 	@Override
-	public Employee getByJobNumber(String jobNumber) {
+	public List<Employee> getByProperties(Map<String,Object> props) {
 		// TODO Auto-generated method stub
-		return this.employeeDao.getByJobNumber(jobNumber);
+		return this.employeeDao.getListByLikeProperties(props);
 	}
 	@Override
-	public Employee getByProperties(Map<String, Object> props) {
-		// TODO Auto-generated method stub
-		return this.employeeDao.getByProperties(props);
+	public void add(Employee employee){
+		employeeDao.add(employee);
+		
+	}
+	@Override
+	public void delete(String id){
+		employeeDao.delete(id);
+	}
+	@Override
+	public void alter(Employee employee){
+		employeeDao.alter(employee);
+		
+		
+	}
+	@Override
+	public Employee getById(String id){
+		return employeeDao.getById(id);
 	}
 
 }
+
+
+
+
+
