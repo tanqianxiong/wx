@@ -48,7 +48,7 @@ $(function(){
 					$("#bindbtn").hide();
 					$("<span class='btn btn-lg btn-success btn-block'>绑定成功！<br/>现在开始借阅吧~</span>").appendTo("#bindcontainer");
 					setTimeout(function(){
-						window.location.href="index.html";
+						window.location.href="book/index.do";
 					},500);
 				} else {
 					alert("抱歉，信息不匹配，请重新输入");
@@ -195,7 +195,7 @@ $(function(){
 					$("#borrow").hide();
 					$("<span>借阅成功</span>").appendTo("#showdetail");
 					setTimeout(function(){
-						window.location.href="index.do";
+						window.location.href="book/index.do";
 					},1000);
 				} else {
 					alert("系统错误");
