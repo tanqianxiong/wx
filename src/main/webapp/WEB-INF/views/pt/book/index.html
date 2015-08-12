@@ -23,7 +23,7 @@
 		  <br/>
 		  <div class="col-sm-12">
 		    <div class="input-group">
-		      <input type="text" id="user_search" class="form-control" placeholder="搜索图书...">
+		      <input type="text" id="user_search" class="form-control" placeholder="书名/作者/出版社..." onkeypress="trigleS()">
 		      <span class="input-group-btn">
 		        <button class="btn btn-success search_book_btn" type="button">Go!</button>
 		      </span>
@@ -114,6 +114,16 @@
 
 		<div class="tocategory">返回浏览分类</div>
 
-	</body>
 
+
+
+	<script>
+		function trigleS(){
+			if(event.keyCode == 13) { 
+				$(".search_book_btn").click();
+				return false; 
+			} 
+		}
+	</script>
+	</body>
 </html>
