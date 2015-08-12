@@ -27,12 +27,6 @@ public class BoundController {
 	@Autowired
 	public EmployeeService employeeService;
 	
-	@RequestMapping(value = {"/book/index"}, method = RequestMethod.GET)
-	public ModelAndView showIndexPage(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("pt/book/index");
-		return mv;
-	}
-
 	@RequestMapping(value = {"/binding"}, method = RequestMethod.GET)
 	public ModelAndView showBoundPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/binding");
@@ -46,14 +40,13 @@ public class BoundController {
 	}
 	
 	@RequestMapping(value = "/binding", method = RequestMethod.POST)
-	public void doLogin(String oppenId,String name,String jobNumber,HttpServletRequest request,HttpServletResponse response) {
+	public void doLogin(String openId,String name,String jobNumber,HttpServletRequest request,HttpServletResponse response) {
 		request.getSession().setAttribute("user", "pt");
-		boolean res=false;
-		res=true;
-		Map<String,Object> eProps=new HashMap<String,Object>();
-		eProps.put("username", name);
-		eProps.put("userNo", jobNumber);
-		Employee ep=this.employeeService.getByProperties(eProps);
+		boolean res=false;res=true;
+//		Map<String,Object> eProps=new HashMap<String,Object>();
+//		eProps.put("username", name);
+//		eProps.put("userNo", jobNumber);
+//		Employee ep=this.employeeService.getByProperties(eProps);
 //		if(ep!=null){
 //			//添加绑定信息
 //			BoundInfo boundInfo=new BoundInfo(ep,oppenId);
