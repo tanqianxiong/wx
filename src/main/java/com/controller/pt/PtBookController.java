@@ -27,6 +27,12 @@ import com.common.util.JsonUtil;
 public class PtBookController {
 	@Autowired
 	public UserService userService;
+
+	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+	public ModelAndView showIndexPage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("pt/book/index");
+		return mv;
+	}
 	
 	@RequestMapping(value = "/bookSearch", method = RequestMethod.POST)
 	public void doSearch(String bookName,HttpServletRequest request,HttpServletResponse response) {

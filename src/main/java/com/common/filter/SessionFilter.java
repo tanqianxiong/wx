@@ -42,8 +42,7 @@ public class SessionFilter extends OncePerRequestFilter {
                 response.setCharacterEncoding("UTF-8");
                 if (obj==null) {
                     if(uri.startsWith("/wx/pt")){
-                    	//重定向到绑定页
-                    	
+                    	//重定向到绑定页                    	
                     	response.sendRedirect(basePath+"/pt/tobind.do");
                     }
                     else{
