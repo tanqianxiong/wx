@@ -73,15 +73,15 @@ $(function(){
 			console.log("搜索内容为空");
 			return ;
 		}
-		var keyWord = $("#user_search").val();
-		console.log("搜索内容为:" + keyWord);
+		var keyword = $("#user_search").val();
+		console.log("搜索内容为:" + keyword);
 		
 		$.ajax({
 		    type: "POST",
 			url: "bookSearch.do",
 			data: {
 				ajaxid : "searchBook",
-				keyWord :  $("#user_search").val()
+				keyword :  $("#user_search").val()
 			},
 			dataType: "json",
 			success: function(result){
