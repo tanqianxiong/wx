@@ -149,6 +149,9 @@ $(function(){
 		
 		var publisher = tds.eq(2).text();
 		sessionStorage.publisher=publisher;
+
+		var bookId = tds.eq(4).text();
+		sessionStorage.bookId=bookId;
 		
 		var amount = tds.eq(6).text();
 		sessionStorage.amount=amount;
@@ -168,10 +171,12 @@ $(function(){
 
 		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 
-		showDetail(tds.eq(0).text(),amount,available,points,brief);
-
+		//showDetail(tds.eq(0).text(),amount,available,points,brief);
+		window.location.href="detail.do";
 	});
 
+	
+/*
 	//点击图书详情按钮中用到的显示弹出层函数
 	function showDetail(bookName,total,available,points,brief){
 		$("#bookName").text(bookName);
@@ -190,14 +195,14 @@ $(function(){
 		$(this).fadeOut(100);
 		$("#showdetail").fadeOut(100);
 	});
-
+*/
 
 
 	//借阅按钮
 	$("#borrow").click(function(){
 		//ajax 将用户信息传递给后台，使其更新数据库
-		var tds = $("table tr.choosing").find("td");
-		var bookId = tds.eq(4).text();
+		//var tds = $("#bookId");
+		var bookId = sessionStorage.bookId;
 		var openId = getCookie("openId");
 
 		$.ajax({
@@ -212,9 +217,8 @@ $(function(){
 			success: function(result){
 				if (result.success) {
 					//借阅成功
-					//$("#show_search_result tr").removeClass("choosing");
-					$("#borrow").hide();
-					$("<span>借阅成功</span>").appendTo("#showdetail");
+					$("#masker").fadeIn(200);
+					$(".popup-detail").fadeIn(200);
 					setTimeout(function(){
 						window.location.href="/wx/pt/book/index.do";
 					},1000);
@@ -255,7 +259,7 @@ $(function(){
 			url:"category.do",
 			data:{
 				ajaxid : "searchByCategory",
-				selected_category:selected_category
+				selectedCategory:selected_category
 			},
 			dataType:"json",
 			success: function(result){
@@ -307,7 +311,6 @@ $(function(){
 
 
 //图书归还模块
-
 	//在individual页面发起ajax请求：
 	if(window.location.href=="http://localhost:8080/wx/pt/book/individual.do"){
 		var openId = getCookie("openId");
@@ -355,7 +358,6 @@ $(function(){
 			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup escheat btn-success">归还</span></td><td style="display:none">'+td_object.id+'</td>');
 			tr.appendTo(borrowingTable);
 		});
-				
 		//显示已经归还书目列表
 		$.each(result.borrowed,function(k,v){
 			var td_object={};

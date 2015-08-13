@@ -61,16 +61,18 @@ public class PtBookController {
 	@RequestMapping(value = {"/borrow"}, method = RequestMethod.POST)
 	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Boolean res=false;
-		Borrow br=new Borrow();
 		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 		Employee el=bi.getEmployee();
 		Book book=this.bookService.get(bookId);
-		br.setBook(book);
-		br.setEmployee(el);
-		br.setBorrowTime(new Date());
-		//br.setReturnTime(new Date());
-		this.borrowService.add(br);
-		res=true;
+		if(this.borrowService.get(el, book)==null){		
+			Borrow br=new Borrow();
+			br.setBook(book);
+			br.setEmployee(el);
+			br.setBorrowTime(new Date());
+			//br.setReturnTime(new Date());
+			this.borrowService.add(br);
+			res=true;			
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", res);
 		JsonUtil.writeCommonJson(response, map);
@@ -186,5 +188,13 @@ public class PtBookController {
 			e.printStackTrace();
 		}
 		//return mv;
+	}
+	/*
+	 * 跳转到图书详情页
+	 */
+	@RequestMapping(value = {"/detail"}, method = RequestMethod.GET)
+	public ModelAndView showBookDetailPage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("pt/book/detail");
+		return mv;
 	}
 }

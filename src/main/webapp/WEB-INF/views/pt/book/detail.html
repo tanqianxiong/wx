@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>IOT-图书详情</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+		<meta name="format-detection" content="telphone=no, email=no"/>
+		<meta name="renderer" content="webkit">
+		<meta name="theme-color" content="#ee3e80">
+		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+		<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
+
+		<script src="/wx/js/jquery.js"></script>
+		<script src="/wx/js/bootstrap.js"></script>
+		<script src="/wx/js/storage.js"></script>
+		<script src="/wx/js/iot.js"></script>
+	</head>
+
+
+
+	<body>
+	
+		<div  class="container-fluid"> 
+			<h4 style="text-align:center;">图书详情：</h4>
+			<table class="table detail-table">
+				<tr>
+					<td class="items">书名:</td>
+					<td id="bookName"></td>
+				</tr>
+				<tr>
+					<td class="items">作者:</td>
+					<td id="author">吴承恩</td>
+				</tr>
+				<tr>
+					<td class="items">出版社:</td>
+					<td id="publisher">party</td>
+				</tr>
+				<tr>
+					<td class="items">出版年份:</td>
+					<td id="publishTime">2012</td>
+				</tr>
+				<tr>
+					<td class="items">馆藏总量:</td>
+					<td id="amount">10</td>
+				</tr>
+				<tr>
+					<td class="items">可借数量:</td>
+					<td id="available">5</td>
+				</tr>
+				
+				<tr>
+					<td class="items">评分:</td>
+					<td id="points">4.9</td>
+				</tr>
+				<tr>
+					<td class="items">简介:</td>
+					<td id="brief">当心！ 如果你想删除某个渐变，确保将你所添加的针对 IE 的 filter 一并删除。你可以通过使用 .reset-filter() mixin 和 background-image: none; 达到目的。当心！ 如果你想删除某个渐变，确保将你所添加的针对 IE 的 filter 一并删除。你可以通过使用 .reset-filter() mixin 和 background-image: none; 达到目的。当心！ 如果你想删除某个渐变，确保将你所添加的针对 IE 的 filter 一并删除。你可以通过使用 .reset-filter() mixin 和 background-image: none; 达到目的。当心！ 如果你想删除某个渐变，确保将你所添加的针对 IE 的 filter 一并删除。你可以通过使用 .reset-filter() mixin 和 background-image: none; 达到目的。</td>
+				</tr>
+			</table>
+
+			<div style="text-align:center;">
+				<span id="borrow" class="btn goodbtn">现在借阅</span><br/><br/>
+			</div>
+			
+ 
+		</div>
+
+		<div id="masker"></div>
+		<div class="popup-detail">
+			借阅成功
+		</div>
+
+	<script>
+		$(function(){
+			$("#bookName").text(sessionStorage.bookName);
+			$("#author").text(sessionStorage.author);
+			$("#publisher").text(sessionStorage.publisher);
+			$("#publishTime").text(sessionStorage.publishTime);
+			$("#amount").text(sessionStorage.amount);
+			$("#available").text(sessionStorage.available);
+			$("#points").text(sessionStorage.points);
+			$("#brief").text(sessionStorage.brief);
+		});
+	</script>
+
+	</body>
+</html>
