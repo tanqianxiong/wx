@@ -124,7 +124,7 @@ public class PtBookController {
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		map.put("score", list.get(0).getEmployee().getPoint());
+		map.put("score", employee.getPoint());
 		map.put("borrowing", borrowing);
 		map.put("borrowed", borrowed);
 		try {
