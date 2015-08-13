@@ -69,7 +69,7 @@ function setData2Table(welfareList){
 	for (var i = 0; i < welfareList.length; i++) {
 		var tr = $("<tr/>");
 		tr.html('<td>' +j+'</td><td>' + welfareList[i].name + '</td><td>'
-				+ window.simplifyBrief(welfareList[i].introduction) + '</td><td>'
+				+ window.simplifyBrief(welfareList[i].introduction,20) + '</td><td>'
 				+ welfareList[i].state + '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''
 				+ welfareList[i].id + '\');" data-toggle="modal" data-target="#auModal">修改</a>'

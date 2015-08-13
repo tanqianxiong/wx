@@ -1,15 +1,40 @@
 /*
- * 此文件用于js的公共类，包括：删除、修改、搜索
+ * 此文件用于js的公共类，包括：删除、修改、搜索、精简简介、日期类型解析
  */
-//精简介绍内容，如超过一定数目，则下文以省略号代替
-function simplifyBrief(brief){
-	if(brief.length>8){
-		return brief.substring(0,8)+"...";
+
+/*
+ * 精简介绍内容，如超过一定数目，则下文以省略号代替
+ * @param brief 简介之类的文本内容
+ * @param len  截取长度
+ * @return 截取长度之内的子串，后面内容用省略号代替
+ */
+function simplifyBrief(brief,len){
+	if(brief.length>len){
+		return brief.substring(0,len)+"...";
 	} 
 	else{
 		return brief;
 	}
 }
+/*
+ * 日期类型解析
+ * @param d Java中的Date类型
+ * @return yyyy-mm-dd
+ */
+function DateFormat(d)
+ { 
+	if(d==null){
+		return "--";
+	}
+	var date = new Date(parseInt(d.time, 10));
+    //月份得+1，且只有个位数时在前面+0
+    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    //日期为个位数时在前面+0
+	var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    //getFullYear得到4位数的年份 ，返回一串字符串
+	return date.getFullYear() + "-" + month + "-" + currentDate;
+}
+
 function del(id){
 	window.Modal.confirm({ msg: "确定删除这条记录？" }).on(function (e) {
         if (e) {

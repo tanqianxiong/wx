@@ -78,7 +78,7 @@ function setData2Table(bookList) {
 				+ '</td><td>' + bookList[i].amount 
 				+ '</td><td>' + bookList[i].borrowed
 				+ '</td><td>' + bookList[i].points 
-				+ '</td><td>' + window.simplifyBrief(bookList[i].brief) + '</td><td>'
+				+ '</td><td>' + window.simplifyBrief(bookList[i].brief,8) + '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''
 				+ bookList[i].id + '\');" data-toggle="modal" data-target="#auModal">修改</a>'
 				+ '&nbsp;&nbsp;<a title="点击删除" href="#" onclick="javascript:del(\''
