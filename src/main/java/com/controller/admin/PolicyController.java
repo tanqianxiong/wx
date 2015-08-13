@@ -1,7 +1,9 @@
 package com.controller.admin;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,8 +61,15 @@ public class PolicyController {
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(HttpServletResponse response,Policy policy) throws IOException{
-	
+	public void add(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		Policy policy=new Policy();
+		String name=request.getParameter("name");
+		String content=request.getParameter("content");
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+		Date createTime=new Date();
+		policy.setName(name);
+		policy.setContent(content);
+		policy.setCreateTime(createTime);
 		this.policyService.add(policy);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
@@ -93,7 +102,12 @@ public class PolicyController {
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(HttpServletResponse response,Policy policy) throws IOException{
+	public void update(HttpServletResponse response,String id,String name,String content) throws IOException{
+		Policy policy = new Policy(id);
+		policy.setName(name);
+		policy.setContent(content);
+		Date createTime=new Date();
+		policy.setCreateTime(createTime);
 		this.policyService.alter(policy);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
