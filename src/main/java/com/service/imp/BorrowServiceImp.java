@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.BorrowDao;
+import com.entity.Book;
 import com.entity.Borrow;
 import com.entity.Employee;
 import com.service.BorrowService;
@@ -35,5 +36,14 @@ public class BorrowServiceImp implements BorrowService{
 		// TODO Auto-generated method stub
 		return this.borrowDao.getListByEmployee(employee);
 	}
-
+	@Override
+	public Borrow get(Employee employee, Book book) {
+		// TODO Auto-generated method stub
+		return this.borrowDao.get(employee,book);
+	}
+	@Override
+	public void update(Borrow br) {
+		// TODO Auto-generated method stub
+		this.borrowDao.update(br);
+	}
 }

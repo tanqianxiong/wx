@@ -93,7 +93,9 @@ public class PtBookController {
 		}
 		//return mv;
 	}
-
+	/*
+	 * 个人借阅记录
+	 */
 	@RequestMapping(value = "/individual", method = RequestMethod.POST)
 	public void doGetBorrowRecord(String openId, HttpServletRequest request,HttpServletResponse response) {
 		Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
@@ -113,6 +115,26 @@ public class PtBookController {
 		map.put("score", list.get(0).getEmployee().getPoint());
 		map.put("borrowing", borrowing);
 		map.put("borrowed", borrowed);
+		try {
+			JsonUtil.writeCommonJson(response, map);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return mv;
+	}
+	/*
+	 * 归还图书
+	 */
+	@RequestMapping(value = "/escheat", method = RequestMethod.POST)
+	public void doReturnBook(String openId, String bookId, HttpServletRequest request,HttpServletResponse response) {
+		Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
+		Book book=this.bookService.get(bookId);
+		Borrow br=this.borrowService.get(employee,book);
+		br.setReturnTime(new Date());
+		this.borrowService.update(br);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", true);
 		try {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {

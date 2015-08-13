@@ -16,7 +16,7 @@ $(function(){
 		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
 
 		}else{
-			window.location.href="/wx/pt/tobind.do";			
+			window.location.href="/wx/pt/tobind.do";
 		}
 	}
 	
@@ -247,7 +247,7 @@ $(function(){
 
 
 	//在category页面发起ajax请求：
-	if(window.location.href=="/wx/pt/book/category.do"){
+	if(window.location.href=="http://localhost:8080/wx/pt/book/category.do"){
 		var selected_category = getCookie("selected_category");
 		$(".category_info").prepend(selected_category);
 		$.ajax({
@@ -309,7 +309,7 @@ $(function(){
 //图书归还模块
 
 	//在individual页面发起ajax请求：
-	if(window.location.href=="/wx/pt/book/individual.do"){
+	if(window.location.href=="http://localhost:8080/wx/pt/book/individual.do"){
 		var openId = getCookie("openId");
 		$.ajax({
 			type:"POST",
@@ -352,7 +352,7 @@ $(function(){
 				console.log(k1+'  '+v1);
 			});
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup escheat btn-success">归还</span></td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup escheat btn-success">归还</span></td><td style="display:none">'+td_object.id+'</td>');
 			tr.appendTo(borrowingTable);
 		});
 				
@@ -390,16 +390,16 @@ $(function(){
 	$("#escheat-yes").click(function(){
 		//发起ajax 更新个人的借阅信息
 		var tds = $("table.individual-table tr.choosing").find("td");
-		var bookName = tds.eq(0).text();
+		var bookId = tds.eq(4).text();
 		var openId = getCookie("openId");
 
 		$.ajax({ 
 		    type: "POST", 	
-			url: "ajax_server.php",
+			url: "escheat.do",
 			data: {
 				ajaxid: "escheat",
 				openId: openId,
-				bookName: bookName
+				bookId: bookId
 			},
 			dataType: "json",
 			success: function(result){
@@ -420,7 +420,7 @@ $(function(){
 	function updateRecord(result){
 		//从表格中删除该书
 		//若归还成功，则
-		alert(result.msg);
+		//alert(result.msg);
 		$("#masker-ind").fadeOut(100);
 		$("#popup-ind").fadeOut(100);
 		//删除选中的书
