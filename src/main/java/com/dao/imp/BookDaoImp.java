@@ -42,4 +42,9 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 		// TODO Auto-generated method stub
 		return this.doGetListByLikeProperties(map, map2);
 	}
+	@Override
+	public List<Book> getListByProperty(Map<String, Object> prop) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperties(prop, null);
+	}
 }

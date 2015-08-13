@@ -15,4 +15,5 @@ public interface BookDao extends BaseDao<Book>{
 	public void alter(Book book);
 	public Book get(String id);
 	List<Book> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
+	List<Book> getListByProperty(Map<String, Object> prop);
 }

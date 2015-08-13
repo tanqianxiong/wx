@@ -46,5 +46,10 @@ public class BookServiceImp implements BookService{
 		// TODO Auto-generated method stub
 		return this.bookDao.getLikeProperty(map, map2);
 	}
+	@Override
+	public List<Book> getListByProperty(Map<String, Object> prop) {
+		// TODO Auto-generated method stub
+		return this.bookDao.getListByProperty(prop);
+	}
 
 }

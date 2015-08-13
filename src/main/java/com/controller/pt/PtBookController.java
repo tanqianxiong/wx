@@ -39,17 +39,25 @@ public class PtBookController {
 	public BorrowService borrowService;
 	@Autowired
 	public BoundInfoService boundInfoService;
-	
+	/*
+	 * 跳转到个人借阅记录页面
+	 */
 	@RequestMapping(value = {"/individual"}, method = RequestMethod.GET)
 	public ModelAndView showIndividualPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/book/individual");
 		return mv;
 	}
+	/*
+	 * 跳转到图书馆的首页
+	 */
 	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
 	public ModelAndView showIndexPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/book/index");
 		return mv;
 	}
+	/*
+	 * 借阅图书
+	 */
 	@RequestMapping(value = {"/borrow"}, method = RequestMethod.POST)
 	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Boolean res=false;
@@ -67,7 +75,9 @@ public class PtBookController {
 		map.put("success", res);
 		JsonUtil.writeCommonJson(response, map);
 	}
-	
+	/*
+	 * 图书搜索
+	 */
 	@RequestMapping(value = "/bookSearch", method = RequestMethod.POST)
 	public void doSearch(HttpServletRequest request,HttpServletResponse response) {
 		List<Book> list=new ArrayList<Book>();
@@ -135,6 +145,40 @@ public class PtBookController {
 		this.borrowService.update(br);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
+		try {
+			JsonUtil.writeCommonJson(response, map);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return mv;
+	}
+	
+	/*
+	 * 跳转到图书分类页面
+	 */
+	@RequestMapping(value = {"/category"}, method = RequestMethod.GET)
+	public ModelAndView showCategoryPage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("pt/book/category");
+		return mv;
+	}
+	/*
+	 * 图书分类的数据响应
+	 */
+	@RequestMapping(value = "/category", method = RequestMethod.POST)
+	public void getCategoryList(String selectedCategory,HttpServletRequest request,HttpServletResponse response) {
+		List<Book> list=new ArrayList<Book>();
+		if(selectedCategory!=null && !selectedCategory.isEmpty()){
+			Map<String,Object> prop=new HashMap<String,Object>();
+			prop.put("type", selectedCategory);
+			list=this.bookService.getListByProperty(prop);
+		}
+		else{
+			list=this.bookService.getAll();
+		}
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", true);
+		map.put("list", list);
 		try {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {

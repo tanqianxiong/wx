@@ -13,4 +13,5 @@ public interface BookService {
 	public Book get(String id);
 	List<Book> getLikeProperty(Map<String, Object> map);
 	public List<Book> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
+	public List<Book> getListByProperty(Map<String, Object> prop);
 }
