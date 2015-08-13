@@ -52,6 +52,7 @@ function update(id) {
 						break;
 					}
 					$("#brief").text(item.brief);
+					$("#type").val(item.type);
 					window.url = "update.do";
 				});
 			}
