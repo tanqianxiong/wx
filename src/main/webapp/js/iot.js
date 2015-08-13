@@ -134,21 +134,37 @@ $(function(){
 
 
 
-
-
 	//	详情click：
 	//点击图书搜索结果中的详情按钮，显示该书可借信息
 	$("table").on('click','.detail',function(){
 		$(this).parents("tr").addClass("choosing");
 		var tds = $("table tr.choosing").find("td");
 
+		//存图书信息
 		var bookName = tds.eq(0).text();
-
+		sessionStorage.bookName=bookName;
+		
+		var author = tds.eq(1).text();
+		sessionStorage.author=author;
+		
+		var publisher = tds.eq(2).text();
+		sessionStorage.publisher=publisher;
+		
 		var amount = tds.eq(6).text();
+		sessionStorage.amount=amount;
+		
 		var borrowed = tds.eq(7).text();
+		sessionStorage.borrowed=borrowed;
+		
 		var available = parseInt(tds.eq(6).text()) - parseInt(tds.eq(7).text());
+		sessionStorage.available=available;
+		
 		var points = tds.eq(8).text();
+		sessionStorage.points=points;
+		
 		var brief = tds.eq(9).text();
+		sessionStorage.brief=brief;
+		
 
 		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 
@@ -231,12 +247,12 @@ $(function(){
 
 
 	//在category页面发起ajax请求：
-	if(window.location.href=="http://localhost:8080/wx/pt/book/category.do"){
+	if(window.location.href=="/wx/pt/book/category.do"){
 		var selected_category = getCookie("selected_category");
 		$(".category_info").prepend(selected_category);
 		$.ajax({
 			type:"POST",
-			url:"book/category.do",
+			url:"category.do",
 			data:{
 				ajaxid : "searchByCategory",
 				selected_category:selected_category
@@ -293,11 +309,11 @@ $(function(){
 //图书归还模块
 
 	//在individual页面发起ajax请求：
-	if(window.location.href=="http://localhost:8080/wx/pt/book/individual.do"){
+	if(window.location.href=="/wx/pt/book/individual.do"){
 		var openId = getCookie("openId");
 		$.ajax({
 			type:"POST",
-			url:"individual/individual.do",
+			url:"individual.do",
 			data:{
 				ajaxid : "borrowRecord",
 				openId:openId
@@ -325,26 +341,30 @@ $(function(){
 	
 		//显示积分
 		$("#score").text(result.score);
+		
+		
+		
 		//显示在借书目列表
 		$.each(result.borrowing,function(k,v){
-			var td_array=[];
+			var td_object={};
 			$.each(v, function(k1, v1) {
-				td_array.push(v1);
+				td_object[''+k1+'']=v1;
+				console.log(k1+'  '+v1);
 			});
-			console.log(td_array);
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_array[0]+'</td><td>'+td_array[1]+'</td><td>'+td_array[2]+'</td><td><span class="go-popup escheat btn-success">归还</span></td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup escheat btn-success">归还</span></td>');
 			tr.appendTo(borrowingTable);
 		});
+				
 		//显示已经归还书目列表
 		$.each(result.borrowed,function(k,v){
-			var td_array=[];
+			var td_object={};
 			$.each(v, function(k1, v1) {
-				td_array.push(v1);
+				td_object[''+k1+'']=v1;
+				console.log(k1+'  '+v1);
 			});
-			console.log(td_array);
 			var tr=$("<tr/>");
-			tr.html('<td>'+td_array[0]+'</td><td>'+td_array[1]+'</td><td>'+td_array[2]+'</td>');
+			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td>');
 			tr.appendTo(borrowedTable);
 		});
 	}

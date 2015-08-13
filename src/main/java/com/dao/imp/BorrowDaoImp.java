@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.dao.BorrowDao;
 import com.dao.UserDao;
 import com.entity.Borrow;
+import com.entity.Employee;
 import com.entity.User;
 import com.common.db.HibernateDaoImp;
 @Repository("borrowDao")
@@ -29,6 +30,13 @@ public class BorrowDaoImp extends HibernateDaoImp<Borrow> implements BorrowDao{
 		// TODO Auto-generated method stub
 		this.doDeleteById(id);
 	}
+
+	@Override
+	public List<Borrow> getListByEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperty("employee", employee, null);
+	}
+
 
 	
 }

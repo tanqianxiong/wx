@@ -70,7 +70,9 @@
 				<value>com.entity.Book</value>
 				<value>com.entity.Welfare</value>
 				<value>com.entity.Borrow</value>
-				<value>com.entity.Employee</value>			
+				<value>com.entity.Employee</value>
+				<value>com.entity.BoundInfo</value>		
+				<value>com.entity.Policy</value>			
 			</list>
 		</property>
 

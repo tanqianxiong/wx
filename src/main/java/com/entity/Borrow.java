@@ -88,7 +88,7 @@ public class Borrow  implements Serializable{
 	public void setBorrowTime(Date borrowTime) {
 		this.borrowTime = borrowTime;
 	}
-	@Column(name = "RETURN_DATE", nullable = false)
+	@Column(name = "RETURN_DATE", nullable = true)
 	public Date getReturnTime() {
 		return this.returnTime;
 	}

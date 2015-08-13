@@ -21,7 +21,7 @@ public class BoundInfo  implements Serializable{
 	
 	private String id;
 	private Employee employee;
-	private String oppenId;
+	private String openId;
 	// Constructors
 
 	/** default constructor */
@@ -34,9 +34,9 @@ public class BoundInfo  implements Serializable{
 	}
 
 	/** full constructor */
-	public BoundInfo(Employee employee, String oppenId) {
+	public BoundInfo(Employee employee, String openId) {
 		this.employee = employee;
-		this.oppenId = oppenId;
+		this.openId = openId;
 	}
 
 	// Property accessors
@@ -52,7 +52,7 @@ public class BoundInfo  implements Serializable{
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID", nullable = false)
 	public Employee getEmployee() {
 		return this.employee;
@@ -63,12 +63,12 @@ public class BoundInfo  implements Serializable{
 	}
 	
 	@Column(name = "WXNO", nullable = false)
-	public String getOppenId() {
-		return this.oppenId;
+	public String getOpenId() {
+		return this.openId;
 	}
 
-	public void setOppenId(String oppenId) {
-		this.oppenId = oppenId;
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 	
 }

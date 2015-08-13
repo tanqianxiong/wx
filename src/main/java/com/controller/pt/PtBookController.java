@@ -40,12 +40,16 @@ public class PtBookController {
 	@Autowired
 	public BoundInfoService boundInfoService;
 	
+	@RequestMapping(value = {"/individual"}, method = RequestMethod.GET)
+	public ModelAndView showIndividualPage(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("pt/book/individual");
+		return mv;
+	}
 	@RequestMapping(value = {"/index"}, method = RequestMethod.GET)
 	public ModelAndView showIndexPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/book/index");
 		return mv;
 	}
-
 	@RequestMapping(value = {"/borrow"}, method = RequestMethod.POST)
 	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Boolean res=false;
@@ -56,7 +60,7 @@ public class PtBookController {
 		br.setBook(book);
 		br.setEmployee(el);
 		br.setBorrowTime(new Date());
-		br.setReturnTime(new Date());
+		//br.setReturnTime(new Date());
 		this.borrowService.add(br);
 		res=true;
 		Map<String,Object> map=new HashMap<String,Object>();
@@ -81,6 +85,34 @@ public class PtBookController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("list", list);
+		try {
+			JsonUtil.writeCommonJson(response, map);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//return mv;
+	}
+
+	@RequestMapping(value = "/individual", method = RequestMethod.POST)
+	public void doGetBorrowRecord(String openId, HttpServletRequest request,HttpServletResponse response) {
+		Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
+		List<Borrow> list =this.borrowService.getListByEmployee(employee);
+		List<Book> borrowing=new ArrayList<Book>();
+		List<Book> borrowed=new ArrayList<Book>();
+		for(Borrow br:list){
+			if(br.getReturnTime()!=null){
+				borrowed.add(br.getBook());
+			}
+			else{
+				borrowing.add(br.getBook());
+			}
+		}
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", true);
+		map.put("score", list.get(0).getEmployee().getPoint());
+		map.put("borrowing", borrowing);
+		map.put("borrowed", borrowed);
 		try {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {
