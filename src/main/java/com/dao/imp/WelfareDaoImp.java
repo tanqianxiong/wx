@@ -43,4 +43,9 @@ public class WelfareDaoImp extends HibernateDaoImp<Welfare> implements WelfareDa
 		// TODO Auto-generated method stub
 		return this.doGetListByLikeProperties(map, map2);
 	}
+	@Override
+	public List<Welfare> getListByProperty(Map<String, Object> prop) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperties(prop, null);
+	}
 }

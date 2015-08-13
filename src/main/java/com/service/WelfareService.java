@@ -14,4 +14,5 @@ public interface WelfareService {
 	public Welfare get(String id);
 	List<Welfare> getLikeProperty(Map<String, Object> map);
 	public List<Welfare> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
+	public List<Welfare> getListByProperty(Map<String, Object> prop);
 }

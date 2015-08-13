@@ -17,5 +17,6 @@ public interface WelfareDao extends BaseDao<Welfare>{
 	public void alter(Welfare book);
 	public Welfare get(String id);
 	List<Welfare> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
+	List<Welfare> getListByProperty(Map<String, Object> prop);
 	
 }
