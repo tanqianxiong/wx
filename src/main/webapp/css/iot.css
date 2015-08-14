@@ -2,12 +2,9 @@ body{
 	font-family: "Microsoft YaHei",arial,sans-serif;
 	font-size: 14px;
 	background-color: #ededef;
-	/*background-image: url("../img/bg.jpg");
-	background-size: cover;
-	background-attachment:fixed;*/
 }
 
-/*slimÀà ×óÓÒ¾àÀëÆÁÄ»20ÏñËØ*/
+/*slimï¿½ï¿½ ï¿½ï¿½ï¿½Ò¾ï¿½ï¿½ï¿½ï¿½ï¿½Ä»20ï¿½ï¿½ï¿½ï¿½*/
 .slim{
 	margin-left:20px;
 	margin-right: 20px;
@@ -81,7 +78,7 @@ img{
 	text-align: center;
 	display: none;
 }
-/*Í¼ÊéËÑË÷½á¹û±í¸ñÖĞ Òş²ØÔİÊ±²»ĞèÒªµÄĞÅÏ¢*/
+/*Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ï¢*/
 .hide_td{
 	display:none;
 }
@@ -133,7 +130,7 @@ img{
 	text-align: center;
 	display: none;
 }
-/*indexÒ³ÃæÖĞ·µ»Øä¯ÀÀ·ÖÀà²ãµÄÑùÊ½*/
+/*indexÒ³ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .tocategory{
 	display: none;
 	width: 100%;
@@ -171,19 +168,19 @@ img{
     border-top: 5px solid transparent;
 }
 
-/*ĞŞ¸´ÏêÇé°´Å¥±»¼·Ñ¹µÄbug*/
+/*ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½é°´Å¥ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½bug*/
 .detail{
 	min-width:45px;
 	display:block;
 	text-align:center;
 }
 
-/*Ôö¼ÓÏêÇéÖĞÍ¼Êé¼ò½éĞÅÏ¢ showdetail»á³¬¿í£¬×öĞŞ¸´*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ showdetailï¿½á³¬ï¿½?ï¿½ï¿½ï¿½Ş¸ï¿½*/
 #showdetail{
 	overflow:auto;
 }
 
-/*Í¼ÊéÏêÇéµÄÒ³Ãæ*/
+/*Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½*/
 .detail-table tr{
 	position:relative;
 }
@@ -192,7 +189,7 @@ img{
 	text-align:right;
 }
 
-/*½èÔÄ³É¹¦µ¯´°*/
+/*ï¿½ï¿½ï¿½Ä³É¹ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .popup-detail{
 	width:60%;
 	display:none;
@@ -205,6 +202,48 @@ img{
 	top: 38.2%;
 	font-size:2rem;
 	text-align:center;
+}
+
+
+/*ç¦åˆ©åŠç†é¡µé¢*/
+
+
+.checkbox{
+	font-size: 2rem;
+}
+#freebtn{
+	margin-top: 20px;
+}
+.info{
+	padding-top: 20px;
+	font-weight: normal;
+}
+.info input{
+	border: 1px solid #999;
+	padding: 3px;
+}
+.popup-welfare{
+	width:60%;
+	display:none;
+	color:#fff;
+	border-radius:5px;
+	border:2px solid #ccc;
+	z-index:1002;
+	position:fixed;
+	left: 20%;
+	top: 38.2%;
+	font-size:2rem;
+	text-align:center;
+}
+#masker-welfare{
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 1000;
+	background-color: rgba(0,0,0,.6);
+	display: none;
 }
 
 
