@@ -17,7 +17,7 @@ function setData2Table(borrowList) {
 		tr.html('<td>' +j
 				
 				+ '</td><td>' + borrowList[i].book.bookName
-				+ '</td><td>' + borrowList[i].tag
+				
 				+ '</td><td>' + DateFormat(borrowList[i].borrowTime)
 				+ '</td><td>' + DateFormat(borrowList[i].returnTime)
 				+ '</td>');
