@@ -20,8 +20,8 @@ function update(id) {
 					case 'id':
 						$(this).val(item.id);
 						break;
-					case 'userNO':
-						$(this).val(item.userNO);
+					case 'userNo':
+						$(this).val(item.userNo);
 						break;
 					case 'username':
 						$(this).val(item.username);
@@ -50,6 +50,10 @@ function update(id) {
 		},
 	});
 }
+function check(id){
+	sessionStorage.employeeId=id;
+	//alert(sessionStorage.employeeId);
+}
 function setData2Table(employeeList) {
 	var employeeTBody = $('#listTable tbody');
 	employeeTBody.html('');
@@ -64,7 +68,7 @@ function setData2Table(employeeList) {
 				+ '</td><td>' + employeeList[i].position
 				+ '</td><td>' + employeeList[i].point 
 				+ '</td><td>'
-				+ '<a title="点击查询" href="#" onclick="javascript:check(\''
+				+ '<a title="点击查询" href="/wx/admin/employee/check.do" onclick="javascript:check(\''
 				+ employeeList[i].id + '\');" >查询</a>'+ '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''
 				+ employeeList[i].id + '\');" data-toggle="modal" data-target="#auModal">修改</a>'
