@@ -164,6 +164,24 @@ function disAgree(id,state){
 	});
 }
 
+/*
+ * 日期类型解析
+ * @param d Java中的Date类型
+ * @return yyyy-mm-dd
+ */
+function DateFormat(d)
+ { 
+	if(d==null){
+		return "--";
+	}
+	var date = new Date(parseInt(d.time, 10));
+    //月份得+1，且只有个位数时在前面+0
+    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    //日期为个位数时在前面+0
+	var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    //getFullYear得到4位数的年份 ，返回一串字符串
+	return date.getFullYear() + "-" + month + "-" + currentDate;
+}
 
 function setDataTable(appintmentList){
 	var appointmentTBody = $('#listTable tbody');
@@ -178,8 +196,8 @@ function setDataTable(appintmentList){
 				     + '</td><td>' + userNo + '</td><td>'
 				     + appintmentList[i].employee.username + '</td><td>'
 				 //    + '</td><td>' + appintmentList[i].employee.userPhone + '</td><td>'				     
-				     + appintmentList[i].applyTime + '</td><td>'
-				     + appintmentList[i].checkTime + '</td><td>'
+				     + window.DateFormat(appintmentList[i].applyTime) + '</td><td>'
+				     + window.DateFormat(appintmentList[i].checkTime) + '</td><td>'
 				     + appintmentList[i].state + '</td><td>'
 				     + '&nbsp;&nbsp;<a title="点击通过" href="#" onclick="javascript:agree(\''
 					 + appintmentList[i].id +'\',\''+ "通过" +'\');">通过</a>'
