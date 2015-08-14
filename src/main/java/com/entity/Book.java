@@ -1,6 +1,8 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +29,8 @@ public class Book  implements Serializable{
 	private int borrowed;
 	private double points;
 	private String brief;
+	private Date bookInputTime;
+	private String bookState;
 	
 	// Constructors
 
@@ -40,7 +44,7 @@ public class Book  implements Serializable{
 	}
 
 	/** full constructor */
-	public Book(String ISBN,String bookName,String author, String publisher,int publishTime,String type,int amount,int borrowed,double points,String brief) {
+	public Book(String ISBN,String bookName,String author, String publisher,int publishTime,String type,int amount,int borrowed,double points,String brief,Date bookInputTime,String bookState) {
 		this.ISBN = ISBN;
 		this.bookName = bookName;
 		this.author = author;
@@ -51,6 +55,8 @@ public class Book  implements Serializable{
 		this.borrowed=borrowed;
 		this.points=points;
 		this.brief=brief;
+		this.bookInputTime=bookInputTime;
+		this.bookState=bookState;
 	}
 
 	// Property accessors
@@ -145,6 +151,21 @@ public class Book  implements Serializable{
 	}
 	public void setBrief(String brief){
 		this.brief = brief;
+	}
+	@Column(name = "Book_Input_Time", nullable = true)
+	public Date getBookInputTime(){
+		return this.bookInputTime;
+	}
+	public void setBookInputTime(Date bookInputTime){
+		this.bookInputTime=bookInputTime;
+	}
+	
+	@Column(name = "Book_State", nullable = true, length = 10)
+	public String getBookState(){
+		return this.bookState;
+	}
+	public void setBookState(String bookState){
+		this.bookState = bookState;
 	}
 	
 }

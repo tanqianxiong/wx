@@ -36,9 +36,7 @@ public class AppointmentController {
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
-	//	System.out.println("进来了");
 	    List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
-	//	Map<String,Object> map=new HashMap<String,Object>();
 		Map<String,Object> res=new HashMap<String,Object>();
 		List<Welfare> welfareList=this.welfareService.getAll();//获取welfare表中的数据
 		for(int i=0;i<welfareList.size();i++){
@@ -66,45 +64,44 @@ public class AppointmentController {
 	public ModelAndView detail(String welfareId,HttpServletRequest request) throws IOException{
 		ModelAndView mv = new ModelAndView("admin/appointment/detail");
 		request.setAttribute("welfareId", welfareId);
-		System.out.println("welfareID"+welfareId);
+		//System.out.println("welfareID"+welfareId);
 		return mv;
 	}
 	
 	//详情
-		@RequestMapping(value = "/detail", method = RequestMethod.POST)
-		public void getDetailInfo(String welfareId,HttpServletResponse response) throws IOException{
-			Welfare wf=this.welfareService.get(welfareId);
-			List<Appointment> list=this.appointmentService.getListByWelfare(wf);
-			Map<String,Object> map=new HashMap<String,Object>();
-			map.put("success", true);
-			map.put("list",list);
-			JsonUtil.writeCommonJson(response, map);
-		}
+	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	public void getDetailInfo(String welfareId,HttpServletResponse response) throws IOException{
+		Welfare wf=this.welfareService.get(welfareId);
+		List<Appointment> list=this.appointmentService.getListByWelfare(wf);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", true);
+		map.put("list",list);
+		JsonUtil.writeCommonJson(response, map);
+	}
 	
-		//显示操作状态：通过或退回
-		@RequestMapping(value = "/agree",method = RequestMethod.POST)
-		public void agree(HttpServletResponse response,String id) throws IOException{
-			Appointment appointment=this.appointmentService.get(id);
-			appointment.setState("通过");
-			this.appointmentService.update(appointment);
-			Map<String,Object> map=new HashMap<String,Object>();
-			map.put("success", true);
-			JsonUtil.writeCommonJson(response, map);
-			
-		}
+	//显示操作状态：通过或退回
+	@RequestMapping(value = "/agree",method = RequestMethod.POST)
+	public void agree(HttpServletResponse response,String id) throws IOException{
+		Appointment appointment=this.appointmentService.get(id);
+		appointment.setState("通过");
+		this.appointmentService.update(appointment);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", true);
+		JsonUtil.writeCommonJson(response, map);		
+	}
 
 		
-		//显示操作状态：通过或退回
-		@RequestMapping(value = "/disAgree",method = RequestMethod.POST)
-		public void disAgree(HttpServletResponse response,String id) throws IOException{
-			Appointment appointment=this.appointmentService.get(id);
-			appointment.setState("退回");
-			this.appointmentService.update(appointment);
-			Map<String,Object> map=new HashMap<String,Object>();
-			map.put("success", true);
-			JsonUtil.writeCommonJson(response, map);
-			
-		}
+	//显示操作状态：通过或退回
+	@RequestMapping(value = "/disAgree",method = RequestMethod.POST)
+	public void disAgree(HttpServletResponse response,String id) throws IOException{
+		Appointment appointment=this.appointmentService.get(id);
+		appointment.setState("退回");
+		this.appointmentService.update(appointment);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", true);
+		JsonUtil.writeCommonJson(response, map);		
+	}
+	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public void add(HttpServletResponse response,Appointment appointment) throws IOException{
@@ -117,19 +114,15 @@ public class AppointmentController {
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public void deleteById(HttpServletResponse response,String id) throws IOException{
-		//String id = request.getParameter("id");
-		System.out.println(id);
 		this.appointmentService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		JsonUtil.writeCommonJson(response, map);
 	}
-	
-	
+		
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
 	public void get(HttpServletResponse response,String id) throws IOException{
-		System.out.println(id);
 		Appointment appointment=this.appointmentService.get(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
