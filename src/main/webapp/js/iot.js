@@ -7,8 +7,7 @@ $(function(){
 	
 	
 	//先搞个假的openId 
-	setCookie("openId","abcd1234",100);
-	//setCookie("username","defaultUserName",100);
+	//setCookie("openId","abcd1234",100);
 	
 	
 	
@@ -37,7 +36,6 @@ $(function(){
 		    type: "POST", 	
 			url: "binding.do",
 			data: {
-				ajaxid:"bind",
 				openId: openId,
 				name:$("#username").val(),
 				jobNumber:$("#jobNumber").val()
@@ -47,7 +45,7 @@ $(function(){
 				//var data = JSON.parse(data);
 				console.log(result);
 				if (result.success) {
-					setCookie("openId",openId,100);
+					//setCookie("openId",openId,1);
 					setCookie("username",name,100);
 					setCookie("jobNumber",jobNumber,100);
 					$("#bindbtn").hide();
@@ -82,7 +80,6 @@ $(function(){
 		    type: "POST",
 			url: "bookSearch.do",
 			data: {
-				ajaxid : "searchBook",
 				keyword :  $("#user_search").val()
 			},
 			dataType: "json",
@@ -209,7 +206,6 @@ $(function(){
 		    type: "POST", 	
 			url: "borrow.do",
 			data: {
-				ajaxid : "borrow",
 				bookId : bookId,
 				openId : openId
 			},
@@ -251,6 +247,10 @@ $(function(){
 
 
 	//在category页面发起ajax请求：
+	
+	
+	//改在了html的script标签中
+	/*
 	if(window.location.href=="http://localhost:8080/wx/pt/book/category.do"){
 		var selected_category = getCookie("selected_category");
 		$(".category_info").prepend(selected_category);
@@ -258,7 +258,6 @@ $(function(){
 			type:"POST",
 			url:"category.do",
 			data:{
-				ajaxid : "searchByCategory",
 				selectedCategory:selected_category
 			},
 			dataType:"json",
@@ -290,7 +289,7 @@ $(function(){
 			tr.appendTo(table);
 		});
 		
-	}
+	}*/
 
 
 
@@ -312,13 +311,17 @@ $(function(){
 
 //图书归还模块
 	//在individual页面发起ajax请求：
+	
+	
+	
+	//已放在页面script标签中
+	/*
 	if(window.location.href=="http://localhost:8080/wx/pt/book/individual.do"){
 		var openId = getCookie("openId");
 		$.ajax({
 			type:"POST",
 			url:"individual.do",
 			data:{
-				ajaxid : "borrowRecord",
 				openId:openId
 			},
 			dataType:"json",
@@ -334,7 +337,6 @@ $(function(){
 			},
 		});
 	}
-	
 	function showRecord(result){
 		$("#borrowing tr:gt(0)").remove();
 		$("#borrowed tr:gt(0)").remove();
@@ -370,7 +372,7 @@ $(function(){
 			tr.appendTo(borrowedTable);
 		});
 	}
-
+	*/
 
 
 	//点击还书(escheat点击区域变为整个tr) 弹出层出现,因为个人的借阅图书是从后台取得的，所以该事件应使用动态添加
@@ -399,7 +401,6 @@ $(function(){
 		    type: "POST", 	
 			url: "escheat.do",
 			data: {
-				ajaxid: "escheat",
 				openId: openId,
 				bookId: bookId
 			},
@@ -439,6 +440,52 @@ $(function(){
 		$("tr").removeClass("choosing");		
 	});
 
+
+	
+	
+//福利办理模块
+	//点击办理按钮，发送ajax
+	//用户点击提交按钮，发送ajax请求
+	$("#freebtn").click(function(){
+
+		var username = $("#getname").find("input").val();
+		var jobNumber = $("#getnumber").find("input").val();
+		var openId = getCookie("openId");
+
+		var welfareIds = [];
+		$("input:checked").each(function () {
+            welfareIds.push(this.value);
+        });
+        console.log(welfareIds);
+        console.log(openId);
+        console.log(username+'  '+jobNumber);
+
+		$.ajax({
+			url:"handle.do",
+			type:"POST",
+			data:{
+				openId: openId,
+				welfareIds: welfareIds,
+				username: username,
+				jobNumber: jobNumber
+			},
+			dataType:"json",
+			success: function(result){
+				if(result.success){
+					$("#masker-welfare").fadeIn(200);
+					$(".popup-welfare").fadeIn(200);
+					setTimeout(function(){
+						window.location.href="/wx/pt/book/index.do";
+					},1000);
+				}else{
+					alert("信息输入有误或系统错误，请稍后再试");
+				}
+			},
+			error: function(jqXHR){
+			   alert("ajax发生错误：" + jqXHR.status);  
+			},
+		});
+	});
 	
 	
 

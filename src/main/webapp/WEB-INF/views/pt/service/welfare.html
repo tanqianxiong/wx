@@ -19,50 +19,99 @@
 	</head>
 
 	<body>
-
-
-	
-
-		<div class="jumbotron">
-		  <h1>FREESHOW~~</h1>
-		  <p>五险一金等等等</p>
-		</div>
-
+		<h3 class="text-center">公司现有福利</h3>
+		<h4 class="text-center">(福利详情请点击微信菜单查看)</h4>
 		<div class="container-fluid freeshow">
 			<div class="row slim">
-				<form action="server.php" method="post">
-					<div class="checkbox">
-					  <label>
-					    <input type="checkbox" value="">
-					    Option one is this and that&mdash;be sure to include why it's great
-					  </label>
-					  <label>
-					    <input type="checkbox" value="">
-					    Option one is this and that&mdash;be sure to include why it's great
-					  </label>
-					  <label>
-					    <input type="checkbox" value="">
-					    Option one is this and that&mdash;be sure to include why it's great
-					  </label>
-					  <label>
-					    <input type="checkbox" value="">
-					    Option one is this and that&mdash;be sure to include why it's great
-					  </label>
-					  <label>
-					    <input type="checkbox" value="">
-					    Option one is this and that&mdash;be sure to include why it's great
-					  </label>
-					  <label>
-					    <input type="checkbox" value="">
-					    Option one is this and that&mdash;be sure to include why it's great
-					  </label>
-	        	<button class="btn btn-lg btn-success btn-block" type="submit" id="freebtn">提交</button>
-					</div>
-				</form>
+				<div class="checkbox">
+				</div>
+				<div>
+					<label class="col-xs-12" style="margin-top:20px;" id="getname">姓名：<input type="text"></label>
+					<label class="col-xs-12" style="margin-bottom:20px;" id="getnumber">工号：<input type="text"></label>
+				</div>
+	        	<button class="btn btn-md btn-success btn-block" type="submit" id="freebtn">提交</button>	
 			</div>
+
 		</div>
 
 
-	</body>
+		<br/><br/>
+		<div class="container">
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading " role="tab" id="headingTwo">
+			      <h4 class="panel-title text-center">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			          已办理业务
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			      <div class="panel-body">
+			      	<p>第一个</p>
+			      	<p>第二个</p>
+			      	<p>第三个</p>
+			      	<p>第四个</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>		
+		</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div id="masker-welfare"></div>
+		<div class="popup-welfare">
+			办理成功，请尽快提交纸质材料
+		</div>
+	<script>
+		$(function(){
+			//进入页面，发起ajax请求
+			$.ajax({
+			    type: "POST", 	
+				url: "welfare.do",
+				data: {
+					ajaxid:"welfare"
+				},
+				dataType: "json",
+				success: function(result){
+					if(result.success){
+						showWelfare(result.list);
+					}else{
+						alert("获取信息失败");
+					}
+				},
+				error: function(jqXHR){     
+				   alert("连接失败：" + jqXHR.status);
+				},  
+			});
+			function showWelfare(list){
+				var checkbox = $(".checkbox");
+				$.each(list,function(k,v){
+					var welfare_object={};
+					$.each(v, function(k1, v1) {
+						welfare_object[''+k1+'']=v1;
+						console.log(k1+'  '+v1);
+					});
+					var label = $("<label/>");
+					label.attr("class","col-xs-6");
+					label.html('<input type="checkbox" value="'+ welfare_object.id + '" name="welfare">' + welfare_object.name );
+					label.appendTo(checkbox);
+				});		
+			};
+		});
+	</script>
+	</body>
 </html>
