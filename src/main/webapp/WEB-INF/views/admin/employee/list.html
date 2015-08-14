@@ -37,8 +37,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/wx/admin/book/list.do">图书管理</a></li>
-						<li><a href="/wx/admin/employee/list.do">用户管理</a></li>
+						<li><a href="/wx/admin/book/list.do">图书管理</a></li>
+						<li class="active"><a href="/wx/admin/employee/list.do">用户管理</a></li>
 						<li><a href="/wx/admin/appointment/list.do">预约办理</a></li>
 						<li><a href="/wx/admin/welfare/list.do">福利管理</a></li>
 						<li><a href="/wx/admin/policy/list.do">政策管理</a></li>
@@ -62,64 +62,65 @@
 		</div>
 		<div>
 			<div class="float-left">
-				<button type="button" class="btn btn-info " data-toggle="modal"
-					data-target="#myModal2">添加新用户</button>
+				<button id="addBtn" type="button" class="btn btn-info "
+					data-toggle="modal" data-target="#auModal">添加新用户</button>
 				<h5 style="float: right">
 					&nbsp;&nbsp;总共用户数目：
 					<kbd>389</kbd>
 				</h5>
 			</div>
 			<div class="float-right ">
-				<form class="navbar-form navbar-left search-margin" role="search">
+				<div class="navbar-form navbar-left search-margin" role="search">
 					<div class="form-group">
 						<input type="text" name="keyword" id="keyword"
 							class="form-control " placeholder="员工姓名/工号/职位">
 					</div>
 					<button type="submit" id="searchBtn" class="btn btn-danger">搜索</button>
+				</div>
 			</div>
-			<br>
-	<br>
-	<div class="float-right">
-		<font class="font-songti">排序方式: </font> <select name="order">
-			<option value="name" selected="selected">工号</option>
-			<option value="workNum">姓名</option>
-			<option value="department">部门</option>
-			<option value="position">职位</option>
-			<option value="point">阅读积分</option>
-
-		</select>
-	</div>
-
-	<table class="table table-striped table-hover " id="listTable">
-		<thead>
-			<tr>
-				<th>序号</th>
-				<th>工号</th>
-				<th>姓名</th>
-				<th>性别</th>
-				<th>部门</th>
-				<th>职位</th>
-				<th>阅读积分</th>
-				<th>借阅情况</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-
-		</tbody>
-	</table>
-	<div align="center">
-
-		<a href="manage_user/add"></a>
-		<button type="button" class="btn btn-default btn-sm-right">上一页</button>
-		<a href="manage_user/add"></a>
-		<button type="button" class="btn btn-default btn-sm-right">下一页</button>
-
-	</div>
 		</div>
-	
-	
-   </div>
+		<br> <br>
+		<div class="float-right">
+			<font class="font-songti">排序方式: </font> <select name="order">
+				<option value="name" selected="selected">工号</option>
+				<option value="workNum">姓名</option>
+				<option value="department">部门</option>
+				<option value="position">职位</option>
+				<option value="point">阅读积分</option>
+
+			</select>
+		</div>
+
+		<table class="table table-striped table-hover " id="listTable">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>工号</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>部门</th>
+					<th>职位</th>
+					<th>阅读积分</th>
+					<th>借阅情况</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		<div align="center">
+
+			<a href="manage_user/add"></a>
+			<button type="button" class="btn btn-default btn-sm-right">上一页</button>
+			<a href="manage_user/add"></a>
+			<button type="button" class="btn btn-default btn-sm-right">下一页</button>
+
+		</div>
+	</div>
+
+
+
 	<div class="modal fade" id="auModal" tabindex="-1" role="dialog"
 		aria-labelledby="auModalLabel">
 		<div class="modal-dialog" role="document">
@@ -129,7 +130,7 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h2 class="modal-title font-yahei" id="auModalLabel" align="center">用户信息</h2>
+					<h2 class="modal-title font-yahei" id="auModalLabel" align="center">员工信息</h2>
 				</div>
 				<div class="modal-body">
 
@@ -137,59 +138,54 @@
 						<div class="form-group " hidden>
 							<label for="name" class="col-sm-3 control-label">ID</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="id" name="id" >
+								<input type="text" class="form-control" id="id" name="id">
 							</div>
 						</div>
-						<div class="form-group form-margin-bottom" >
-							<label for="name" class="col-sm-3 control-label">书名</label>
+						<div class="form-group form-margin-bottom">
+							<label for="userNo" class="col-sm-3 control-label">工号</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="bookName" name="bookName" >
+								<input type="text" class="form-control" id="userNo"
+									name="userNo">
 							</div>
 						</div>
-						<div class="form-group  form-margin-bottom" >
-							<label for="ISBN" class="col-sm-3 control-label">ISBN</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="ISBN" name="ISBN" ></div>
+						<div class="form-group  form-margin-bottom">
+							<label for="username" class="col-sm-3 control-label">姓名</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="username"
+									name="username">
+							</div>
 						</div>
 						<div class="form-group form-margin-bottom">
-							<label for="author" class="col-sm-3 control-label">作者</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="author" name="author" ></div>
+							<label for="gender" class="col-sm-3 control-label">性别</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="gender"
+									name="gender">
+							</div>
 						</div>
 						<div class="form-group form-margin-bottom">
-							<label for="publisher" class="col-sm-3 control-label">出版社</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="publisher" name="publisher" ></div>
+							<label for="department" class="col-sm-3 control-label">部门</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="department"
+									name="department">
+							</div>
 						</div>
 						<div class="form-group form-margin-bottom">
-							<label for="year" class="col-sm-3 control-label">出版年份</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="publishTime" name="publishTime" ></div>
+							<label for="point" class="col-sm-3 control-label">职位</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="position"
+									name="position">
+							</div>
 						</div>
-						<div class="form-group form-margin-bottom">
-							<label for="type" class="col-sm-3 control-label">所属分类</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="type" name="type" ></div>
-						</div>
-						<div class="form-group form-margin-bottom">
-							<label for="totalNum" class="col-sm-3 control-label">总本数</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="amount" name="amount" ></div>
-						</div>
-						<div class="form-group form-margin-bottom">
-							<label for="outNum" class="col-sm-3 control-label">借出数</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="borrowed" name="borrowed"></div>
-						</div>
-						<div class="form-group form-margin-bottom">
-							<label for="points" class="col-sm-3 control-label">评分</label>
-							<div class="col-sm-7"><input type="text" class="form-control" id="points" name="points" ></div>
-						</div>
-						<div class="form-group form-margin-bottom">
-							<label for="brief" class="col-sm-3 control-label">简介</label>
-							<div class="col-sm-7"><textarea rows="4" class="form-control" id="brief" name="brief" ></textarea></div>
-						</div>
+
 					</form>
 				</div>
-
 				<div class="modal-footer">
-					<button type="button" id="addBtn" class="btn btn-primary">保存</button>
+					<button type="button" class="btn btn-primary" id="saveBtn">保存</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
+
+
 		</div>
 	</div>
 

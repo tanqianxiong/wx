@@ -37,21 +37,15 @@ public class EmployeeController {
 	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Employee> list=new ArrayList<Employee>();
+		
 		String keyword=request.getParameter("keyword");
-//		String bookType=request.getParameter("bookType");
 		if(keyword!=null && !keyword.isEmpty()){
 			Map<String,Object> like=new HashMap<String,Object>();
-			like.put("userName", "%"+keyword+"%");
-			like.put("department", "%"+keyword+"%");
-			like.put("userNO", "%"+keyword+"%");
-//			if(bookType!=null && !bookType.isEmpty()){
-//				Map<String,Object> and=new HashMap<String,Object>();
-//				and.put("type", bookType);
-//				list=this.bookService.getLikeProperty(like, and);
-//			}
-//			else{
-				list=this.employeeService.getByProperties(like);
-//			}
+			like.put("username", "%"+keyword+"%");
+			like.put("position", "%"+keyword+"%");
+			like.put("userNo", "%"+keyword+"%");
+			list=this.employeeService.getByProperties(like);
+			
 		}
 		else{
 			list=this.employeeService.getAll();
@@ -111,11 +105,24 @@ public class EmployeeController {
 	}
 	//查询借书记录
 		@RequestMapping(value = "/check", method = RequestMethod.POST)
-		public void check(HttpServletResponse response,String id) throws IOException{
-			List<Borrow> list=this.borrowService.getAll();
+		public void check(HttpServletResponse response,String userId) throws IOException{
+			Employee employee=this.employeeService.getById(userId);
 			
+			List<Borrow> list=this.borrowService.getListByEmployee(employee);//.getByUserID("employee",userId);
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("success", true);
+			map.put("employee", employee);
+			map.put("list", list);
+			JsonUtil.writeCommonJson(response, map);
 			
 		}
+		
+		@RequestMapping(value = {"/check"}, method = RequestMethod.GET)
+		public ModelAndView showIndividualPage(HttpServletRequest request) {
+			ModelAndView mv = new ModelAndView("admin/employee/detail");
+			return mv;
+		}
+		
 	
 	
 	
