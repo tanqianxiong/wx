@@ -61,24 +61,6 @@ public class AppointmentController {
 		return null;
 	}
 	
-/*	//详情
-		@RequestMapping(value = "/detail", method = RequestMethod.GET)
-		public void detail(HttpServletResponse response,Appointment appointment,String id) throws IOException{
-			Map<String,Object> map=new HashMap<String,Object>();
-			List<Appointment> list=new ArrayList<Appointment>();
-			for(int i=0;i<this.appointmentService.getAll().size();i++){
-				if(appointment.getWelfare().getId()==id){
-					
-				}
-				
-			}
-			//Map<String,Object> map=new HashMap<String,Object>();
-			map.put("success", true);
-			JsonUtil.writeCommonJson(response, map);
-			
-		}*/
-	
-	
 	//详情
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(String welfareId,HttpServletRequest request) throws IOException{

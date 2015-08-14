@@ -117,7 +117,6 @@ function getQueryString(name) {
 
 //通过预约申请
 function agree(id,state){
-	alert(id+state);
 	window.Modal.confirm({ msg: "确定"+state+"这条预约申请？" }).on(function (e) {
         if (e) {
 			$.ajax({
