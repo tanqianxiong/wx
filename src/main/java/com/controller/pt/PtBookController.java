@@ -64,7 +64,8 @@ public class PtBookController {
 		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 		Employee el=bi.getEmployee();
 		Book book=this.bookService.get(bookId);
-		if(this.borrowService.get(el, book)==null){		
+		Borrow _br=this.borrowService.get(el, book);
+		if(_br==null || _br.getReturnTime()!=null){
 			Borrow br=new Borrow();
 			br.setBook(book);
 			br.setEmployee(el);
