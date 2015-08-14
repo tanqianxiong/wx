@@ -88,7 +88,7 @@ public class Appointment  implements Serializable{
 	public void setApplyTime(Date applyTime) {
 		this.applyTime = applyTime;
 	}
-	@Column(name = "CHECK_TIME", nullable = false)
+	@Column(name = "CHECK_TIME", nullable = true)
 	public Date getCheckTime() {
 		return this.checkTime;
 	}
@@ -96,7 +96,7 @@ public class Appointment  implements Serializable{
 	public void setCheckTime(Date checkTime) {
 		this.checkTime = checkTime;
 	}
-	@Column(name="STATE", nullable = true, length = 10)
+	@Column(name="STATE", nullable = false, length = 10)
 	public String getState(){
 		return this.state;
 	}
