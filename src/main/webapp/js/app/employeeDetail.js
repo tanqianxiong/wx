@@ -2,7 +2,7 @@ function setEmployeeInfo(employee){
 	var e = $('#employeeInfo');
 	e.html('');
 	
-		e.html('用户名'+employee.username+'&nbsp;&nbsp;&nbsp;&nbsp;工号：'+employee.userNo+'&nbsp;&nbsp;&nbsp;&nbsp;部门:'+employee.department+'&nbsp;&nbsp;&nbsp;&nbsp;职位:'+employee.position);	
+		e.html('用户名：'+employee.username+'&nbsp;&nbsp;&nbsp;&nbsp;工号：'+employee.userNo+'&nbsp;&nbsp;&nbsp;&nbsp;部门：'+employee.department+'&nbsp;&nbsp;&nbsp;&nbsp;职位：'+employee.position);	
 
 					
 		
@@ -42,9 +42,11 @@ $(function(){
 			if (result.success) {
 				var borrowList = result.list;
 				var employee=result.employee;
+				setEmployeeInfo(employee);
 				if (borrowList.length > 0) {
+					
 					setData2Table(borrowList);
-					setEmployeeInfo(employee);
+					
 				} else {
 					window.Modal.alert({msg:"没有数据"});
 				}
@@ -59,16 +61,3 @@ $(function(){
 	
 });
 
-function DateFormat(d)
-{   
-	if (d==null){
-		return " ";
-		}
-    var date = new Date(parseInt(d.time, 10));
-     //月份得+1，且只有个位数时在前面+0
-    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-    //日期为个位数时在前面+0
-    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    //getFullYear得到4位数的年份 ，返回一串字符串
-    return date.getFullYear() + "-" + month + "-" + currentDate;
-}
