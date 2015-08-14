@@ -3,13 +3,9 @@
 
 $(function(){
 
-	//在进入任何菜单页面后，先判断浏览器中是否已经存在cookie，if no 那么跳转致i账号绑定页面。
-	
-	
+	//在进入任何菜单页面后，先判断浏览器中是否已经存在cookie，if no 那么跳转致i账号绑定页面。	
 	//先搞个假的openId 
 	//setCookie("openId","abcd1234",100);
-	
-	
 	
 	if (getCookie("username")==""){
 		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
@@ -19,8 +15,6 @@ $(function(){
 		}
 	}
 	
-
-
 //用户绑定模块
 	//binding 页面 点击绑定按钮后，向服务器发送ajax，
 	//服务器判断信息是否存在，若存在，则将cookie写入，同时服务器端做数据库的更新
@@ -100,23 +94,17 @@ $(function(){
 
 	//负责搜索结果的展示
 	function showResult(result){
-		
 		$("#six_category").fadeOut(10);
 		$("#show_search_result").fadeIn(200);
 		//var table = $("#show_search_result table");
 		$("#show_search_result table tr:gt(0)").remove();
-
 		dealResult(result);
-
 	}
 
 	//负责把搜索结果，向table中动态添加，即实现 json数据转化为td标签
 	function dealResult(result){
-
 		var table = $("#show_search_result table");
-
 		$.each(result.list,function(k,v){
-					
 			var td_object={};
 			$.each(v, function(k1, v1) {
 				td_object[''+k1+'']=v1;
@@ -126,7 +114,6 @@ $(function(){
 			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.id+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
 			tr.appendTo(table);
 		});
-		
 	}
 
 
@@ -136,7 +123,6 @@ $(function(){
 	$("table").on('click','.detail',function(){
 		$(this).parents("tr").addClass("choosing");
 		var tds = $("table tr.choosing").find("td");
-
 		//存图书信息
 		var bookName = tds.eq(0).text();
 		sessionStorage.bookName=bookName;
@@ -165,43 +151,17 @@ $(function(){
 		var brief = tds.eq(9).text();
 		sessionStorage.brief=brief;
 		
-
 		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 
-		//showDetail(tds.eq(0).text(),amount,available,points,brief);
+		//设好sessionStorage，跳转到detail页面
 		window.location.href="detail.do";
 	});
-
-	
-/*
-	//点击图书详情按钮中用到的显示弹出层函数
-	function showDetail(bookName,total,available,points,brief){
-		$("#bookName").text(bookName);
-		$("#points").text(points);
-		$("#totalnumber").text(total);
-		$("#availablenumber").text(available);
-		$("#brief").text(brief);
-		$("#masker").fadeIn(100);
-		$("#showdetail").fadeIn(100);
-	}
-
-	//弹出层交互，点击masker 隐藏 
-	$("#masker").click(function(){
-		//点击取消后，应该移除tr的choosing类
-		$("#show_search_result tr").removeClass("choosing");
-		$(this).fadeOut(100);
-		$("#showdetail").fadeOut(100);
-	});
-*/
-
 
 	//借阅按钮
 	$("#borrow").click(function(){
 		//ajax 将用户信息传递给后台，使其更新数据库
-		//var tds = $("#bookId");
 		var bookId = sessionStorage.bookId;
 		var openId = getCookie("openId");
-
 		$.ajax({
 		    type: "POST", 	
 			url: "borrow.do",
@@ -213,13 +173,20 @@ $(function(){
 			success: function(result){
 				if (result.success) {
 					//借阅成功
+					$(".popup-detail").text("借阅成功");
 					$("#masker").fadeIn(200);
 					$(".popup-detail").fadeIn(200);
 					setTimeout(function(){
 						window.location.href="/wx/pt/book/index.do";
 					},1000);
 				} else {
-					alert("系统错误");
+					$(".popup-detail").text("您已借过这本书了哦");
+					$(".popup-detail").css("color","#93ebf5");
+					$("#masker").fadeIn(200);
+					$(".popup-detail").fadeIn(200);
+					setTimeout(function(){
+						window.location.href="/wx/pt/book/category.do";
+					},1000);
 				}
 			},
 			error: function(jqXHR){  
@@ -235,145 +202,11 @@ $(function(){
 		$(this).fadeOut();
 	});
 
-
-
 	//点击六大类,页面转向category.html,同时通过cookie的方式实现页面间传参
 	$(".thumbnail").click(function(){
 		var selected_category = $(this).data("category");
 		setCookie("selected_category",selected_category,0001);
 	});
-
-
-
-
-	//在category页面发起ajax请求：
-	
-	
-	//改在了html的script标签中
-	/*
-	if(window.location.href=="http://localhost:8080/wx/pt/book/category.do"){
-		var selected_category = getCookie("selected_category");
-		$(".category_info").prepend(selected_category);
-		$.ajax({
-			type:"POST",
-			url:"category.do",
-			data:{
-				selectedCategory:selected_category
-			},
-			dataType:"json",
-			success: function(result){
-				if (result.success) {
-					showCategory(result);
-				} else {
-					alert("抱歉，暂无藏书");
-				}
-			},
-			error: function(jqXHR){
-			   alert("分类页面加载ajax发生错误：" + jqXHR.status);  
-			},
-		});
-	}
-	function showCategory(result){
-		$("#category_table tr:gt(0)").remove();
-
-		var table = $("#category_table");
-		
-		$.each(result.list,function(k,v){
-			var td_object={};
-			$.each(v, function(k1, v1) {
-				td_object[''+k1+'']=v1;
-				console.log(k1+'  '+v1);
-			});
-			var tr=$("<tr/>");
-			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td">'+td_object.id+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
-			tr.appendTo(table);
-		});
-		
-	}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//图书归还模块
-	//在individual页面发起ajax请求：
-	
-	
-	
-	//已放在页面script标签中
-	/*
-	if(window.location.href=="http://localhost:8080/wx/pt/book/individual.do"){
-		var openId = getCookie("openId");
-		$.ajax({
-			type:"POST",
-			url:"individual.do",
-			data:{
-				openId:openId
-			},
-			dataType:"json",
-			success: function(result){
-				if (result.success) {
-					showRecord(result);
-				} else {
-					alert("抱歉，信息载入失败");
-				}
-			},
-			error: function(jqXHR){
-			   alert("个人记录ajax发生错误：" + jqXHR.status);  
-			},
-		});
-	}
-	function showRecord(result){
-		$("#borrowing tr:gt(0)").remove();
-		$("#borrowed tr:gt(0)").remove();
-
-		var borrowingTable = $("#borrowing");
-		var borrowedTable = $("#borrowed");
-	
-		//显示积分
-		$("#score").text(result.score);
-		
-		
-		
-		//显示在借书目列表
-		$.each(result.borrowing,function(k,v){
-			var td_object={};
-			$.each(v, function(k1, v1) {
-				td_object[''+k1+'']=v1;
-				console.log(k1+'  '+v1);
-			});
-			var tr=$("<tr/>");
-			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup escheat btn-success">归还</span></td><td style="display:none">'+td_object.id+'</td>');
-			tr.appendTo(borrowingTable);
-		});
-		//显示已经归还书目列表
-		$.each(result.borrowed,function(k,v){
-			var td_object={};
-			$.each(v, function(k1, v1) {
-				td_object[''+k1+'']=v1;
-				console.log(k1+'  '+v1);
-			});
-			var tr=$("<tr/>");
-			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td>');
-			tr.appendTo(borrowedTable);
-		});
-	}
-	*/
-
 
 	//点击还书(escheat点击区域变为整个tr) 弹出层出现,因为个人的借阅图书是从后台取得的，所以该事件应使用动态添加
 	$("table.borrowing_table").on('click','tr',function(){

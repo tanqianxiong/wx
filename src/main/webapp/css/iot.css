@@ -207,9 +207,11 @@ img{
 
 /*福利办理页面*/
 
-
 .checkbox{
-	font-size: 2rem;
+	font-size: 1.6rem;
+}
+.checkbox label{
+	padding-right:0;
 }
 #freebtn{
 	margin-top: 20px;
@@ -245,7 +247,3 @@ img{
 	background-color: rgba(0,0,0,.6);
 	display: none;
 }
-
-
-
-
