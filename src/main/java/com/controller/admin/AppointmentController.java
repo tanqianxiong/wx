@@ -2,6 +2,7 @@ package com.controller.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,8 @@ public class AppointmentController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("list",list);
+		//加载福利名称到detail页面
+		map.put("welfareName", wf.getName());
 		JsonUtil.writeCommonJson(response, map);
 	}
 	
@@ -84,6 +87,8 @@ public class AppointmentController {
 	public void agree(HttpServletResponse response,String id) throws IOException{
 		Appointment appointment=this.appointmentService.get(id);
 		appointment.setState("通过");
+		//加上审批时间
+		appointment.setCheckTime(new Date());
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
@@ -96,6 +101,8 @@ public class AppointmentController {
 	public void disAgree(HttpServletResponse response,String id) throws IOException{
 		Appointment appointment=this.appointmentService.get(id);
 		appointment.setState("退回");
+		//加上审批时间
+		appointment.setCheckTime(new Date());
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);

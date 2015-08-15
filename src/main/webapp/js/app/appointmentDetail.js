@@ -81,7 +81,9 @@ $(function(){
 	        confirm: _confirm
 	    }
 	}();
-	
+
+	//获取当前时间
+	window.setInterval("getCurrentTime($('#currentTime'));",100);
 	
 	var welfareId = getQueryString("welfareId");	
 	//开始向后台请求获取数据
@@ -94,6 +96,8 @@ $(function(){
 		},
 		success : function(result) {
 			if (result.success) {
+				//加载福利类型到Detail页面
+				$('#welfareName').html(result.welfareName);
 				var bookList = result.list;
 				if (bookList.length > 0) {
 					setDataTable(bookList);
@@ -109,6 +113,10 @@ $(function(){
 		},
 	});
 });
+//获取当前时间
+function getCurrentTime($this){
+	$this.html(new Date().toLocaleString());	
+}
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);

@@ -75,6 +75,11 @@ function addOrUpdate(){
 		},
 	});
 }
+//获取当前时间
+function getCurrentTime($this){
+	$this.html(new Date().toLocaleString());	
+}
+//初始化需要加载的数据
 $(function() {
 	$('#addBtn').click(function(){
 		$("#auModal form").find('input').each(function(){
@@ -86,7 +91,8 @@ $(function() {
 	$('#saveBtn').click(function(){
 		addOrUpdate();
 	});
-	
+	//获取当前时间
+	window.setInterval("getCurrentTime($('#currentTime'));",100);
 	//开始向后台请求获取数据
 	$.ajax({
 		type : "POST",

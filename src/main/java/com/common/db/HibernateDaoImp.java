@@ -446,7 +446,12 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 			for (String key : likeProps.keySet()) {
 				seList.add(Restrictions.like(key,likeProps.get(key)));
 			}
-			criteria.add(orExpressionLink(seList));
+			if(likeProps.size()<2){
+				criteria.add(seList.get(0));
+			}
+			else{
+				criteria.add(orExpressionLink(seList));
+			}
 		}
 		if(andProps!=null && !andProps.isEmpty()){
 			criteria.add(Restrictions.allEq(andProps));

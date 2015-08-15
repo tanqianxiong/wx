@@ -34,16 +34,16 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li ><a href="manage_book.html">图书管理</a></li>
-                <li><a href="manage_user.html">用户管理</a></li>
-                <li class="active"><a href="manage_order.html">预约办理</a></li>
-				<li><a href="manage_welfare.html">福利管理</a></li>
-                <li ><a href="manage_policy.html">政策管理</a></li>
+               	<li><a href="/wx/admin/book/list.do">图书管理</a></li>
+                <li><a href="/wx/admin/employee/list.do">用户管理</a></li>
+                <li class="active"><a href="/wx/admin/appointment/list.do">预约办理</a></li>
+				<li><a href="/wx/admin/welfare/list.do">福利管理</a></li>
+                <li><a href="/wx/admin/policy/list.do">政策管理</a></li>
 				
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">这里显示时间</a></li>
-                <li><a href="navbar-fixed-top/">退出</a></li>
+                <li><a href="#" id="currentTime"></a></li>
+                <li><a href="/wx/admin/logout.do">退出</a></li>
               </ul>
             </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
@@ -51,7 +51,7 @@
         
 		<div><h2 align="center" class="font-yahei" >预约办理</h2></div>
 		<div>
-		   <p><h1><span class="label label-default">养老保险</span></h1></p>
+		   <p><h1><span id="welfareName" class="label label-default">养老保险</span></h1></p>
 	    </div>
 		<div class="float-left"><h4 class="font-yahei">未处理申请：<kbd>3</kbd></h4></div>
 		<div class="float-right margin-top-5">
