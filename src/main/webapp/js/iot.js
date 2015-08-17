@@ -2,7 +2,6 @@
 
 
 $(function(){
-
 	//在进入任何菜单页面后，先判断浏览器中是否已经存在cookie，if no 那么跳转致i账号绑定页面。	
 	//先搞个假的openId 
 	//setCookie("openId","abcd1234",100);
@@ -229,13 +228,14 @@ $(function(){
 		var tds = $("table.individual-table tr.choosing").find("td");
 		var bookId = tds.eq(4).text();
 		var openId = getCookie("openId");
-
-		$.ajax({ 
+		var point = $("#trackBar").val();
+		$.ajax({
 		    type: "POST", 	
 			url: "escheat.do",
 			data: {
 				openId: openId,
-				bookId: bookId
+				bookId: bookId,
+				point:point
 			},
 			dataType: "json",
 			success: function(result){

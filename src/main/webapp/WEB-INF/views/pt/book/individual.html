@@ -16,6 +16,27 @@
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/iot.js"></script>
 		<script src="/wx/js/storage.js"></script>
+		
+		<style>
+		    input[type="range"] {
+		        background-color: #ccc;
+		        border-radius: 15px;
+		        width: 80%;
+		        -webkit-appearance: none;
+		        height:10px;
+		        margin:0 auto;
+		    }
+		    input[type="range"]::-webkit-slider-thumb {
+		        -webkit-appearance: none;
+		        cursor: pointer;
+		        height: 25px;
+		        width: 25px;
+		        transform: translateY(-2px);
+		        background-image: url("/wx/img/star.png");
+		        background-size: 25px 25px;
+		        border-radius: 100%;
+		    }	
+		</style>
 	</head>
 
 	<body>
@@ -84,6 +105,12 @@
 			<br>
 			<b>归还确认</b><hr style="border-bottom:1px solid #999;"/>
 			<div>
+			
+			
+			    <p>亲，评个分吧：<span style="color:#e00;font-weight:bold" id="showPoint">3分</span></p>
+			    <input type="range" id="trackBar" value="3" />
+			    
+			    
 				<br/>
 				<br/>
 				<span id="escheat-yes" class="btn goodbtn">确定</span>
@@ -95,6 +122,27 @@
 		
 		<script>
 			$(function(){
+				
+				
+				//range评分控件的js
+		        var trackBar = document.getElementById("trackBar");
+		        //初始化trackBar
+		        trackBar.min = 1;
+		        trackBar.max = 5;
+		        trackBar.step = 1;
+		        trackBar.value = 3;
+		        trackBar.addEventListener("change",
+		          function(){
+		            var showPoint = document.getElementById("showPoint");
+		            showPoint.innerHTML = this.value + '分';
+		          });
+				
+				
+				
+				
+				
+				
+				//获取用户借阅记录
 				var openId = getCookie("openId");
 				$.ajax({
 					type:"POST",
