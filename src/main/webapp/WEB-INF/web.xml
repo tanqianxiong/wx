@@ -62,7 +62,7 @@
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping> -->
 	
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>jsp</servlet-name>
 		<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
 		<init-param>
@@ -70,17 +70,17 @@
 			<param-value>true</param-value>
 		</init-param>
 		<load-on-startup>4</load-on-startup>
-	</servlet>
+	</servlet> -->
 	
 	
-	<filter>
+	<!-- <filter>
         <filter-name>sessionFilter</filter-name>
         <filter-class>com.common.filter.SessionFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>sessionFilter</filter-name>
         <url-pattern>*.do</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
     <!-- <filter-mapping>
         <filter-name>sessionFilter</filter-name>
         <url-pattern>*.action</url-pattern>
