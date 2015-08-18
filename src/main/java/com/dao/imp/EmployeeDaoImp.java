@@ -50,6 +50,12 @@ public class EmployeeDaoImp extends HibernateDaoImp<Employee> implements Employe
 		return this.doGetById(id);
 	}
 
+	@Override
+	public List<Employee> getByProperties(Map<String, Object> props) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperties(props, null);
+	}
+
 }
 
 

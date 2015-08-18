@@ -14,4 +14,5 @@ public interface EmployeeService {
 	public void alter(Employee employee);
 	public List<Employee> getByProperties(Map<String,Object> props);
 	public Employee getById(String id);
+	public List<Employee> getByLikeProperties(Map<String, Object> like);
 }

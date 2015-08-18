@@ -24,7 +24,7 @@ public class EmployeeServiceImp implements EmployeeService{
 	@Override
 	public List<Employee> getByProperties(Map<String,Object> props) {
 		// TODO Auto-generated method stub
-		return this.employeeDao.getListByLikeProperties(props);
+		return this.employeeDao.getByProperties(props);
 	}
 	@Override
 	public void add(Employee employee){
@@ -44,6 +44,12 @@ public class EmployeeServiceImp implements EmployeeService{
 	@Override
 	public Employee getById(String id){
 		return employeeDao.getById(id);
+	}
+
+	@Override
+	public List<Employee> getByLikeProperties(Map<String, Object> like) {
+		// TODO Auto-generated method stub
+		return this.employeeDao.getListByLikeProperties(like);
 	}
 
 }

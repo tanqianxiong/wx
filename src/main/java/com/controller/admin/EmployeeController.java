@@ -44,7 +44,7 @@ public class EmployeeController {
 			like.put("username", "%"+keyword+"%");
 			like.put("position", "%"+keyword+"%");
 			like.put("userNo", "%"+keyword+"%");
-			list=this.employeeService.getByProperties(like);
+			list=this.employeeService.getByLikeProperties(like);
 			
 		}
 		else{

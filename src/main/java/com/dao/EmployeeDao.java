@@ -15,4 +15,5 @@ public interface EmployeeDao extends BaseDao<Employee>{
 	public void delete(String id);
 	public void alter(Employee employee);
 	public Employee getById(String id);
+	public List<Employee> getByProperties(Map<String, Object> props);
 }
