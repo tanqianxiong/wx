@@ -28,5 +28,30 @@ public class BoundInfoServiceImp implements BoundInfoService{
 		prop.put("openId", openId);
 		return this.boundInfoDao.getByProperties(prop);
 	}
+	@Override
+	public void add(BoundInfo boundInfo) {
+		// TODO Auto-generated method stub
+		this.boundInfoDao.add(boundInfo);
+	}
+	@Override
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		this.boundInfoDao.delete(id);
+	}
+	@Override
+	public void update(BoundInfo boundInfo) {
+		// TODO Auto-generated method stub
+		this.boundInfoDao.update(boundInfo);
+	}
+	@Override
+	public BoundInfo get(String id) {
+		// TODO Auto-generated method stub
+		return this.boundInfoDao.get(id);
+	}
+	@Override
+	public BoundInfo getByProperties(Map<String, Object> props) {
+		// TODO Auto-generated method stub
+		return this.boundInfoDao.getByProperties(props);
+	}
 
 }

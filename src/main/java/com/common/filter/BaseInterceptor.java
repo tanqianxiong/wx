@@ -13,13 +13,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
 
 import com.entity.BoundInfo;
-import com.service.pt.BoundService;
+import com.service.BoundInfoService;
 
 public class BaseInterceptor extends HandlerInterceptorAdapter {
 
 
 	@Autowired
-	public BoundService boundService;
+	public BoundInfoService boundInfoService;
 	
 
 	private UrlPathHelper urlPathHelper = new UrlPathHelper();
@@ -53,7 +53,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 				if(openId!=null){
 					Map<String, Object> props = new HashMap<String, Object>();
 					props.put("openId", openId);
-					BoundInfo bi = this.boundService.getByProperties(props);
+					BoundInfo bi = this.boundInfoService.getByProperties(props);
 					obj = bi;
 				}
 			} else if (uri.startsWith("/wx/admin")) {
@@ -67,7 +67,8 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 				if (uri.startsWith("/wx/pt") && openId!=null) {
 					// 重定向到绑定页
 					request.setAttribute("openId", openId);
-					response.sendRedirect(basePath + "/pt/tobind.do");	
+					//System.out.println("before="+openId);
+					response.sendRedirect(basePath + "/pt/tobind.do?openId="+openId);	
 					return false;
 				} 
 				else if (uri.startsWith("/wx/pt") && openId==null) {
@@ -96,6 +97,7 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		if (request.getRequestURI().startsWith("/wx/pt")) {
+			//System.out.println(request.getParameter("openId"));
 			request.setAttribute("openId", request.getParameter("openId"));
 		}
 		return true;

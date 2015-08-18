@@ -61,18 +61,20 @@ public class PtBookController {
 	@RequestMapping(value = {"/borrow"}, method = RequestMethod.POST)
 	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Boolean res=false;
-		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
-		Employee el=bi.getEmployee();
-		Book book=this.bookService.get(bookId);
-		Borrow _br=this.borrowService.get(el, book);
-		if(_br==null || _br.getReturnTime()!=null){
-			Borrow br=new Borrow();
-			br.setBook(book);
-			br.setEmployee(el);
-			br.setBorrowTime(new Date());
-			//br.setReturnTime(new Date());
-			this.borrowService.add(br);
-			res=true;			
+		if(openId!=null){
+			BoundInfo bi=this.boundInfoService.getByOpenId(openId);
+			Employee el=bi.getEmployee();
+			Book book=this.bookService.get(bookId);
+			Borrow _br=this.borrowService.get(el, book);
+			if(_br==null || _br.getReturnTime()!=null){
+				Borrow br=new Borrow();
+				br.setBook(book);
+				br.setEmployee(el);
+				br.setBorrowTime(new Date());
+				//br.setReturnTime(new Date());
+				this.borrowService.add(br);
+				res=true;			
+			}
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", res);

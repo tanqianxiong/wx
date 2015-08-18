@@ -14,25 +14,25 @@ public class BoundInfoDaoImp extends HibernateDaoImp<BoundInfo> implements Bound
 	@Override
 	public List<BoundInfo> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.doGetAll();
 	}
 
 	@Override
 	public void add(BoundInfo boundInfo) {
 		// TODO Auto-generated method stub
-		
+		this.doInsert(boundInfo);
 	}
 
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-		
+		this.doDeleteById(id);
 	}
 
 	@Override
 	public void update(BoundInfo boundInfo) {
 		// TODO Auto-generated method stub
-		
+		this.doUpdate(boundInfo);
 	}
 
 	@Override

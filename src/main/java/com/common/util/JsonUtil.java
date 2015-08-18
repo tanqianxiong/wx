@@ -87,5 +87,19 @@ public class JsonUtil {
 		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		return jsonConfig;
 	}
+	
+	/**
+	 * 根据实体对象生成JSON字符串
+	 * 
+	 * @param response
+	 * @param object
+	 *            对象
+	 */
+	public static String object2JsonStr(HttpServletResponse response,
+			Object object) {
+		JSONObject jsonObject = JSONObject.fromObject(object);
+		response.setContentType(CONTENT_TYPE);
+		return jsonObject.toString();
+	}
 
 }

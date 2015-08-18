@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.service.WelfareService;
-import com.service.pt.BoundService;
 import com.common.util.JsonUtil;
 import com.entity.BoundInfo;
 import com.entity.Employee;
@@ -27,7 +27,7 @@ import com.entity.Welfare;
 @RequestMapping("/pt/service")
 public class ServiceController {
 	@Autowired
-	public BoundService boundService;
+	public BoundInfoService boundInfoService;
 	@Autowired
 	public EmployeeService employeeService;
 
