@@ -249,7 +249,6 @@ $(function(){
 			   alert("ajax发生错误：" + jqXHR.status);  
 			},
 		});
-
 	});
 
 

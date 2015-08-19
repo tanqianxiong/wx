@@ -16,35 +16,23 @@
 		<script src="/wx/js/bootstrap.js"></script>
 		
 	</head>
-	<body background="/wx/img/2.jpg" style="background-size:cover">			
-		<div >
-			<div class="login_container" ><br><br>				
-				<br><br><br><br><br>
-				<div class="float-left" style="margin-left:20px">
-					  <br><br>
-					  <p><h1 class="font-yahei">  &nbsp;&nbsp;欢迎来到中移物联网</h1></p>
-					  <p><h1 class="font-yahei">图书管理系统 !</h1></p>
-					  <br>
-					  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://www.10086.cn/sc_head/images/logo.png"></p>
+	<body>			
+		<div style="width:480px;margin:38px auto;">
+		  <div class="form-signin">
+				<h2 class="form-signin-heading font-yahei" align="center">请登录</h2>
+				<label for="username" >用户名</label>
+				<input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
+				<label for="password" >密码</label>
+				<input type="password" id="password" class="form-control" placeholder="密码" required>
+				<div class="checkbox">
+				  <label>
+					<input type="checkbox" value="remember-me"> 记住我
+				  </label>
 				</div>
-				<br>	<br>	
-			  <div style="width:35% " class=" float-right">
-				  <div class="form-signin">
-					<h2 class="form-signin-heading font-yahei" align="center">请登录</h2>
-					<label for="username" >用户名</label>
-					<input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
-					<label for="password" >密码</label>
-					<input type="password" id="password" class="form-control" placeholder="密码" required>
-					<div class="checkbox">
-					  <label>
-						<input type="checkbox" value="remember-me"> 记住我
-					  </label>
-					</div>
-					<button class="btn btn-lg btn-primary btn-block" id="loginBtn" type="submit">登录</button>
-				  </div>
-			   </div>
-			</div>
+				<button class="btn btn-lg btn-primary btn-block" id="loginBtn" type="submit">登录</button>		  
+		  </div>		
 		</div>
+
 		<script>
 			$(function(){
 				$('#loginBtn').click(function(){
