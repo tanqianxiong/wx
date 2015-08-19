@@ -288,6 +288,7 @@ $(function(){
 		$("input:checked").each(function () {
             welfareIds.push(this.value);
         });
+		welfareIds = welfareIds.join(",");
         console.log(welfareIds);
         console.log(openId);
         console.log(username+'  '+jobNumber);
@@ -319,6 +320,25 @@ $(function(){
 		});
 	});
 	
-	
+	//用户点击已办理业务
+	$(".alreadyHandle").click(function(){
+		console.log("alreadyHandle");
+		var openId = getCookie("openId");		
+		
+		$.ajax({
+			url:"alreadyHandle.do",
+			type:"POST",
+			data:{
+				openId:openId
+			},
+			dataType:"json",
+			success:function(result){
+				
+			},
+			error:function(jqXHR){
+				alert("对不起，查询失败：" + jqXHR.status);
+			}
+		});
+	});
 
 });
