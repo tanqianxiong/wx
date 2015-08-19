@@ -51,7 +51,7 @@ public class ServiceController {
 
 	@RequestMapping(value = {"/welfare"}, method = RequestMethod.POST)
 	public void getWelfareData(HttpServletResponse response) throws IOException {
-		Map<String,Object> map=new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		List<Welfare> list=new ArrayList<Welfare>();
 		Map<String,Object> prop=new HashMap<String,Object>();
 		prop.put("state", "启用");
@@ -63,30 +63,60 @@ public class ServiceController {
 
 	@RequestMapping(value = {"/handle"}, method = RequestMethod.POST)
 	public void doWelfareHandle(String openId,String welfareIds,String jobNumber,String username,HttpServletResponse response) throws IOException {
-		Boolean res = false;
-		
-		String[] welIds =  welfareIds.split(",");
-		
+		Boolean res = false;		
+		String[] welIds =  welfareIds.split(",");		
 		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 		Employee em=bi.getEmployee();
+		//String user_id = em.getId();
 		if(em.getUsername().equals(username) && em.getUserNo().equals(jobNumber) ){
 			for(int i=0;i<welIds.length;i++){
-				System.out.println(welIds[i]);
-				Appointment ap = new Appointment();
-				
+				Appointment ap = new Appointment();			
 				Welfare wel = this.welfareService.get(welIds[i]);
-				ap.setWelfare(wel);
-				ap.setEmployee(em);
-				ap.setApplyTime(new Date());
-				ap.setState("0");
-				this.appointmentService.add(ap);
+				List<Appointment> li = this.appointmentService.getListByProperty("employee",em);
+				
+				
+				if(li!=null && !li.isEmpty()){
+					int j=0;
+					for(int k=0;k<li.size();k++){
+						Appointment app = li.get(k);
+						String id=app.getWelfare().getId();
+						if(id.equals(welIds[i])){
+							j=1;
+							break;
+						}
+					}
+					if(j==0){
+						ap.setWelfare(wel);
+						ap.setEmployee(em);
+						ap.setApplyTime(new Date());
+						ap.setState("审核中");
+						this.appointmentService.add(ap);	
+					}
+				}else{
+					ap.setWelfare(wel);
+					ap.setEmployee(em);
+					ap.setApplyTime(new Date());
+					ap.setState("审核中");
+					this.appointmentService.add(ap);					
+				}
 			}
 			res = true;
 		}
-		
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", res);
 		JsonUtil.writeCommonJson(response, map);		
 	}
+	
+	
+	@RequestMapping(value = {"/hasHandled"}, method = RequestMethod.POST)
+	public void doHasHandled(String openId,String welfareIds,String jobNumber,String username,HttpServletResponse response) throws IOException {
+		Boolean res = false;
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("success", res);
+		JsonUtil.writeCommonJson(response, map);
+	}
+	
+	
+	
 	
 }

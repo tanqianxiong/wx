@@ -69,5 +69,11 @@ public class AppointmentServiceImp implements AppointmentService {
 		// TODO Auto-generated method stub
 		return this.appointmentDao.getListByWelfare(wf);
 	}
+	
+	@Override
+	public List<Appointment> getListByProperty(String propertyName, Object propertyValue){
+		// TODO Auto-generated method stub
+		return this.appointmentDao.getListByProperty(propertyName, propertyValue);
+	}
 
 }

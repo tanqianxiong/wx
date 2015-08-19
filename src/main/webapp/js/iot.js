@@ -292,7 +292,19 @@ $(function(){
         console.log(welfareIds);
         console.log(openId);
         console.log(username+'  '+jobNumber);
-
+        
+        if(welfareIds==''){
+        	alert("请选择要办理的业务");
+        	return;
+        }
+        if(username==''){
+        	alert("请输入姓名");
+        	return;
+        }
+        if(jobNumber==''){
+        	alert("请输入工号");
+        	return;
+        }
 		$.ajax({
 			url:"handle.do",
 			type:"POST",
@@ -326,7 +338,7 @@ $(function(){
 		var openId = getCookie("openId");		
 		
 		$.ajax({
-			url:"alreadyHandle.do",
+			url:"hasHandled.do",
 			type:"POST",
 			data:{
 				openId:openId

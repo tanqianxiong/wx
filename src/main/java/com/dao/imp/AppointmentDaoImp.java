@@ -63,4 +63,16 @@ public class AppointmentDaoImp extends HibernateDaoImp<Appointment> implements A
 		// TODO Auto-generated method stub
 		return this.doGetListByProperty("welfare", wf, null);
 	}
+	
+	
+	@Override
+	public List<Appointment> getListByProperty(String propertyName, Object propertyValue){
+		// TODO Auto-generated method stub
+		return this.doGetListByProperty(propertyName, propertyValue,null);
+	}
+	
+	
+	
+	
+	
 }

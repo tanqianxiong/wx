@@ -16,4 +16,5 @@ public interface AppointmentService {
 	public List<Appointment> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
 	public int getNumByWelfare(Welfare welfare);
 	public List<Appointment> getListByWelfare(Welfare wf);
+	public List<Appointment> getListByProperty(String propertyName, Object propertyValue);
 }

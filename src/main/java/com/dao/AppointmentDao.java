@@ -17,4 +17,5 @@ public interface AppointmentDao extends BaseDao<Appointment> {
 	List<Appointment> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
 	int getNumByWelfare(Welfare welfare);
 	List<Appointment> getListByWelfare(Welfare wf);
+	public List<Appointment> getListByProperty(String propertyName, Object propertyValue);
 }
