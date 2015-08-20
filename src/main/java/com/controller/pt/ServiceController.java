@@ -107,16 +107,25 @@ public class ServiceController {
 		JsonUtil.writeCommonJson(response, map);		
 	}
 	
-	
+	//获取用户所办理的福利列表
 	@RequestMapping(value = {"/hasHandled"}, method = RequestMethod.POST)
-	public void doHasHandled(String openId,String welfareIds,String jobNumber,String username,HttpServletResponse response) throws IOException {
+	public void doHasHandled(String openId,HttpServletResponse response) throws IOException {
 		Boolean res = false;
-		Map<String,Object> map=new HashMap<String,Object>();
+		Map<String,Object> map=new HashMap<String,Object>();		
+		if(openId!=null){
+			Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
+			List<Appointment> alist=this.appointmentService.getListByProperty("employee", employee);
+			List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+			for(Appointment am:alist){
+				Map<String,Object> elem=new HashMap<String,Object>();
+				elem.put("welfare", am.getWelfare());
+				elem.put("state", am.getState());
+				list.add(elem);
+			}
+			map.put("list", list);
+		}
 		map.put("success", res);
 		JsonUtil.writeCommonJson(response, map);
 	}
-	
-	
-	
 	
 }
