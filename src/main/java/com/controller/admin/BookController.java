@@ -2,6 +2,7 @@ package com.controller.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class BookController {
 				count=this.bookService.getCountByLikeProperty(like, and);
 			}
 			else{
-				list=this.bookService.getLikeProperty(like);
+				list=this.bookService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
 				count=this.bookService.getCountByLikeProperty(like, null);
 			}
 		}
@@ -70,11 +71,22 @@ public class BookController {
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(HttpServletResponse response,Book book) throws IOException{
+	public void add(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
+					String type,int amount,String brief) throws IOException{
+		Book book=new Book(id);
+		book.setISBN(ISBN);
+		book.setBookName(bookName);
+		book.setAuthor(author);
+		book.setPublisher(publisher);
+		book.setPublishTime(publishTime);
+		book.setType(type);
+		book.setAmount(amount);
+		book.setBrief(brief);
 		book.setPoints((float) 0);
 		book.setBorrowed(0);
 		book.setCommentNum(0);
 		book.setBookState("新书");
+		book.setBookInputTime(new Date());
 		this.bookService.add(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
@@ -107,7 +119,21 @@ public class BookController {
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(HttpServletResponse response,Book book) throws IOException{
+	public void update(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
+			String type,int amount,String brief,float points,int borrowed,int commentNum,String bookState) throws IOException{
+		Book book=new Book(id);
+		book.setISBN(ISBN);
+		book.setBookName(bookName);
+		book.setAuthor(author);
+		book.setPublisher(publisher);
+		book.setPublishTime(publishTime);
+		book.setType(type);
+		book.setAmount(amount);
+		book.setBrief(brief);
+		book.setPoints(points);
+		book.setBorrowed(borrowed);
+		book.setCommentNum(commentNum);
+		book.setBookState(bookState);
 		this.bookService.alter(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);

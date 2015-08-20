@@ -50,6 +50,15 @@ function update(id) {
 					case 'brief':
 						$(this).val(item.brief);
 						break;
+					case 'bookState':
+						$(this).val(item.bookState);
+						break;
+					case 'commentNum':
+						$(this).val(item.commentNum);
+						break;
+					case 'bookInputTime':
+						$(this).val(DateFormat(item.bookInputTime));
+						break;
 					}
 					$("#brief").text(item.brief);
 					$("#type").val(item.type);

@@ -80,13 +80,14 @@ function getCurrentTime($this){
 	$this.html(new Date().toLocaleString());	
 }
 
-
+window.keyword="";
 //初始化分页
 function initPagination() {
   	var init_num_entries=1;
-	// 在指定区域创建分页,默认每页条数为10
+  	// 在指定区域创建分页,默认每页条数为10
     $("#pagination").pagination(init_num_entries, {
       callback: pageselectCallback,
+      //itemsPerPage:$('#itemsPerPage').val(),
      });
  }
 //page_index为第几页,第一页为0,jq是分页所在区域的Jquery对象
@@ -96,8 +97,10 @@ function pageselectCallback(page_index, jq){
 		type : "POST",
 		url : "list.do",
 		data : {
+			//keyword: $('#keyword').val(),
+			keyword:window.keyword,
 			pageIndex : page_index,		
-			itemsPerPage : sessionStorage.itemsPerPage,
+			itemsPerPage : $('#itemsPerPage').val(),
 		},
 		dataType : "json",
 		success : function(result) {
@@ -109,9 +112,10 @@ function pageselectCallback(page_index, jq){
 						callback: pageselectCallback,
 				        load_first_page:false,
 				        current_page:page_index,
-				        items_per_page:sessionStorage.itemsPerPage,
+				        items_per_page:$('#itemsPerPage').val(),
 				     });
 					$("#count").html(result.count);
+					$("#count").attr('id','dontAlterMeAgain');
 					setData2Table(bookList);
 					
 				} else {
@@ -127,14 +131,23 @@ function pageselectCallback(page_index, jq){
 	});
 	return false;
 }
+
 //初始化需要加载的数据
 $(function() {
+	if(sessionStorage.itemsPerPage!=null){
+		//alert("session存在");
+		$('#itemsPerPage').val(sessionStorage.itemsPerPage);
+	}
+	$("kbd.count").attr('id','count');
 	initPagination();
 	$('#itemsPerPage').change(function(){
 		sessionStorage.itemsPerPage=$(this).val();
-		//initPagination();
 		pageselectCallback(0,$("#pagination"));
 	});
+	/*$('#keyword').change(function(){
+		initPagination();
+		pageselectCallback(0,$("#pagination"));
+	});*/
 	$('#getPage').click(function(){
 		var page = $('#page').val();
 		var re = /^\d+$/g;
@@ -181,7 +194,9 @@ $(function() {
 	});*/
 	//按关键字搜索			
 	$('#searchBtn').click(function() {
-		$.ajax({
+		window.keyword=$('#keyword').val();
+		initPagination();
+		/*$.ajax({
 			type : "POST",
 			url : "list.do",
 			data : {
@@ -205,7 +220,7 @@ $(function() {
 			error : function(jqXHR) {
 				window.Modal.alert({msg:"发生错误：" + jqXHR.status});
 			},
-		});
+		});*/
 	});
 	
 	//自定义alert与confirm弹出框

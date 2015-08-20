@@ -47,7 +47,7 @@
                 <li><a href="#" id="currentTime"></a></li>
                 <li><a href="/wx/admin/logout.do">退出</a></li>
 						
-				</li>
+				
               </ul>
             </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
@@ -56,7 +56,7 @@
 		<div>
 			<div class="float-left">
 				<button id="addBtn" type="button" class="btn btn-info " data-toggle="modal" data-target="#auModal">添加新图书</button>
-				<h5 style="float:right"> &nbsp;&nbsp;当前馆藏数目：<kbd id="count">..</kbd></h5>
+				<h5 style="float:right"> &nbsp;&nbsp;当前馆藏总数：<kbd id="count" class="count">..</kbd></h5>
 			</div>
 			<div class="float-right ">
 			     <div class="navbar-form navbar-left search-margin" role="search" >
@@ -129,14 +129,14 @@
 	<div class="modal fade" id="auModal" tabindex="-1" role="dialog" aria-labelledby="auModalLabel">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
-		  <div clases="modal-header">
+		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h2 class="modal-title font-yahei" id="auModalLabel" align="center" >图书信息</h2>
 		  </div>
 			<div class="modal-body">
 		  
 				<form class="form-horizontal">
-					<div class="form-group " hidden>
+					<div class="form-group " hidden="true">
 						<label for="name" class="col-sm-3 control-label">ID</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="id" name="id" >
@@ -182,11 +182,11 @@
 						<label for="totalNum" class="col-sm-3 control-label">总本数</label>
 						<div class="col-sm-7"><input type="text" class="form-control" id="amount" name="amount" ></div>
 					</div>
-					<div class="form-group form-margin-bottom">
+					<div class="form-group form-margin-bottom" hidden="true">
 						<label for="outNum" class="col-sm-3 control-label">借出数</label>
 						<div class="col-sm-7"><input type="text" class="form-control" id="borrowed" name="borrowed"></div>
 					</div>
-					<div class="form-group form-margin-bottom">
+					<div class="form-group form-margin-bottom" hidden="true">
 						<label for="points" class="col-sm-3 control-label">评分</label>
 						<div class="col-sm-7"><input type="text" class="form-control" id="points" name="points" ></div>
 					</div>
@@ -194,6 +194,19 @@
 						<label for="brief" class="col-sm-3 control-label">简介</label>
 						<div class="col-sm-7"><textarea rows="4" class="form-control" id="brief" name="brief" ></textarea></div>
 					</div>
+					<div class="form-group form-margin-bottom" hidden="true">
+						<label for="bookState" class="col-sm-3 control-label">状态</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="bookState" name="bookState"></div>
+					</div>
+					<div class="form-group form-margin-bottom"  hidden="true">
+						<label for="commentNum" class="col-sm-3 control-label">已评人数</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="commentNum" name="commentNum"></div>
+					</div>
+					<div class="form-group form-margin-bottom"  hidden="true">
+						<label for="bookInputTime" class="col-sm-3 control-label">入库时间</label>
+						<div class="col-sm-7"><input type="text" class="form-control" id="bookInputTime" name="bookInputTime"></div>
+					</div>
+										
 				</form>
 			</div>
 		
