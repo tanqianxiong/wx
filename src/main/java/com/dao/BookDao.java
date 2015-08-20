@@ -9,6 +9,8 @@ import com.common.db.BaseDao;
 public interface BookDao extends BaseDao<Book>{
 
 	List<Book> getAll();
+	public List<Book> getPagination(int start, int count);
+	public int getCount();
 	public void add(Book book);
 	List<Book> getListByLikeProperties(Map<String,Object> map);
 	public void delete(String id);

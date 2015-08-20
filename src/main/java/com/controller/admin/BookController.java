@@ -31,7 +31,8 @@ public class BookController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Book> list=new ArrayList<Book>();
 		String keyword=request.getParameter("keyword");
@@ -51,10 +52,12 @@ public class BookController {
 			}
 		}
 		else{
-			list=this.bookService.getAll();
+			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			count=this.bookService.getCount();
 		}
 		map.put("success", true);
 		map.put("list", list);
+		map.put("count",count);
 		JsonUtil.writeCommonJson(response, map);
 	}
 
