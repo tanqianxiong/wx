@@ -80,7 +80,10 @@ public class PtBookController {
 				br.setBorrowTime(new Date());
 				//br.setReturnTime(new Date());
 				this.borrowService.add(br);
-				res=true;			
+				//图书借出数量相应加一
+				book.setBorrowed(book.getBorrowed()+1);
+				this.bookService.alter(book);
+				res=true;
 			}
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
@@ -162,6 +165,8 @@ public class PtBookController {
 		book.setPoints((book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1));
 		//这一句一定要放在后面
 		book.setCommentNum(book.getCommentNum()+1);
+		//图书借出数相应减一
+		book.setBorrowed(book.getBorrowed()-1);
 		this.bookService.alter(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
