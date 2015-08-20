@@ -73,8 +73,10 @@ public class BaseInterceptor extends HandlerInterceptorAdapter {
 				} 
 				else if (uri.startsWith("/wx/pt") && openId==null) {
 					// 重定向到只供手机访问页
+					/*
 					request.getRequestDispatcher("/onlyWep.jsp").forward(request, response);
-					return false;
+					return false;*/
+					
 				}
 				else if(uri.startsWith("/wx/admin")){
 					// 重定向到管理员登录页

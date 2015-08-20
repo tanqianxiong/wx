@@ -14,7 +14,6 @@
 
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
-		<script src="/wx/js/storage.js"></script>
 		<script src="/wx/js/iot.js"></script>
 	</head>
 
@@ -30,10 +29,8 @@
 		    </div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
-
 		<br/><br/>
 		<div  class="container-fluid" id="six_category">
-
 			<div class="row">
 			  <div class="col-xs-6 col-md-4 category text-center">
 			    <a href="category.do" data-category="管理类" class="thumbnail">
@@ -72,11 +69,7 @@
 			    </a>
 			  </div>
 			</div>
-
 		</div>
-
-
-
 		<!--该表用于显示搜索结果-->
 		<div  class="container-fluid" id="show_search_result" style="display:none;">
 			<h4>匹配书目：</h4>
@@ -94,29 +87,10 @@
 					<td><span class="go-popup detail btn-success">详情</span></td>
 				</tr>
 			</table>
-
 		</div>
-
-<!--  
-		<点击搜索结果中的详情按钮出现的弹出层>
-		<div id="masker"></div>
-		<div id="showdetail">
-			<br>
-			<b id="bookName"></b><hr style="border-bottom:1px solid #999;"/>
-			<div>
-				<p>评分：<span id="points"></span></p>
-				<p>可借数量：<span id="availablenumber"></span></p>
-				<span id="borrow" class="btn goodbtn">现在借阅</span>
-				<p style="text-align:left;margin:10px;">图书简介：<span id="brief"></span></p>
-			</div>
-		</div>
--->
-
 		<div class="tocategory">返回浏览分类</div>
-
-
-
-
+		
+<!-- 测试用，上线可删除 -->		
 	<script>
 		function trigleS(){
 			if(event.keyCode == 13) { 

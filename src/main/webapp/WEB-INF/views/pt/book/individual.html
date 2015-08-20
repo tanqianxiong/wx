@@ -11,11 +11,9 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
-
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
-		<script src="/wx/js/iot.js"></script>
-		<script src="/wx/js/storage.js"></script>
+		<script src="/wx/js/iot.js"></script> 
 		
 		<style>
 		    input[type="range"] {
@@ -131,17 +129,10 @@
 		        trackBar.max = 5;
 		        trackBar.step = 1;
 		        trackBar.value = 3;
-		        trackBar.addEventListener("change",
-		          function(){
+		        trackBar.addEventListener("change",function(){
 		            var showPoint = document.getElementById("showPoint");
 		            showPoint.innerHTML = this.value + '分';
-		          });
-				
-				
-				
-				
-				
-				
+		        });
 				//获取用户借阅记录
 				var openId = getCookie("openId");
 				$.ajax({

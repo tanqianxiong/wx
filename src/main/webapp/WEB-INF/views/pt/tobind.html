@@ -11,38 +11,11 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
-
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
-		<script src="/wx/js/storage.js"></script>
 		<script src="/wx/js/iot.js"></script>
 	</head>
 	<body>
-	<!-- 
-		<div class="jumbotron" style="display:none">
-			<div class="row">
-				<div class="col-sm-4">
-					<button class="btn btn-primary" type="button">
-					  总计访问次数(localstorage)： <span id="localstor" class="badge">4</span>
-					</button>
-				</div>
-				<div class="col-sm-4">
-					<button class="btn btn-info" type="button">
-					  本次浏览次数(sessionstorage)： <span id="sessionstor" class="badge">4</span>
-					</button>
-				</div>
-				<div class="col-sm-4">
-					<button class="btn btn-warning" type="button">
-					  cookie(username)： <span id="mycookie" class="badge">4</span>
-					</button>
-				</div>
-			</div> 	
-		  <h1>Hello, world!</h1>
-		  <p>中移物联网员工服务平台</p>
-		  <p><a id="addnode" class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-		  <p id="addtarget"></p>
-		</div>
-	-->
 		<div class="container-fluid">
 			<div class="row">
 				<h1 class="text-center">中移物联网</h1>
@@ -53,5 +26,14 @@
 				<div id="binding" class="likebtn"><a href="binding.do">立即绑定</a></div>
 			</div>
 		</div>
+		<script>
+			$(function(){
+				var openId = getQueryString("openId");
+				setCookie("openId", openId, 300);
+				$('#binding').click(function(){
+					window.location.href="binding.do?openId="+openId;
+				});
+			});	
+		</script>
 	</body>
 </html>

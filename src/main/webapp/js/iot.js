@@ -1,18 +1,44 @@
+//设置cookie
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + escape(cvalue) + "; " + expires + + "; path=/";
+}
+//获取cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
+    }
+    return "";
+}
+//清除cookie
+function clearCookie(name) {  
+    setCookie(name, "", -1);  
+}
 
+//获取url参数的正则函数
+function getQueryString(name) { 
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
 
 
 $(function(){
-	//在进入任何菜单页面后，先判断浏览器中是否已经存在cookie，if no 那么跳转致i账号绑定页面。	
-	//先搞个假的openId 
-	//setCookie("openId","abcd1234",100);
-	
+
+	/*
 	if (getCookie("username")==""){
 		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
 
 		}else{
 			window.location.href="/wx/pt/tobind.do";
 		}
-	}
+	}*/
 	
 //用户绑定模块
 	//binding 页面 点击绑定按钮后，向服务器发送ajax，
@@ -21,9 +47,14 @@ $(function(){
 		event.preventDefault();
 		var name = $("#username").val();
 		var jobNumber = $("#jobNumber").val();
+		var reg1 = /^[\u0391-\uFFE5|\w]+$/g;
+		var reg2 = /^\d+$/g; 
+		if(!reg1.test(name) || !reg2.test(jobNumber)){
+			return;
+		}
 		var openId = getCookie("openId");
 		if( name=='' || jobNumber==''){
-			return ;
+			return;
 		}
 		$.ajax({
 		    type: "POST", 	
@@ -35,16 +66,15 @@ $(function(){
 			},
 			dataType: "json",
 			success: function(result){
-				//var data = JSON.parse(data);
 				console.log(result);
 				if (result.success) {
-					//setCookie("openId",openId,1);
+					//setCookie("openId",openId,300);
 					setCookie("username",name,100);
 					setCookie("jobNumber",jobNumber,100);
 					$("#bindbtn").hide();
 					$("<span class='btn btn-lg btn-success btn-block'>绑定成功！<br/>现在开始借阅吧~</span>").appendTo("#bindcontainer");
 					setTimeout(function(){
-						window.location.href="/wx/pt/book/index.do";
+						window.location.href="/wx/pt/book/index.do?openId="+openId;
 					},500);
 				} else {
 					alert("抱歉，信息不匹配，请重新输入");
@@ -56,8 +86,6 @@ $(function(){
 		});
 	});
 	
-
-
 //图书搜索、借阅模块
 	//图书搜索按钮，搜索内容不为空，则发起ajax的get方式请求
 	$(".search_book_btn").click(function(){
@@ -67,8 +95,11 @@ $(function(){
 			return ;
 		}
 		var keyword = $("#user_search").val();
-		console.log("搜索内容为:" + keyword);
-		
+		var reg = /^[\u0391-\uFFE5|\w]+$/g;
+		if(!reg.test(keyword)){
+			return ;
+		}		
+		console.log("搜索内容为:" + keyword);	
 		$.ajax({
 		    type: "POST",
 			url: "bookSearch.do",
@@ -89,8 +120,6 @@ $(function(){
 			},
 		});
 	});
-
-
 	//负责搜索结果的展示
 	function showResult(result){
 		$("#six_category").fadeOut(10);
@@ -99,7 +128,6 @@ $(function(){
 		$("#show_search_result table tr:gt(0)").remove();
 		dealResult(result);
 	}
-
 	//负责把搜索结果，向table中动态添加，即实现 json数据转化为td标签
 	function dealResult(result){
 		var table = $("#show_search_result table");
@@ -114,9 +142,6 @@ $(function(){
 			tr.appendTo(table);
 		});
 	}
-
-
-
 	//	详情click：
 	//点击图书搜索结果中的详情按钮，显示该书可借信息
 	$("table").on('click','.detail',function(){
@@ -125,44 +150,33 @@ $(function(){
 		//存图书信息
 		var bookName = tds.eq(0).text();
 		sessionStorage.bookName=bookName;
-		
 		var author = tds.eq(1).text();
-		sessionStorage.author=author;
-		
+		sessionStorage.author=author;		
 		var publisher = tds.eq(2).text();
 		sessionStorage.publisher=publisher;
-
 		var bookId = tds.eq(4).text();
-		sessionStorage.bookId=bookId;
-		
+		sessionStorage.bookId=bookId;		
 		var amount = tds.eq(6).text();
-		sessionStorage.amount=amount;
-		
+		sessionStorage.amount=amount;		
 		var borrowed = tds.eq(7).text();
-		sessionStorage.borrowed=borrowed;
-		
+		sessionStorage.borrowed=borrowed;		
 		var available = parseInt(tds.eq(6).text()) - parseInt(tds.eq(7).text());
-		sessionStorage.available=available;
-		
+		sessionStorage.available=available;		
 		var points = tds.eq(8).text();
-		sessionStorage.points=points;
-		
+		sessionStorage.points=points;		
 		var brief = tds.eq(9).text();
-		sessionStorage.brief=brief;
-		
+		sessionStorage.brief=brief;		
 		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
-
 		//设好sessionStorage，跳转到detail页面
 		window.location.href="detail.do";
 	});
-
 	//借阅按钮
 	$("#borrow").click(function(){
 		//ajax 将用户信息传递给后台，使其更新数据库
 		var bookId = sessionStorage.bookId;
 		var openId = getCookie("openId");
 		$.ajax({
-		    type: "POST", 	
+		    type: "POST",
 			url: "borrow.do",
 			data: {
 				bookId : bookId,
@@ -193,20 +207,17 @@ $(function(){
 			},
 		});	
 	});
-
 	//从搜索结果退回到六大类书目
 	$(".tocategory").click(function(){
 		$("#show_search_result").hide();
 		$("#six_category").fadeIn();
 		$(this).fadeOut();
 	});
-
 	//点击六大类,页面转向category.html,同时通过cookie的方式实现页面间传参
 	$(".thumbnail").click(function(){
 		var selected_category = $(this).data("category");
-		setCookie("selected_category",selected_category,0001);
+		setCookie("selected_category",selected_category,0.001);
 	});
-
 	//点击还书(escheat点击区域变为整个tr) 弹出层出现,因为个人的借阅图书是从后台取得的，所以该事件应使用动态添加
 	$("table.borrowing_table").on('click','tr',function(){
 		//获取被点击的书目
@@ -250,8 +261,6 @@ $(function(){
 			},
 		});
 	});
-
-
 	function updateRecord(result){
 		//从表格中删除该书
 		//若归还成功，则
@@ -264,7 +273,6 @@ $(function(){
 		$("#borrowing .choosing").remove();	
 		$("tr").removeClass("choosing");	
 	}
-
 	//点击取消还书
 	$("#escheat-no").click(function(){
 		$("#masker-ind").fadeOut(100);
@@ -272,37 +280,33 @@ $(function(){
 		$("tr").removeClass("choosing");		
 	});
 
-
-	
-	
 //福利办理模块
 	//点击办理按钮，发送ajax
 	//用户点击提交按钮，发送ajax请求
 	$("#freebtn").click(function(){
-
 		var username = $("#getname").find("input").val();
 		var jobNumber = $("#getnumber").find("input").val();
+		var reg1 = /^[\u0391-\uFFE5|\w]+$/g;
+		var reg2 = /^\d+$/g;
+		if(!reg1.test(username) || !reg2.test(jobNumber)){
+			if(username==''||jobNumber==''){
+				alert("请输入姓名和工号");
+			}else{
+				alert("请正确输入姓名和工号");
+			}
+			return;
+		}
 		var openId = getCookie("openId");
-
 		var welfareIds = [];
-		$("input:checked").each(function () {
+		$("input:checked").each(function(){
             welfareIds.push(this.value);
         });
 		welfareIds = welfareIds.join(",");
         console.log(welfareIds);
         console.log(openId);
-        console.log(username+'  '+jobNumber);
-        
+        console.log(username+'  '+jobNumber);     
         if(welfareIds==''){
         	alert("请选择要办理的业务");
-        	return;
-        }
-        if(username==''){
-        	alert("请输入姓名");
-        	return;
-        }
-        if(jobNumber==''){
-        	alert("请输入工号");
         	return;
         }
 		$.ajax({
@@ -320,7 +324,7 @@ $(function(){
 					$("#masker-welfare").fadeIn(200);
 					$(".popup-welfare").fadeIn(200);
 					setTimeout(function(){
-						window.location.href="/wx/pt/book/index.do";
+						window.location.href="/wx/pt/book/index.do?openId="+openId;
 					},1000);
 				}else{
 					alert("信息输入有误或系统错误，请稍后再试");
@@ -331,12 +335,10 @@ $(function(){
 			},
 		});
 	});
-	
 	//用户点击已办理业务
 	$(".alreadyHandle").click(function(){
 		console.log("alreadyHandle");
-		var openId = getCookie("openId");		
-		
+		var openId = getCookie("openId");	
 		$.ajax({
 			url:"hasHandled.do",
 			type:"POST",
@@ -345,6 +347,12 @@ $(function(){
 			},
 			dataType:"json",
 			success:function(result){
+				var myhandle = $("#myhandle");
+				for(var i=0;i<result.list.length;i++){
+					var p = $("<p/>");
+					p.html(result.list[i].name);
+					p.appendTo(myhandle);
+				}
 				
 			},
 			error:function(jqXHR){
@@ -352,5 +360,4 @@ $(function(){
 			}
 		});
 	});
-
 });
