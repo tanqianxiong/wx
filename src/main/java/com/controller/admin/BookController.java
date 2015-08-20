@@ -45,10 +45,12 @@ public class BookController {
 			if(bookType!=null && !bookType.isEmpty()){
 				Map<String,Object> and=new HashMap<String,Object>();
 				and.put("type", bookType);
-				list=this.bookService.getLikeProperty(like, and);
+				list=this.bookService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.bookService.getCountByLikeProperty(like, and);
 			}
 			else{
 				list=this.bookService.getLikeProperty(like);
+				count=this.bookService.getCountByLikeProperty(like, null);
 			}
 		}
 		else{

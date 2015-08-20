@@ -18,4 +18,6 @@ public interface BookDao extends BaseDao<Book>{
 	public Book get(String id);
 	List<Book> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
 	List<Book> getListByProperty(Map<String, Object> prop);
+	List<Book> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i, int itemsPerPage);
+	int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and);
 }
