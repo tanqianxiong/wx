@@ -20,6 +20,7 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.entity.Book;
+import com.entity.Welfare;
 
 
 public class HibernateDaoImp<T> extends HibernateDaoSupport {
@@ -476,7 +477,7 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 		}
 	}
 	@SuppressWarnings("unchecked")
-	public List<Book> doGetListByLikeProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int i,
+	public List<T> doGetListByLikeProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int i,
 			int itemsPerPage) {
 		Criteria criteria = this.getSession(true).createCriteria(this.entityName);
 		if(likeProps!=null && !likeProps.isEmpty()){

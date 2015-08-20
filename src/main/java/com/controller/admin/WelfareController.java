@@ -31,7 +31,8 @@ public class WelfareController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Welfare> list=new ArrayList<Welfare>();
 		String keyword=request.getParameter("keyword");
@@ -42,17 +43,22 @@ public class WelfareController {
 			if(welfareType!=null && !welfareType.isEmpty()){
 				Map<String,Object> and=new HashMap<String,Object>();
 				and.put("type", welfareType);
-				list=this.welfareService.getLikeProperty(like, and);
+				list=this.welfareService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.welfareService.getCountByLikeProperty(like, and);
 			}
 			else{
-				list=this.welfareService.getLikeProperty(like);
+				list=this.welfareService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.welfareService.getCountByLikeProperty(like, null);
+			    }   
+		}
+			else{
+				list=this.welfareService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+				count=this.welfareService.getCount();
 			}
-		}
-		else{
-			list=this.welfareService.getAll();
-		}
+		
 		map.put("success", true);
 		map.put("list", list);
+		map.put("count",count);
 		JsonUtil.writeCommonJson(response, map);
 	}
 
