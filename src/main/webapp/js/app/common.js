@@ -114,6 +114,7 @@ function pageselectCallback(page_index, jq){
 				        current_page:page_index,
 				        items_per_page:$('#itemsPerPage').val(),
 				     });
+					$('#searchInfo').html('共'+result.count+'条记录');
 					$("#count").html(result.count);
 					$("#count").attr('id','dontAlterMeAgain');
 					setData2Table(bookList);
