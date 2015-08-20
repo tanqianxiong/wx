@@ -26,6 +26,7 @@ import com.entity.User;
 import com.service.BookService;
 import com.service.BorrowService;
 import com.service.BoundInfoService;
+import com.service.EmployeeService;
 import com.service.UserService;
 import com.common.util.JsonUtil;
 
@@ -37,8 +38,14 @@ public class PtBookController {
 
 	@Autowired
 	public BorrowService borrowService;
+	
 	@Autowired
 	public BoundInfoService boundInfoService;
+	
+	@Autowired
+	public EmployeeService employeeService;
+	
+	
 	/*
 	 * 跳转到个人借阅记录页面
 	 */
@@ -142,12 +149,20 @@ public class PtBookController {
 	 * 归还图书
 	 */
 	@RequestMapping(value = "/escheat", method = RequestMethod.POST)
-	public void doReturnBook(String openId, String bookId, HttpServletRequest request,HttpServletResponse response) {
+	public void doReturnBook(String openId, String bookId,int point, HttpServletRequest request,HttpServletResponse response) {
 		Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
 		Book book=this.bookService.get(bookId);
 		Borrow br=this.borrowService.get(employee,book);
 		br.setReturnTime(new Date());
 		this.borrowService.update(br);
+		//更新员工的得分
+		employee.setPoint(employee.getPoint()+1);
+		this.employeeService.alter(employee);
+		//图书评分进行更新
+		book.setPoints((book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1));
+		//这一句一定要放在后面
+		book.setCommentNum(book.getCommentNum()+1);
+		this.bookService.alter(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		try {

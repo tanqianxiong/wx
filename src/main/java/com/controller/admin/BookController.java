@@ -31,7 +31,8 @@ public class BookController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Book> list=new ArrayList<Book>();
 		String keyword=request.getParameter("keyword");
@@ -44,17 +45,21 @@ public class BookController {
 			if(bookType!=null && !bookType.isEmpty()){
 				Map<String,Object> and=new HashMap<String,Object>();
 				and.put("type", bookType);
-				list=this.bookService.getLikeProperty(like, and);
+				list=this.bookService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.bookService.getCountByLikeProperty(like, and);
 			}
 			else{
 				list=this.bookService.getLikeProperty(like);
+				count=this.bookService.getCountByLikeProperty(like, null);
 			}
 		}
 		else{
-			list=this.bookService.getAll();
+			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			count=this.bookService.getCount();
 		}
 		map.put("success", true);
 		map.put("list", list);
+		map.put("count",count);
 		JsonUtil.writeCommonJson(response, map);
 	}
 
@@ -68,6 +73,8 @@ public class BookController {
 	public void add(HttpServletResponse response,Book book) throws IOException{
 		book.setPoints((float) 0);
 		book.setBorrowed(0);
+		book.setCommentNum(0);
+		book.setBookState("新书");
 		this.bookService.add(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);

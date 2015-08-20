@@ -21,6 +21,15 @@ public class BookServiceImp implements BookService{
 		return bookDao.getAll();
 	}
 	@Override
+	public List<Book> getPagination(int start, int count) {
+		// TODO Auto-generated method stub
+		return bookDao.getPagination(start,count);
+	}
+	@Override
+	public int getCount(){
+		return bookDao.getCount();
+	}
+	@Override
 	public void add(Book book){
 		bookDao.add(book);
 	}
@@ -50,6 +59,17 @@ public class BookServiceImp implements BookService{
 	public List<Book> getListByProperty(Map<String, Object> prop) {
 		// TODO Auto-generated method stub
 		return this.bookDao.getListByProperty(prop);
+	}
+	@Override
+	public List<Book> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
+			int itemsPerPage) {
+		// TODO Auto-generated method stub
+		return this.bookDao.getPaginationByLikeProperty(like, and, i, itemsPerPage);
+	}
+	@Override
+	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+		// TODO Auto-generated method stub
+		return this.bookDao.getCountByLikeProperty(like, and);
 	}
 
 }

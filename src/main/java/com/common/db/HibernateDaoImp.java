@@ -19,6 +19,8 @@ import org.hibernate.criterion.SimpleExpression;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.entity.Book;
+
 
 public class HibernateDaoImp<T> extends HibernateDaoSupport {
 
@@ -472,5 +474,47 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 			seList.subList(0, 1).clear();
 			return Restrictions.or(se,orExpressionLink(seList));
 		}
+	}
+	@SuppressWarnings("unchecked")
+	public List<Book> doGetListByLikeProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int i,
+			int itemsPerPage) {
+		Criteria criteria = this.getSession(true).createCriteria(this.entityName);
+		if(likeProps!=null && !likeProps.isEmpty()){
+			List<SimpleExpression> seList=new ArrayList<SimpleExpression>();
+			for (String key : likeProps.keySet()) {
+				seList.add(Restrictions.like(key,likeProps.get(key)));
+			}
+			if(likeProps.size()<2){
+				criteria.add(seList.get(0));
+			}
+			else{
+				criteria.add(orExpressionLink(seList));
+			}
+		}
+		if(andProps!=null && !andProps.isEmpty()){
+			criteria.add(Restrictions.allEq(andProps));
+		}
+		criteria.setFirstResult(i);
+		criteria.setMaxResults(itemsPerPage);
+		return criteria.list();
+	}
+	public int doGetCountByLikeProperty(Map<String, Object> likeProps, Map<String, Object> andProps) {
+		Criteria criteria = this.getSession(true).createCriteria(this.entityName);
+		if(likeProps!=null && !likeProps.isEmpty()){
+			List<SimpleExpression> seList=new ArrayList<SimpleExpression>();
+			for (String key : likeProps.keySet()) {
+				seList.add(Restrictions.like(key,likeProps.get(key)));
+			}
+			if(likeProps.size()<2){
+				criteria.add(seList.get(0));
+			}
+			else{
+				criteria.add(orExpressionLink(seList));
+			}
+		}
+		if(andProps!=null && !andProps.isEmpty()){
+			criteria.add(Restrictions.allEq(andProps));
+		}
+		return criteria.list().size();
 	}
 }
