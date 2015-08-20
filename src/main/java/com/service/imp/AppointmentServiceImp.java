@@ -76,4 +76,27 @@ public class AppointmentServiceImp implements AppointmentService {
 		return this.appointmentDao.getListByProperty(propertyName, propertyValue);
 	}
 
+	@Override
+	public List<Appointment> getPagination(int start, int count) {
+		// TODO Auto-generated method stub
+		return appointmentDao.getPagination(start, count);
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return appointmentDao.getCount();
+	}
+
+	@Override
+	public	List<Appointment> getEntityListByWelfareID(String welfareID, Object propertyValue, int start, int count, Map<String, String> orderProps){	
+		return this.appointmentDao.getEntityListByWelfareID(welfareID, propertyValue, start, count, orderProps);
+	}
+	
+	@Override
+	public int getCountByWelfareID(String welfareID,Object value) {
+		// TODO Auto-generated method stub
+		return this.appointmentDao.getCountByWelfareID(welfareID,value);
+	}
+
 }

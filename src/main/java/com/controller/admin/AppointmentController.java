@@ -36,8 +36,9 @@ public class AppointmentController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
-	    List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	 
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		Map<String,Object> res=new HashMap<String,Object>();
 		List<Welfare> welfareList=this.welfareService.getAll();//获取welfare表中的数据
 		for(int i=0;i<welfareList.size();i++){
@@ -71,12 +72,19 @@ public class AppointmentController {
 	
 	//详情
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public void getDetailInfo(String welfareId,HttpServletResponse response) throws IOException{
+	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response) throws IOException{
+		int count=0;
+		
 		Welfare wf=this.welfareService.get(welfareId);
-		List<Appointment> list=this.appointmentService.getListByWelfare(wf);
+		//List<Appointment> list=this.appointmentService.getListByWelfare(wf);
+		
+		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfareID", wf.getId(), pageIndex*itemsPerPage,itemsPerPage, null);
+		count=this.appointmentService.getCountByWelfareID("welfareID", wf.getId());
+				
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("list",list);
+		map.put("count", count);
 		//加载福利名称到detail页面
 		map.put("welfareName", wf.getName());
 		JsonUtil.writeCommonJson(response, map);

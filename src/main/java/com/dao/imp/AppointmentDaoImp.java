@@ -70,6 +70,27 @@ public class AppointmentDaoImp extends HibernateDaoImp<Appointment> implements A
 		// TODO Auto-generated method stub
 		return this.doGetListByProperty(propertyName, propertyValue,null);
 	}
+
+	@Override
+	public List<Appointment> getPagination(int start, int count) {
+		// TODO Auto-generated method stub
+		return this.doGetListByPage(null,start,count,null);
+	}
+
+	@Override
+	public int getCount() {
+		return this.doGetCount();
+	}
+
+	@Override
+	public	List<Appointment> getEntityListByWelfareID(String welfareID, Object propertyValue, int start, int count, Map<String, String> orderProps){	
+		return this.doGetEntityListByProperty(welfareID, propertyValue, start, count, orderProps);
+	}
+
+	@Override
+	public int getCountByWelfareID(String welfareID,Object value) {
+		return this.doGetCountByProperty(welfareID,value);
+	}
 	
 	
 	
