@@ -19,18 +19,33 @@ public class Book  implements Serializable{
 	// Fields
 	
 	private String id;
+	//图书的唯一识别码
 	private String ISBN;
+	//图书名称
 	private String bookName;
+	//作者
 	private String author;
+	//出版社
 	private String publisher;
+	//出版年份
 	private int publishTime;
+	//图书类型（管理类、文学类、经济类、技术类、综合类、其他）
 	private String type;
+	//当前图书的馆藏数量
 	private int amount;
+	//已借人数
 	private int borrowed;
+	//图书评分
 	private double points;
+	//图书简介
 	private String brief;
+	//图书入库时间
 	private Date bookInputTime;
+	//图书状态（新书、旧书）
 	private String bookState;
+	//图书已评人数
+	private int commentNum;
+	
 	
 	// Constructors
 
@@ -44,7 +59,7 @@ public class Book  implements Serializable{
 	}
 
 	/** full constructor */
-	public Book(String ISBN,String bookName,String author, String publisher,int publishTime,String type,int amount,int borrowed,double points,String brief,Date bookInputTime,String bookState) {
+	public Book(String ISBN,String bookName,String author, String publisher,int publishTime,String type,int amount,int borrowed,double points,String brief,Date bookInputTime,String bookState,int commentNum) {
 		this.ISBN = ISBN;
 		this.bookName = bookName;
 		this.author = author;
@@ -57,6 +72,7 @@ public class Book  implements Serializable{
 		this.brief=brief;
 		this.bookInputTime=bookInputTime;
 		this.bookState=bookState;
+		this.commentNum=commentNum;
 	}
 
 	// Property accessors
@@ -167,5 +183,11 @@ public class Book  implements Serializable{
 	public void setBookState(String bookState){
 		this.bookState = bookState;
 	}
-	
+	@Column(name = "Book_Comment_Num", nullable = true, length = 11)
+	public int getCommentNum(){
+		return this.commentNum;
+	}
+	public void setCommentNum(int commentNum){
+		this.commentNum=commentNum;
+	}
 }

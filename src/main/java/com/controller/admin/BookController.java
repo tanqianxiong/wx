@@ -73,6 +73,8 @@ public class BookController {
 	public void add(HttpServletResponse response,Book book) throws IOException{
 		book.setPoints((float) 0);
 		book.setBorrowed(0);
+		book.setCommentNum(0);
+		book.setBookState("新书");
 		this.bookService.add(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
