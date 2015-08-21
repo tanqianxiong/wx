@@ -389,6 +389,7 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 	public List<T> doGetListByPage(int start, int count,
 			Map<String, String> orderProps) {
 		String hql = "from " + this.entityName + " _t001 where 1=1 ";
+		hql = this.doGenOrderHql(hql, orderProps);
 		Query query = this.getSession().createQuery(hql);
 		query.setCacheable(useCache);
 		query.setFirstResult(start);
@@ -428,7 +429,7 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 	 * 得到所有实体集合一页记录
 	 */
 	@SuppressWarnings("rawtypes")
-	public List doGetAll(int start, int count, Map<String, String> orderProps) {
+	public List<T> doGetAll(int start, int count, Map<String, String> orderProps) {
 		String hql = "from " + this.entityName + " _t001";
 		hql = this.doGenOrderHql(hql, orderProps);
 		Query query = this.getSession().createQuery(hql);

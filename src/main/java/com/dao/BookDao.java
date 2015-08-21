@@ -9,7 +9,6 @@ import com.common.db.BaseDao;
 public interface BookDao extends BaseDao<Book>{
 
 	List<Book> getAll();
-	public List<Book> getPagination(int start, int count);
 	public int getCount();
 	public void add(Book book);
 	List<Book> getListByLikeProperties(Map<String,Object> map);
@@ -20,4 +19,5 @@ public interface BookDao extends BaseDao<Book>{
 	List<Book> getListByProperty(Map<String, Object> prop);
 	List<Book> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i, int itemsPerPage);
 	int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and);
+	public List<Book> getPagination(int start, int count,Map<String, String> orderProps);
 }

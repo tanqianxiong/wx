@@ -17,9 +17,9 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 		return this.doGetAll(null);
 	}
 	@Override
-	public List<Book> getPagination(int start, int count) {
+	public List<Book> getPagination(int start, int count,Map<String,String> orderProps) {
 		// TODO Auto-generated method stub
-		return this.doGetListByPage(null,start,count,null);
+		return this.doGetAll(start,count,orderProps);
 	}
 	@Override
 	public int getCount(){

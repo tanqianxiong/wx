@@ -35,6 +35,7 @@ public class BookController {
 	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
+		Map<String,String> orderProps = new HashMap<String,String>();
 		List<Book> list=new ArrayList<Book>();
 		String keyword=request.getParameter("keyword");
 		String bookType=request.getParameter("bookType");
@@ -55,7 +56,8 @@ public class BookController {
 			}
 		}
 		else{
-			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			orderProps.put("bookInputTime", "desc");
+			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage,orderProps);
 			count=this.bookService.getCount();
 		}
 		map.put("success", true);
