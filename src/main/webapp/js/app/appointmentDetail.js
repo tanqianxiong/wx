@@ -167,7 +167,7 @@ function pageselectCallback(page_index, jq){
 		data : {
 			//keyword: $('#keyword').val(),
 			welfareId:welfareId,
-			keyword:window.keyword,
+			//keyword:window.keyword,
 			pageIndex : page_index,		
 			itemsPerPage : $('#itemsPerPage').val(),
 		},

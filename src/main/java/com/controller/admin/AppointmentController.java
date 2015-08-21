@@ -78,8 +78,8 @@ public class AppointmentController {
 		Welfare wf=this.welfareService.get(welfareId);
 		//List<Appointment> list=this.appointmentService.getListByWelfare(wf);
 		
-		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfareID", wf.getId(), pageIndex*itemsPerPage,itemsPerPage, null);
-		count=this.appointmentService.getCountByWelfareID("welfareID", wf.getId());
+		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfare", wf, pageIndex*itemsPerPage,itemsPerPage, null);
+		count=this.appointmentService.getCountByWelfareID("welfare", wf);
 				
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
