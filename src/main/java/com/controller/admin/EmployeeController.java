@@ -34,10 +34,10 @@ public class EmployeeController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Employee> list=new ArrayList<Employee>();
-		
 		String keyword=request.getParameter("keyword");
 		if(keyword!=null && !keyword.isEmpty()){
 			Map<String,Object> like=new HashMap<String,Object>();
@@ -49,9 +49,12 @@ public class EmployeeController {
 		}
 		else{
 			list=this.employeeService.getAll();
+			list=this.employeeService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			count=this.employeeService.getCount();
 		}
 		map.put("success", true);
 		map.put("list", list);
+		map.put("count",count);
 		JsonUtil.writeCommonJson(response, map);
 	}
 
