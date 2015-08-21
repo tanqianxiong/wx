@@ -12,4 +12,12 @@ public interface PolicyService {
 	public void alter(Policy policy);
 	public Policy get(String id);
 	List<Policy> getLikeProperty(Map<String, Object> map);
+	public List<Policy> getPagination(int start, int count);
+	public int getCount();
+	public List<Policy> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
+	public List<Policy> getListByProperty(Map<String, Object> prop);
+	public List<Policy> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
+			int itemsPerPage);
+	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and);
+	
 }

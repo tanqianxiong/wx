@@ -20,6 +20,7 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.entity.Book;
+import com.entity.Welfare;
 
 
 public class HibernateDaoImp<T> extends HibernateDaoSupport {

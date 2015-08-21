@@ -22,6 +22,15 @@ public class WelfareServiceImp implements WelfareService{
 		return welfareDao.getAll();
 	}
 	@Override
+	public List<Welfare> getPagination(int start, int count) {
+		// TODO Auto-generated method stub
+		return welfareDao.getPagination(start,count);
+	}
+	@Override
+	public int getCount(){
+		return welfareDao.getCount();
+	}
+	@Override
 	public void add(Welfare welfare){
 		welfareDao.add(welfare);
 	}
@@ -51,6 +60,17 @@ public class WelfareServiceImp implements WelfareService{
 	public List<Welfare> getListByProperty(Map<String, Object> prop) {
 		// TODO Auto-generated method stub
 		return this.welfareDao.getListByProperty(prop);
+	}
+	@Override
+	public List<Welfare> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
+			int itemsPerPage) {
+		// TODO Auto-generated method stub
+		return this.welfareDao.getPaginationByLikeProperty(like, and, i, itemsPerPage);
+	}
+	@Override
+	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+		// TODO Auto-generated method stub
+		return this.welfareDao.getCountByLikeProperty(like, and);
 	}
 
 }

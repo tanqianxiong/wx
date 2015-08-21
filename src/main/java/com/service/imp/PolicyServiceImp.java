@@ -21,6 +21,10 @@ public class PolicyServiceImp implements PolicyService{
 		return policyDao.getAll();
 	}
 	@Override
+	public int getCount(){
+		return policyDao.getCount();
+	}
+	@Override
 	public void add(Policy policy){
 		policyDao.add(policy);
 	}
@@ -34,6 +38,27 @@ public class PolicyServiceImp implements PolicyService{
 		policyDao.delete(id);
 	}
 	@Override
+	public List<Policy> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+		// TODO Auto-generated method stub
+		return this.policyDao.getLikeProperty(map, map2);
+	}
+	@Override
+	public List<Policy> getListByProperty(Map<String, Object> prop) {
+		// TODO Auto-generated method stub
+		return this.policyDao.getListByProperty(prop);
+	}
+	@Override
+	public List<Policy> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
+			int itemsPerPage) {
+		// TODO Auto-generated method stub
+		return this.policyDao.getPaginationByLikeProperty(like, and, i, itemsPerPage);
+	}
+	@Override
+	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+		// TODO Auto-generated method stub
+		return this.policyDao.getCountByLikeProperty(like, and);
+	}
+	@Override
 	public Policy get(String id){
 		return policyDao.get(id);
 	}
@@ -41,5 +66,9 @@ public class PolicyServiceImp implements PolicyService{
 	public void alter(Policy policy){
 		policyDao.alter(policy);
 	}
-
+	@Override
+	public List<Policy> getPagination(int start, int count) {
+		// TODO Auto-generated method stub
+		return policyDao.getPagination(start,count);
+	}
 }
