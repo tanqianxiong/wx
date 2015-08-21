@@ -73,21 +73,21 @@ public class AppointmentController {
 	//详情
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response) throws IOException{
-		int count=0;		
+		int num=0;		
 		Welfare wf=this.welfareService.get(welfareId);
 		//List<Appointment> list=this.appointmentService.getListByWelfare(wf);
 		
 		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfare", wf, pageIndex*itemsPerPage,itemsPerPage, null);
-		count=this.appointmentService.getCountByWelfareID("welfare", wf);
-		int num=0;//未处理请求数
-		for(int i=0;i<count;i++){
+		num=this.appointmentService.getCountByWelfareID("welfare", wf);
+		int count=0;//未处理请求数
+		for(int i=0;i<num;i++){
 			if(wf.getState()=="申请中")
-				num++;
+				count++;
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("list",list);
-		map.put("num", num);
+		map.put("count", count);
 		//加载福利名称到detail页面
 		map.put("welfareName", wf.getName());
 		JsonUtil.writeCommonJson(response, map);
