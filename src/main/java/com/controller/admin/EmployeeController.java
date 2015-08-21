@@ -44,11 +44,13 @@ public class EmployeeController {
 			like.put("username", "%"+keyword+"%");
 			like.put("position", "%"+keyword+"%");
 			like.put("userNo", "%"+keyword+"%");
-			list=this.employeeService.getByLikeProperties(like);
+			//list=this.employeeService.getByLikeProperties(like);
+			list=this.employeeService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
+			count=this.employeeService.getCountByLikeProperty(like, null);
 			
 		}
 		else{
-			list=this.employeeService.getAll();
+			//list=this.employeeService.getAll();
 			list=this.employeeService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
 			count=this.employeeService.getCount();
 		}
