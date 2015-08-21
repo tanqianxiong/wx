@@ -123,6 +123,7 @@ public class ServiceController {
 				list.add(elem);
 			}
 			map.put("list", list);
+			res=true;
 		}
 		map.put("success", res);
 		JsonUtil.writeCommonJson(response, map);
