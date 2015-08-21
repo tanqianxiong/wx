@@ -18,6 +18,15 @@ public class WelfareDaoImp extends HibernateDaoImp<Welfare> implements WelfareDa
 		return this.doGetAll(null);
 	}
 	@Override
+	public List<Welfare> getPagination(int start, int count) {
+		// TODO Auto-generated method stub
+		return this.doGetListByPage(null,start,count,null);
+	}
+	@Override
+	public int getCount(){
+		return this.doGetCount();
+	}
+	@Override
 	public void add(Welfare welfare){
 		this.doInsert(welfare);
 	}
@@ -47,5 +56,15 @@ public class WelfareDaoImp extends HibernateDaoImp<Welfare> implements WelfareDa
 	public List<Welfare> getListByProperty(Map<String, Object> prop) {
 		// TODO Auto-generated method stub
 		return this.doGetListByProperties(prop, null);
+	}
+	@Override
+	public List<Welfare> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
+			int itemsPerPage) {
+		return this.doGetListByLikeProperties(like, and, i, itemsPerPage);
+	}
+	@Override
+	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+		// TODO Auto-generated method stub
+		return this.doGetCountByLikeProperty(like, and);
 	}
 }

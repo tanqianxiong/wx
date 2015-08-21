@@ -20,6 +20,7 @@ import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.entity.Book;
+import com.entity.Welfare;
 
 
 public class HibernateDaoImp<T> extends HibernateDaoSupport {
@@ -246,7 +247,7 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 	 * 根据实体属性得到一页记录
 	 */
 	@SuppressWarnings("rawtypes")
-	public List doGetEntityListByProperty(String propertyName,
+	public List<T> doGetEntityListByProperty(String propertyName,
 			Object propertyValue, int start, int count,
 			Map<String, String> orderProps) {
 		String hql = "from " + this.entityName + " _t001 where _t001."

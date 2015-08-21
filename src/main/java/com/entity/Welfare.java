@@ -22,6 +22,7 @@ public class Welfare  implements Serializable{
 	private String introduction;
 	private String state;
 	// Constructors
+	private int commentNum;
 
 	/** default constructor */
 	public Welfare() {
@@ -33,10 +34,11 @@ public class Welfare  implements Serializable{
 	}
 
 	/** full constructor */
-	public Welfare(String name,String introduction,String state) {
+	public Welfare(String name,String introduction,String state,int commentNum) {
 		this.name = name;
 		this.introduction=introduction;
 		this.state=state;
+		this.commentNum=commentNum;
 	}
 
 	// Property accessors
@@ -73,5 +75,12 @@ public class Welfare  implements Serializable{
 	}
 	public void setState(String state){
 		this.state = state;
+	}
+	@Column(name = "Welfare_Comment_Num", nullable = true, length = 11)
+	public int getCommentNum(){
+		return this.commentNum;
+	}
+	public void setCommentNum(int commentNum){
+		this.commentNum=commentNum;
 	}
 }

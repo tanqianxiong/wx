@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.entity.Appointment;
+import com.entity.Book;
 import com.entity.Welfare;
 
 public interface AppointmentService {
@@ -17,4 +18,10 @@ public interface AppointmentService {
 	public int getNumByWelfare(Welfare welfare);
 	public List<Appointment> getListByWelfare(Welfare wf);
 	public List<Appointment> getListByProperty(String propertyName, Object propertyValue);
+	
+	public List<Appointment> getPagination(int start, int count);
+	public int getCount();
+	public 	List<Appointment> getEntityListByWelfareID(String welfareID, Object propertyValue, int start, int count, Map<String, String> orderProps); 
+
+	public int getCountByWelfareID(String welfareID,Object value);
 }

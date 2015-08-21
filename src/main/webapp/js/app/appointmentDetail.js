@@ -81,11 +81,13 @@ $(function(){
 	        confirm: _confirm
 	    }
 	}();
+	
+	
 
 	//获取当前时间
 	window.setInterval("getCurrentTime($('#currentTime'));",100);
 	
-	var welfareId = getQueryString("welfareId");	
+	/*var welfareId = getQueryString("welfareId");	
 	//开始向后台请求获取数据
 	$.ajax({
 		type : "POST",
@@ -111,12 +113,97 @@ $(function(){
 		error : function(jqXHR) {
 			window.Modal.alert({msg:"发生错误：" + jqXHR.status});
 		},
+	});*/
+
+	if(sessionStorage.itemsPerPage!=null){
+		//alert("session存在");
+		$('#itemsPerPage').val(sessionStorage.itemsPerPage);
+	}
+	$("kbd.count").attr('id','count');
+	initPagination();
+	$('#itemsPerPage').change(function(){
+		sessionStorage.itemsPerPage=$(this).val();
+		pageselectCallback(0,$("#pagination"));
+	});
+	/*$('#keyword').change(function(){
+		initPagination();
+		pageselectCallback(0,$("#pagination"));
+	});*/
+	$('#getPage').click(function(){
+		var page = $('#page').val();
+		var re = /^\d+$/g;
+		if(re.test(page)){
+			if(page!=0)
+			pageselectCallback(page-1,$("#pagination"));
+			else alert("请输入正整数");
+		}
+		else alert("请输入正整数");
+		$('#page').val("");
 	});
 });
 //获取当前时间
 function getCurrentTime($this){
 	$this.html(new Date().toLocaleString());	
 }
+
+window.keyword="";
+//初始化分页
+function initPagination() {
+	var init_num_entries=1;
+	// 在指定区域创建分页,默认每页条数为10
+	if($("#pagination")!=null){
+	    $("#pagination").pagination(init_num_entries, {
+	      callback: pageselectCallback,
+	      //itemsPerPage:$('#itemsPerPage').val(),
+	     });
+	}
+}
+//page_index为第几页,第一页为0,jq是分页所在区域的Jquery对象
+function pageselectCallback(page_index, jq){
+	var welfareId = getQueryString("welfareId")
+	$.ajax({
+		type : "POST",
+		url : "detail.do",
+		data : {
+			//keyword: $('#keyword').val(),
+			welfareId:welfareId,
+			//keyword:window.keyword,
+			pageIndex : page_index,		
+			itemsPerPage : $('#itemsPerPage').val(),
+		},
+		dataType : "json",
+		success : function(result) {
+			if (result.success) {
+				//加载福利类型到Detail页面
+				$('#welfareName').html(result.welfareName);
+				var bookList = result.list;
+				if (bookList.length > 0) {
+					//重新加载分页
+					$("#pagination").pagination(result.count, {
+						callback: pageselectCallback,
+				        load_first_page:false,
+				        current_page:page_index,
+				        items_per_page:$('#itemsPerPage').val(),
+				     });
+					$('#searchInfo').html('共'+result.count+'条记录');
+					$("#count").html(result.count);
+					$("#count").attr('id','dontAlterMeAgain');
+					setDataTable(bookList);
+					
+				} else {
+					window.Modal.alert({msg:"没有找到相匹配的数据"});
+				}
+			} else {
+				window.Modal.alert({msg:"抱歉，信息不匹配，请重新输入"});
+			}
+		},
+		error : function(jqXHR) {
+			window.Modal.alert({msg:"发生错误：" + jqXHR.status});
+		},
+	});
+	return false;
+}
+
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
