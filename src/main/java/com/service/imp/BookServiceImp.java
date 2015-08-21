@@ -21,9 +21,9 @@ public class BookServiceImp implements BookService{
 		return bookDao.getAll();
 	}
 	@Override
-	public List<Book> getPagination(int start, int count) {
+	public List<Book> getPagination(int start, int count,Map<String,String> orderProps) {
 		// TODO Auto-generated method stub
-		return bookDao.getPagination(start,count);
+		return bookDao.getPagination(start,count,orderProps);
 	}
 	@Override
 	public int getCount(){
