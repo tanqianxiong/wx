@@ -33,8 +33,9 @@ public class PolicyController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Map<String,Object> map=new HashMap<String,Object>();
+		int count=0;
 		List<Policy> list=new ArrayList<Policy>();
 		String keyword=request.getParameter("keyword");
 	
@@ -44,13 +45,17 @@ public class PolicyController {
 			like.put("content", "%"+keyword+"%");
 		
 				list=this.policyService.getLikeProperty(like);
+				list=this.policyService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.policyService.getCountByLikeProperty(like, null);
 			
 		}
 		else{
-			list=this.policyService.getAll();
+			list=this.policyService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			count=this.policyService.getCount();
 		}
 		map.put("success", true);
 		map.put("list", list);
+		map.put("count",count);
 		JsonUtil.writeCommonJson(response, map);
 	}
 
