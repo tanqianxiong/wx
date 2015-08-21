@@ -41,18 +41,21 @@ public class AppointmentController {
 		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		Map<String,Object> res=new HashMap<String,Object>();
 		List<Welfare> welfareList=this.welfareService.getAll();//获取welfare表中的数据
+		int count=0;
 		for(int i=0;i<welfareList.size();i++){
 			Map<String,Object> r=new HashMap<String,Object>();
 			r.put("name", welfareList.get(i).getName());
 			r.put("welfareId", welfareList.get(i).getId());
 			int num=0;
 			num=this.appointmentService.getNumByWelfare(welfareList.get(i));
+			count+=num;
 			r.put("number", num);
 			list.add(r);
 		}	
 		
 		res.put("success", true);
 		res.put("list", list);
+		res.put("count", count);
 		JsonUtil.writeCommonJson(response, res);
 	}
 
@@ -74,14 +77,12 @@ public class AppointmentController {
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response) throws IOException{
 		int num=0;		
-		Welfare wf=this.welfareService.get(welfareId);
-		//List<Appointment> list=this.appointmentService.getListByWelfare(wf);
-		
+		Welfare wf=this.welfareService.get(welfareId);		
 		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfare", wf, pageIndex*itemsPerPage,itemsPerPage, null);
 		num=this.appointmentService.getCountByWelfareID("welfare", wf);
 		int count=0;//未处理请求数
 		for(int i=0;i<num;i++){
-			if(wf.getState()=="申请中")
+			if(list.get(i).getState().equals("申请中"))
 				count++;
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
