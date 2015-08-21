@@ -12,10 +12,13 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/manage.css" rel="stylesheet" type="text/css">
+		<link href="/wx/css/jquery.pagination.css" rel="stylesheet">
 
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/app/appointmentDetail.js"></script>
+		<script src="/wx/js/jquery.pagination.js"></script>
+		
 		
 	</head>
 	<body>
@@ -54,7 +57,16 @@
 		<div>
 		   <p><h1><span id="welfareName" class="label label-default">养老保险</span></h1></p>
 	    </div>
-		<div class="float-left"><h4 class="font-yahei">未处理申请：<kbd>3</kbd></h4></div>
+		<div class="float-left"><h4 class="font-yahei">未处理申请：<kbd id="count" class="count">..</kbd></h4></div>
+		<!-- <div class="float-right ">
+			     <div class="navbar-form navbar-left search-margin" role="search" >
+					<div class="form-group">
+					  <input type="text" name="keyword" id="keyword" class="form-control " placeholder="输入工号/姓名">
+					</div>
+					<button type="submit" id="searchBtn" class="btn btn-danger">搜索</button>
+				</div>
+			  
+		</div> -->
 		<div class="float-right margin-top-5">
 				<font class="font-songti">排序方式: </font>
 				  <select  name="order">
@@ -82,6 +94,26 @@
          
          </tbody>
         </table>
+        <div class="float-right">
+        	 <div id="searchInfo" style="display:inline-block;margin-top:23px;vertical-align:top">
+        	 	 	共...条记录
+        	 </div>
+        	<div id="pagination" style="display:inline-block"></div>
+        	<div style="display:inline-block;margin-top:20px;vertical-align:top">
+        	 	<input type="text" size="1" id="page" name="page" >
+        	 	<button type="submit" id="getPage">go!</button>
+        	</div>
+        	<div style="display:inline-block;margin-top:23px;vertical-align:top">
+        		<label class="control-label font-songti"> &nbsp;每页数量：</label>
+        		  <select id="itemsPerPage" name="itemsPerPage">
+					<option value=5>5</option>
+					<option value=10 selected="selected">10</option>
+					<option value=15>15</option>
+					<option value=20>20</option>
+				 </select>	
+        	</div>
+        </div>
+        
 		<div>
 		     <a href="list.do"><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal2">返回主界面</button></a>
 		</div>

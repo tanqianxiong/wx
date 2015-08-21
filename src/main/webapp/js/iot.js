@@ -337,7 +337,6 @@ $(function(){
 	});
 	//用户点击已办理业务
 	$(".alreadyHandle").click(function(){
-		console.log("alreadyHandle");
 		var openId = getCookie("openId");	
 		$.ajax({
 			url:"hasHandled.do",
@@ -348,12 +347,16 @@ $(function(){
 			dataType:"json",
 			success:function(result){
 				var myhandle = $("#myhandle");
+				myhandle.find("p").remove();
 				for(var i=0;i<result.list.length;i++){
 					var p = $("<p/>");
-					p.html(result.list[i].name);
+					welfareName = result.list[i].welfare.name;
+					console.log(name);
+					welfareState = result.list[i].welfareState;
+					console.log(state);
+					p.html(welfareName+'   '+state);
 					p.appendTo(myhandle);
 				}
-				
 			},
 			error:function(jqXHR){
 				alert("对不起，查询失败：" + jqXHR.status);
@@ -361,3 +364,6 @@ $(function(){
 		});
 	});
 });
+
+
+

@@ -12,7 +12,9 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet"	type="text/css">
 		<link href="/wx/css/manage.css" rel="stylesheet" type="text/css">
+		<link href="/wx/css/jquery.pagination.css" rel="stylesheet">
 		
+        <script src="/wx/js/jquery.pagination.js"></script>
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/app/common.js"></script>
@@ -63,14 +65,13 @@
 						data-toggle="modal" data-target="#auModal">添加新用户</button>
 					<h5 style="float: right">
 						&nbsp;&nbsp;总共用户数目：
-						<kbd>389</kbd>
+						<kbd id="count" class="count">..</kbd>
 					</h5>
 				</div>
 				<div class="float-right ">
 					<div class="navbar-form navbar-left search-margin" role="search">
 						<div class="form-group">
-							<input type="text" name="keyword" id="keyword"
-								class="form-control " placeholder="员工姓名/工号/职位">
+							<input type="text" name="keyword" id="keyword" class="form-control " placeholder="员工姓名/工号/职位">
 						</div>
 						<button type="submit" id="searchBtn" class="btn btn-danger">搜索</button>
 					</div>
@@ -106,14 +107,26 @@
 	
 				</tbody>
 			</table>
-			<div align="center">
-	
-				<a href="manage_user/add"></a>
-				<button type="button" class="btn btn-default btn-sm-right">上一页</button>
-				<a href="manage_user/add"></a>
-				<button type="button" class="btn btn-default btn-sm-right">下一页</button>
-	
-			</div>
+		 <div class="float-right">
+        	 <div id="searchInfo" style="display:inline-block;margin-top:23px;vertical-align:top">
+        	 	 	共...条记录
+        	 </div>
+        	<div id="pagination" style="display:inline-block"></div>
+        	<div style="display:inline-block;margin-top:20px;vertical-align:top">
+        	 	<input type="text" size="1" id="page" name="page" >
+        	 	<button type="submit" id="getPage">go!</button>
+        	</div>
+        	<div style="display:inline-block;margin-top:23px;vertical-align:top">
+        		<label class="control-label font-songti"> &nbsp;每页数量：</label>
+        		  <select id="itemsPerPage" name="itemsPerPage">
+					<option value=5>5</option>
+					<option value=10 selected="selected">10</option>
+					<option value=15>15</option>
+					<option value=20>20</option>
+				 </select>	
+        	</div>
+        </div>
+        
 		</div>
 	
 	

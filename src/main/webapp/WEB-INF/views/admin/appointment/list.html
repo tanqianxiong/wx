@@ -12,12 +12,12 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/manage.css" rel="stylesheet" type="text/css">
-
+		<link href="/wx/css/jquery.pagination.css" rel="stylesheet">
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/app/common.js"></script>
 		<script src="/wx/js/app/appointment.js"></script>
-	</head>
+		<script src="/wx/js/jquery.pagination.js"></script>
 	<body>
 
       <!-- Static navbar -->
@@ -65,7 +65,26 @@
          <tbody>
          
          </tbody>	
-        </table>	
+        </table>
+         <div class="float-right " hidden="true">
+        	 <div id="searchInfo" style="display:inline-block;margin-top:23px;vertical-align:top">
+        	 	 	共...条记录
+        	 </div>
+        	<div id="pagination" style="display:inline-block"></div>
+        	<div style="display:inline-block;margin-top:20px;vertical-align:top">
+        	 	<input type="text" size="1" id="page" name="page" >
+        	 	<button type="submit" id="getPage">go!</button>
+        	</div>
+        	<div style="display:inline-block;margin-top:23px;vertical-align:top">
+        		<label class="control-label font-songti"> &nbsp;每页数量：</label>
+        		  <select id="itemsPerPage" name="itemsPerPage">
+					<option value=5>5</option>
+					<option value=10 selected="selected">10</option>
+					<option value=15>15</option>
+					<option value=20>20</option>
+				 </select>	
+        	</div>
+        </div>	
 	</div>	
 	</body>
 </html>
