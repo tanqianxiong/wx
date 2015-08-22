@@ -39,6 +39,7 @@
 						<value>/logout.do</value>
 						<value>/tobind.do</value>
 						<value>/binding.do</value>
+						<value>/checkWeChat.do</value>
 					</list>
 				</property>
   			</bean>

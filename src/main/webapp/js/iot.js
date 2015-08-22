@@ -346,16 +346,16 @@ $(function(){
 			},
 			dataType:"json",
 			success:function(result){
-				var myhandle = $("#myhandle");
-				myhandle.find("p").remove();
-				for(var i=0;i<result.list.length;i++){
-					var p = $("<p/>");
-					welfareName = result.list[i].welfare.name;
-					console.log(name);
-					welfareState = result.list[i].welfareState;
-					console.log(state);
-					p.html(welfareName+'   '+state);
-					p.appendTo(myhandle);
+				if(result.success){
+					var myhandle = $("#myhandle");
+					myhandle.find("p").remove();
+					for(var i=0;i<result.list.length;i++){
+						var p = $("<p/>");
+						welfareName = result.list[i].welfare.name;
+						welfareState = result.list[i].state;
+						p.html(welfareName+'   '+state);
+						p.appendTo(myhandle);
+					}
 				}
 			},
 			error:function(jqXHR){

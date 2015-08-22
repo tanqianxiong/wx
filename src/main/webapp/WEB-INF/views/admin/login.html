@@ -45,9 +45,8 @@
 						dataType: "json",
 						success: function(result){
 							if (result.success) {
-								setTimeout(function(){
-									window.location.href="/wx/admin/book/list.do";
-								},100);
+								window.location.href="/wx/admin/book/list.do";
+								
 							} else {
 								alert("抱歉，信息不匹配，请重新输入");
 							}  

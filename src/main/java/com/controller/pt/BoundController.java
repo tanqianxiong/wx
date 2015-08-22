@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.common.util.JsonUtil;
+import com.common.util.WeChatUtil;
 import com.entity.BoundInfo;
 import com.entity.Employee;
 
@@ -27,7 +28,18 @@ public class BoundController {
 	public BoundInfoService boundInfoService;
 	@Autowired
 	public EmployeeService employeeService;
+
+	/*@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.GET)
+	public void checkWeChat(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		WeChatUtil.check(request, response);
+	}*/
 	
+	/*@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.GET)
+	public void checkWeChat(String code, HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String openId=WeChatUtil.httpGetOpenId(code);
+		String basePath = request.getContextPath();
+		response.sendRedirect(basePath + "/pt/book/list.do?openId="+openId);
+	}*/
 	@RequestMapping(value = {"/binding"}, method = RequestMethod.GET)
 	public ModelAndView showBoundPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/binding");
@@ -41,7 +53,7 @@ public class BoundController {
 	}
 	
 	@RequestMapping(value = "/binding", method = RequestMethod.POST)
-	public void doLogin(String openId,String name,String jobNumber,HttpServletRequest request,HttpServletResponse response) {
+	public void doLogin(String openId,String name,int jobNumber,HttpServletRequest request,HttpServletResponse response) {
 		boolean res=false;
 		Map<String,Object> eProps=new HashMap<String,Object>();
 		eProps.put("username", name);
