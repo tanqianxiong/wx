@@ -160,7 +160,7 @@ function initPagination() {
 }
 //page_index为第几页,第一页为0,jq是分页所在区域的Jquery对象
 function pageselectCallback(page_index, jq){
-	var welfareId = getQueryString("welfareId")
+	var welfareId = getQueryString("welfareId");
 	$.ajax({
 		type : "POST",
 		url : "detail.do",
