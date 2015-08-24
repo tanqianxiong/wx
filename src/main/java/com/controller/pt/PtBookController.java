@@ -1,6 +1,7 @@
 package com.controller.pt;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -162,7 +163,9 @@ public class PtBookController {
 		employee.setPoint(employee.getPoint()+1);
 		this.employeeService.alter(employee);
 		//图书评分进行更新
-		book.setPoints((book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1));
+		DecimalFormat df = new DecimalFormat("######.0");
+		double _point=(book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1);
+		book.setPoints(Double.parseDouble(df.format(_point)));
 		//这一句一定要放在后面
 		book.setCommentNum(book.getCommentNum()+1);
 		//图书借出数相应减一
