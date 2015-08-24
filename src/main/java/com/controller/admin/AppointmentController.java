@@ -81,9 +81,11 @@ public class AppointmentController {
 		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfare", wf, pageIndex*itemsPerPage,itemsPerPage, null);
 		num=this.appointmentService.getCountByWelfareID("welfare", wf);
 		int count=0;//未处理请求数
+		if(list!=null&&!list.isEmpty()){
 		for(int i=0;i<num;i++){
 			if(list.get(i).getState().equals("申请中"))
 				count++;
+		}
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
