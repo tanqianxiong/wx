@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.common.util.JsonUtil;
-import com.common.util.WeChatUtil;
 import com.entity.BoundInfo;
 import com.entity.Employee;
 
