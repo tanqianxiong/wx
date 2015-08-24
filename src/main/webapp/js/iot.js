@@ -316,8 +316,8 @@ $(function(){
 					setTimeout(function(){
 						$("#masker-welfare").fadeOut(200);
 						$(".popup-welfare").fadeOut(200);
-						window.location.href="/wx/pt/service/welfare.do";
-						$(".alreadyHandle").click();
+						window.location.refresh();
+						$(".collapsed").click();
 					},400);
 				}else{
 					alert("信息输入有误或系统错误，请稍后再试");
