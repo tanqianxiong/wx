@@ -58,7 +58,7 @@ public class BoundController {
 		Map<String,Object> eProps=new HashMap<String,Object>();
 		eProps.put("username", name);
 		eProps.put("userNo", jobNumber);
-		List<Employee> epList=this.employeeService.getByProperties(eProps);
+		List<Employee> epList=this.employeeService.getListByProperties(eProps);
 		if(epList!=null && epList.size()>0 && openId!=null){
 			//添加绑定信息
 			BoundInfo boundInfo=new BoundInfo(epList.get(0),openId);

@@ -53,6 +53,11 @@ public class WelfareDaoImp extends HibernateDaoImp<Welfare> implements WelfareDa
 		// TODO Auto-generated method stub
 		return this.doGetCountByProperties(like, null);
 	}
+	@Override
+	public List<Welfare> getListByProperties(Map<String, Object> andProps) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperties(null, andProps);
+	}
 	
 	
 }

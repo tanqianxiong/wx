@@ -24,5 +24,6 @@ public interface WelfareDao extends BaseDao<Welfare>{
 	public List<Welfare> getListByProperties(Map<String, Object> like,
 			int startIndex, int itemsPerPage);
 	public int getCountByLikeProperties(Map<String, Object> like);
+	public List<Welfare> getListByProperties(Map<String, Object> andProps);
 	
 }

@@ -18,4 +18,5 @@ public interface WelfareService {
 	public int getCountByLikeProperties(Map<String, Object> like);
 	public List<Welfare> getPagination(int i, int itemsPerPage);
 	public int getCountByProperties(Map<String, Object> like);
+	public List<Welfare> getListByProperties(Map<String, Object> andProps);
 }

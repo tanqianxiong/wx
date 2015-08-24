@@ -68,6 +68,12 @@ public class EmployeeServiceImp implements EmployeeService{
 		return this.employeeDao.getCount();
 	}
 
+	@Override
+	public List<Employee> getListByProperties(Map<String, Object> andProps) {
+		// TODO Auto-generated method stub
+		return this.employeeDao.getListByProperties(andProps);
+	}
+
 
 }
 

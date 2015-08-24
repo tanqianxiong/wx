@@ -37,7 +37,7 @@ public class BorrowDaoImp extends HibernateDaoImp<Borrow> implements BorrowDao{
 	@Override
 	public List<Borrow> getListByEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		return this.doGetListByProperty("employee", employee, null);
+		return this.doGetListByProperty("employee", employee);
 	}
 
 
@@ -47,7 +47,15 @@ public class BorrowDaoImp extends HibernateDaoImp<Borrow> implements BorrowDao{
 		Map<String,Object> param=new HashMap<String,Object>();
 		param.put("employee", employee);
 		param.put("book", book);
-		return this.doGetByProperties(param, null);
+		Map<String,String> orderProps=new HashMap<String,String>();
+		orderProps.put("returnTime", "asc");
+		List<Borrow> list=this.doGetListByProperties(null, param, 0, 0, orderProps);
+		if(list==null || list.isEmpty()){
+			return null;
+		}
+		else{
+			return list.get(0);
+		}
 	}
 
 	@Override

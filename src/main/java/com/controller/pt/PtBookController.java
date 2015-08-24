@@ -157,7 +157,7 @@ public class PtBookController {
 		this.borrowService.update(br);
 		//更新员工的得分
 		employee.setPoint(employee.getPoint()+1);
-		this.employeeService.alter(employee);
+		this.employeeService.update(employee);
 		//图书评分进行更新
 		DecimalFormat df = new DecimalFormat("######.0");
 		double _point=(book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1);

@@ -64,5 +64,10 @@ public class WelfareServiceImp implements WelfareService{
 		// TODO Auto-generated method stub
 		return this.getCountByLikeProperties(like);
 	}
+	@Override
+	public List<Welfare> getListByProperties(Map<String, Object> andProps) {
+		// TODO Auto-generated method stub
+		return this.welfareDao.getListByProperties(andProps);
+	}
 
 }

@@ -30,5 +30,6 @@ public interface EmployeeService {
 	public int getCountByProperties(Map<String, Object> like);
 	public List<Employee> getListByProperties(int startIndex, int itemsPerpage, Map<String, String> orderMap);
 	public int getCount();
+	public List<Employee> getListByProperties(Map<String, Object> andProps);
 	
 }

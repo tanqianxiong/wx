@@ -44,7 +44,13 @@ public class BoundInfoDaoImp extends HibernateDaoImp<BoundInfo> implements Bound
 	@Override
 	public BoundInfo getByProperties(Map<String, Object> props) {
 		// TODO Auto-generated method stub
-		return this.doGetByProperties(props, null);
+		List<BoundInfo> list=this.doGetListByProperties(null, props);
+		if(list==null || list.isEmpty()){
+			return null;
+		}
+		else{
+			return list.get(0);
+		}
 	}
 
 }

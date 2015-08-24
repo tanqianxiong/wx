@@ -61,4 +61,10 @@ public class AppointmentServiceImp implements AppointmentService {
 		return this.appointmentDao.getCountByProperty(propKey,propValue);
 	}
 
+	@Override
+	public List<Appointment> getListByProperty(String propKey, Object propValue) {
+		// TODO Auto-generated method stub
+		return this.appointmentDao.getListByProperty(propKey, propValue);
+	}
+
 }

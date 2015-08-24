@@ -28,5 +28,6 @@ public interface AppointmentDao extends BaseDao<Appointment> {
 	public List<Appointment> getListByProperties(Map<String, Object> andProps, int startIndex, int itemsPerPage,
 			Map<String, String> orderMap);
 	public int getCountByProperty(String propKey, Object propValue);
+	public List<Appointment> getListByProperty(String propKey, Object propValue);
 	
 }

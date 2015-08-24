@@ -53,9 +53,9 @@ public class ServiceController {
 	public void getWelfareData(HttpServletResponse response) throws IOException {
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<Welfare> list=new ArrayList<Welfare>();
-		Map<String,Object> prop=new HashMap<String,Object>();
-		prop.put("state", "启用");
-		list=this.welfareService.getListByProperty(prop);
+		Map<String,Object> andProps=new HashMap<String,Object>();
+		andProps.put("state", "启用");
+		list=this.welfareService.getListByProperties(andProps);
 		map.put("success", true);
 		map.put("list", list);
 		JsonUtil.writeCommonJson(response, map);

@@ -53,5 +53,11 @@ public class AppointmentDaoImp extends HibernateDaoImp<Appointment> implements A
 		return this.doGetCountByProperty(propKey, propValue);
 	}
 
+	@Override
+	public List<Appointment> getListByProperty(String propKey, Object propValue) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperty(propKey, propValue);
+	}
+
 
 }
