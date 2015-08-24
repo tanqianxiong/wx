@@ -11,9 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,12 +21,10 @@ import com.entity.Book;
 import com.entity.Borrow;
 import com.entity.BoundInfo;
 import com.entity.Employee;
-import com.entity.User;
 import com.service.BookService;
 import com.service.BorrowService;
 import com.service.BoundInfoService;
 import com.service.EmployeeService;
-import com.service.UserService;
 import com.common.util.JsonUtil;
 
 @Controller
@@ -83,7 +79,7 @@ public class PtBookController {
 				this.borrowService.add(br);
 				//图书借出数量相应加一
 				book.setBorrowed(book.getBorrowed()+1);
-				this.bookService.alter(book);
+				this.bookService.update(book);
 				res=true;
 			}
 		}
@@ -103,7 +99,7 @@ public class PtBookController {
 			like.put("bookName", "%"+keyword+"%");
 			like.put("author", "%"+keyword+"%");
 			like.put("publisher", "%"+keyword+"%");
-			list=this.bookService.getLikeProperty(like);
+			list=this.bookService.getListByLikeProperties(like);
 		}
 		else{
 			list=this.bookService.getAll();
@@ -170,7 +166,7 @@ public class PtBookController {
 		book.setCommentNum(book.getCommentNum()+1);
 		//图书借出数相应减一
 		book.setBorrowed(book.getBorrowed()-1);
-		this.bookService.alter(book);
+		this.bookService.update(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		try {
@@ -197,9 +193,7 @@ public class PtBookController {
 	public void getCategoryList(String selectedCategory,HttpServletRequest request,HttpServletResponse response) {
 		List<Book> list=new ArrayList<Book>();
 		if(selectedCategory!=null && !selectedCategory.isEmpty()){
-			Map<String,Object> prop=new HashMap<String,Object>();
-			prop.put("type", selectedCategory);
-			list=this.bookService.getListByProperty(prop);
+			list=this.bookService.getListByProperty("type", selectedCategory);
 		}
 		else{
 			list=this.bookService.getAll();

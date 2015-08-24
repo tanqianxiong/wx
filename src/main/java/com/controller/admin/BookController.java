@@ -58,27 +58,22 @@ public class BookController {
 			if(bookType!=null && !bookType.isEmpty()){
 				Map<String,Object> and=new HashMap<String,Object>();
 				and.put("type", bookType);
-				list=this.bookService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage,orderMap);
-				count=this.bookService.getCountByLikeProperty(like, and);
+				list=this.bookService.getListByProperties(like, and,pageIndex*itemsPerPage,itemsPerPage,orderMap);
+				count=this.bookService.getCountByProperties(like, and);
 			}
 			else{
-				list=this.bookService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
-				count=this.bookService.getCountByLikeProperty(like, null);
+				list=this.bookService.getListByProperties(like, null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
+				count=this.bookService.getCountByProperties(like, null);
 			}
 		}
 		else{
-			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage,orderMap);
+			list=this.bookService.getListByProperties(pageIndex*itemsPerPage,itemsPerPage,orderMap);
 			count=this.bookService.getCount();
 		}
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
 		JsonUtil.writeCommonJson(response, map);
-	}
-
-	public ModelAndView list(HttpServletRequest request) {
-		List<Book> list=this.bookService.getAll();
-		return null;
 	}
 	
 	//增加
@@ -146,7 +141,7 @@ public class BookController {
 		book.setBorrowed(borrowed);
 		book.setCommentNum(commentNum);
 		book.setBookState(bookState);
-		this.bookService.alter(book);
+		this.bookService.update(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		JsonUtil.writeCommonJson(response, map);

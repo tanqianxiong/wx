@@ -16,11 +16,7 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 		// TODO Auto-generated method stub
 		return this.doGetAll(null);
 	}
-	@Override
-	public List<Book> getPagination(int start, int count,Map<String,String> orderProps) {
-		// TODO Auto-generated method stub
-		return this.doGetAll(start,count,orderProps);
-	}
+	
 	@Override
 	public int getCount(){
 		return this.doGetCount();
@@ -29,11 +25,7 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 	public void add(Book book){
 		this.doInsert(book);
 	}
-	@Override
-	public List<Book> getListByLikeProperties(Map<String,Object> map){
-		
-		return this.doGetListByLikeProperties(map);
-	}
+	
 	@Override
 	public void delete(String id){
 		this.doDeleteById(id);
@@ -43,29 +35,39 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 		return this.doGetById(id);
 	}
 	@Override
-	public void alter(Book book){
+	public void update(Book book){
 		this.doUpdate(book);
 	}
+
 	@Override
-	public List<Book> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+	public List<Book> getListByProperty(String propKey, Object propValue) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(map, map2);
+		return this.doGetListByProperty(propKey, propValue);
 	}
+
 	@Override
-	public List<Book> getListByProperty(Map<String, Object> prop) {
+	public List<Book> getListByProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int startIndex,
+			int itemsPerpage, Map<String, String> orderProps) {
 		// TODO Auto-generated method stub
-		return this.doGetListByProperties(prop, null);
+		return this.doGetListByProperties(likeProps, andProps, startIndex, itemsPerpage, orderProps);
 	}
+
 	@Override
-	public List<Book> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage,Map<String,String> orderMap) {
+	public int getCountByProperties(Map<String, Object> likeProps, Map<String, Object> andProps) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(like, and, i, itemsPerPage,orderMap);
+		return this.doGetCountByProperties(likeProps, andProps);
 	}
+
 	@Override
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+	public List<Book> getListByProperties(int startIndex, int itemsPerpage, Map<String, String> orderProps) {
 		// TODO Auto-generated method stub
-		return this.doGetCountByLikeProperty(like, and);
+		return this.doGetListByProperties(null, null, startIndex, itemsPerpage, orderProps);
+	}
+
+	@Override
+	public List<Book> getListByLikeProperties(Map<String, Object> likeProps) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperties(likeProps);
 	}
 	
 }
