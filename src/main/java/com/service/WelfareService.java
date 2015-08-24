@@ -8,16 +8,14 @@ import com.entity.Welfare;
 
 public interface WelfareService {
 	public List<Welfare> getAll();
-	public List<Welfare> getPagination(int start, int count);
 	public int getCount();
 	public void add(Welfare welfare);
 	public void delete(String id);
-	public void alter(Welfare welfare);
 	public Welfare get(String id);
-	List<Welfare> getLikeProperty(Map<String, Object> map);
-	public List<Welfare> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
-	public List<Welfare> getListByProperty(Map<String, Object> prop);
-	public List<Welfare> getPaginationByLikeProperty(Map<String, Object> like,
-			Map<String, Object> and, int i, int itemsPerPage);
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and);
+	public void update(Welfare welfare);
+	public List<Welfare> getListByProperties(Map<String, Object> like, int startIndex,
+			int itemsPerPage);
+	public int getCountByLikeProperties(Map<String, Object> like);
+	public List<Welfare> getPagination(int i, int itemsPerPage);
+	public int getCountByProperties(Map<String, Object> like);
 }
