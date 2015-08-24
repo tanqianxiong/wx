@@ -64,7 +64,7 @@ $(function(){
 					$("<span class='btn btn-lg btn-success btn-block'>绑定成功！<br/>现在开始借阅吧~</span>").appendTo("#bindcontainer");
 					setTimeout(function(){
 						window.location.href="/wx/pt/book/index.do?openId="+openId;
-					},500);
+					},800);
 				} else {
 					alert("对不起，信息不匹配，请重输");
 				}  
@@ -320,7 +320,7 @@ $(function(){
 						$("input:checked").attr("checked",false);
 						$(".alreadyHandle").click();
 						$("#collapseTwo").addClass("in");
-					},500);
+					},1000);
 				}else{
 					alert("信息输入有误,请重输");
 				}
