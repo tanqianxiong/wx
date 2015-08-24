@@ -45,9 +45,9 @@
 		<property name="password" value="${jdbc.password}" />
 
 		<!-- 连接池配置 -->
-		<property name="houseKeepingSleepTime" value="90000" />
+		<property name="houseKeepingSleepTime" value="30000" />
 		<property name="prototypeCount" value="5" />
-		<property name="maximumConnectionCount" value="50" />
+		<property name="maximumConnectionCount" value="100" />
 		<property name="minimumConnectionCount" value="2" />
 		<property name="trace" value="true" />
 		<property name="verbose" value="true" />

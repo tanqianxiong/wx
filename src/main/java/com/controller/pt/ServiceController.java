@@ -62,19 +62,17 @@ public class ServiceController {
 	}
 
 	@RequestMapping(value = {"/handle"}, method = RequestMethod.POST)
-	public void doWelfareHandle(String openId,String welfareIds,String jobNumber,String username,HttpServletResponse response) throws IOException {
+	public void doWelfareHandle(String openId,String welfareIds,int jobNumber,String username,HttpServletResponse response) throws IOException {
 		Boolean res = false;		
 		String[] welIds =  welfareIds.split(",");		
 		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 		Employee em=bi.getEmployee();
 		//String user_id = em.getId();
-		if(em.getUsername().equals(username) && em.getUserNo().equals(jobNumber) ){
+		if(em.getUsername().equals(username) && em.getUserNo()==jobNumber ){
 			for(int i=0;i<welIds.length;i++){
 				Appointment ap = new Appointment();			
 				Welfare wel = this.welfareService.get(welIds[i]);
 				List<Appointment> li = this.appointmentService.getListByProperty("employee",em);
-				
-				
 				if(li!=null && !li.isEmpty()){
 					int j=0;
 					for(int k=0;k<li.size();k++){
@@ -89,14 +87,14 @@ public class ServiceController {
 						ap.setWelfare(wel);
 						ap.setEmployee(em);
 						ap.setApplyTime(new Date());
-						ap.setState("审核中");
+						ap.setState("申请中");
 						this.appointmentService.add(ap);	
 					}
 				}else{
 					ap.setWelfare(wel);
 					ap.setEmployee(em);
 					ap.setApplyTime(new Date());
-					ap.setState("审核中");
+					ap.setState("申请中");
 					this.appointmentService.add(ap);					
 				}
 			}
