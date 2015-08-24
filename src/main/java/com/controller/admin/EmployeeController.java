@@ -38,20 +38,33 @@ public class EmployeeController {
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Employee> list=new ArrayList<Employee>();
+		Map<String,String> orderMap = new HashMap<String,String>();
 		String keyword=request.getParameter("keyword");
+		String orderProp =request.getParameter("orderProp");
+		if(orderProp!=null && !orderProp.isEmpty()){
+			if(orderProp.equals("point")){
+				orderMap.put(orderProp, "desc");
+			}
+			else{
+				orderMap.put(orderProp, "asc");
+			}
+		}
+		else {
+			orderMap.put("userNo", "asc");
+		}
 		if(keyword!=null && !keyword.isEmpty()){
 			Map<String,Object> like=new HashMap<String,Object>();
 			like.put("username", "%"+keyword+"%");
 			like.put("position", "%"+keyword+"%");
 			like.put("userNo", "%"+keyword+"%");
 			//list=this.employeeService.getByLikeProperties(like);
-			list=this.employeeService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
-			count=this.employeeService.getCountByLikeProperty(like, null);
+			list=this.employeeService.getListByProperties(like,pageIndex*itemsPerPage,itemsPerPage,orderMap);
+			count=this.employeeService.getCountByProperties(like);
 			
 		}
 		else{
 			//list=this.employeeService.getAll();
-			list=this.employeeService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			list=this.employeeService.getListByProperties(pageIndex*itemsPerPage,itemsPerPage,orderMap);
 			count=this.employeeService.getCount();
 		}
 		map.put("success", true);
@@ -103,7 +116,7 @@ public class EmployeeController {
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void update(HttpServletResponse response,Employee employee) throws IOException{
-		this.employeeService.alter(employee);
+		this.employeeService.update(employee);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		JsonUtil.writeCommonJson(response, map);
@@ -128,26 +141,5 @@ public class EmployeeController {
 			return mv;
 		}
 		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

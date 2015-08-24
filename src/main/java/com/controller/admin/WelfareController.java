@@ -34,26 +34,20 @@ public class WelfareController {
 	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
+		Map<String,Object> like=new HashMap<String,Object>();
 		List<Welfare> list=new ArrayList<Welfare>();
 		String keyword=request.getParameter("keyword");
-		String welfareType=request.getParameter("welfareType");
+		like.put("name", "%"+keyword+"%");
+		
 		if(keyword!=null && !keyword.isEmpty()){
-			Map<String,Object> like=new HashMap<String,Object>();
-			like.put("name", "%"+keyword+"%");
-			if(welfareType!=null && !welfareType.isEmpty()){
-				Map<String,Object> and=new HashMap<String,Object>();
-				and.put("type", welfareType);
-				list=this.welfareService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage);
-				count=this.welfareService.getCountByLikeProperty(like, and);
-			}
-			else{
-				list=this.welfareService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
-				count=this.welfareService.getCountByLikeProperty(like, null);
-			    }   
+			
+			list=this.welfareService.getListByProperties(like,pageIndex*itemsPerPage,itemsPerPage);
+			count=this.welfareService.getCountByLikeProperties(like);
+		   
 		}
 			else{
-				list=this.welfareService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
-				count=this.welfareService.getCount();
+				list=this.welfareService.getListByProperties(like,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.welfareService.getCountByProperties(like);
 			}
 		
 		map.put("success", true);
@@ -112,7 +106,7 @@ public class WelfareController {
 		else{
 			welfare.setState("停用");
 		}
-		this.welfareService.alter(welfare);
+		this.welfareService.update(welfare);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		JsonUtil.writeCommonJson(response, map);
@@ -121,7 +115,7 @@ public class WelfareController {
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void update(HttpServletResponse response,Welfare welfare) throws IOException{
-		this.welfareService.alter(welfare);
+		this.welfareService.update(welfare);
 		welfare.setState("停用");
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
