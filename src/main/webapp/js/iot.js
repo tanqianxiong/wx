@@ -30,16 +30,6 @@ function getQueryString(name) {
 
 
 $(function(){
-
-	/*
-	if (getCookie("username")==""){
-		if(window.location.href == "http://localhost:8080/wx/pt/tobind.do"||window.location.href == "http://localhost:8080/wx/pt/binding.do"){
-
-		}else{
-			window.location.href="/wx/pt/tobind.do";
-		}
-	}*/
-	
 //用户绑定模块
 	//binding 页面 点击绑定按钮后，向服务器发送ajax，
 	//服务器判断信息是否存在，若存在，则将cookie写入，同时服务器端做数据库的更新
@@ -324,8 +314,10 @@ $(function(){
 					$("#masker-welfare").fadeIn(200);
 					$(".popup-welfare").fadeIn(200);
 					setTimeout(function(){
-						window.location.href="/wx/pt/book/index.do?openId="+openId;
-					},1000);
+						$("#masker-welfare").fadeOut(200);
+						$(".popup-welfare").fadeOut(200);
+						$(".alreadyHandle").click();
+					},400);
 				}else{
 					alert("信息输入有误或系统错误，请稍后再试");
 				}
@@ -353,7 +345,7 @@ $(function(){
 						var p = $("<p/>");
 						welfareName = result.list[i].welfare.name;
 						welfareState = result.list[i].state;
-						p.html(welfareName+'   '+state);
+						p.html(welfareName + '<span style="float:right;margin-right:20px;">'+ welfareState +'</span>');
 						p.appendTo(myhandle);
 					}
 				}
