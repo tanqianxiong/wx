@@ -11,50 +11,37 @@ import com.common.db.HibernateDaoImp;
 @Repository("policyDao")
 public class PolicyDaoImp extends HibernateDaoImp<Policy> implements PolicyDao{
 
-	@Override
-	public List<Policy> getAll() {
-		// TODO Auto-generated method stub
-		return this.doGetAll(null);
-	}
+	
 	@Override
 	public void add(Policy policy){
 		this.doInsert(policy);
 	}
-	@Override
-	public List<Policy> getPagination(int start, int count) {
-		// TODO Auto-generated method stub
-		return this.doGetListByPage(null,start,count,null);
-	}
+	
 	@Override
 	public int getCount(){
 		return this.doGetCount();
 	}
+	
+	
 	@Override
-	public List<Policy> getLikeProperties(Map<String,Object> map){
-		
-		return this.doGetListByLikeProperties(map);
-	}
-	@Override
-	public List<Policy> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+	public List<Policy> getListByProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int startIndex,
+			int itemsPerpage) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(map, map2);
+		return this.doGetListByProperties(likeProps, andProps, startIndex, itemsPerpage, null);
 	}
 	@Override
-	public List<Policy> getListByProperty(Map<String, Object> prop) {
+	public int getCountByProperties(Map<String, Object> like, Map<String, Object> and) {
 		// TODO Auto-generated method stub
-		return this.doGetListByProperties(prop, null);
+		return this.doGetCountByProperties(like, and);
 	}
 	@Override
-	public List<Policy> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage) {
+	public List<Policy> getListByProperties(int startIndex, int itemsPerpage) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(like, and, i, itemsPerPage);
+		return this.doGetListByProperties(null, null, startIndex, itemsPerpage,null);
 	}
-	@Override
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
-		// TODO Auto-generated method stub
-		return this.doGetCountByLikeProperty(like, and);
-	}
+
+	
+	
 	@Override
 	public void delete(String id){
 		this.doDeleteById(id);

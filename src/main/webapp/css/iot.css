@@ -3,7 +3,6 @@ body{
 	font-size: 14px;
 	background-color: #ededef;
 }
-
 /*slim�� ���Ҿ�����Ļ20����*/
 .slim{
 	margin-left:20px;
@@ -85,7 +84,6 @@ img{
 .hide_td{
 	display:none;
 }
-
 #borrow,#escheat-yes,#escheat-no{
 	background-color: #5cb85c;
 	color: #eee;
@@ -207,10 +205,7 @@ img{
 	font-size:2rem;
 	text-align:center;
 }
-
-
 /*福利办理页面*/
-
 .checkbox{
 	font-size: 1.6rem;
 }
@@ -251,3 +246,22 @@ img{
 	background-color: rgba(0,0,0,.6);
 	display: none;
 }
+.az{
+	position:relative;
+}
+.az:before{
+	content:'';
+	position:absolute;
+	right:5%;
+	top:4px;
+	width:0;
+	height:0;
+	border-top:8px solid #666;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent;
+}
+
+
+
+
+
