@@ -41,59 +41,17 @@ public class AppointmentDaoImp extends HibernateDaoImp<Appointment> implements A
 	}
 
 	@Override
-	public List<Appointment> getListByLikeProperties(Map<String, Object> map) {
+	public List<Appointment> getListByProperties(Map<String, Object> andProps, int startIndex, int itemsPerpage,
+			Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(map);
+		return this.doGetListByProperties(null, andProps, startIndex, itemsPerpage, orderMap);
 	}
 
 	@Override
-	public List<Appointment> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+	public int getCountByProperty(String propKey, Object propValue) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(map, map2);
+		return this.doGetCountByProperty(propKey, propValue);
 	}
 
-	@Override
-	public int getNumByWelfare(Welfare welfare) {
-		// TODO Auto-generated method stub
-		return this.doGetCountByProperty("welfare", welfare);
-	}
 
-	@Override
-	public List<Appointment> getListByWelfare(Welfare wf) {
-		// TODO Auto-generated method stub
-		return this.doGetListByProperty("welfare", wf, null);
-	}
-	
-	
-	@Override
-	public List<Appointment> getListByProperty(String propertyName, Object propertyValue){
-		// TODO Auto-generated method stub
-		return this.doGetListByProperty(propertyName, propertyValue,null);
-	}
-
-	@Override
-	public List<Appointment> getPagination(int start, int count) {
-		// TODO Auto-generated method stub
-		return this.doGetListByPage(null,start,count,null);
-	}
-
-	@Override
-	public int getCount() {
-		return this.doGetCount();
-	}
-
-	@Override
-	public	List<Appointment> getEntityListByWelfareID(String welfareID, Object propertyValue, int start, int count, Map<String, String> orderProps){	
-		return this.doGetEntityListByProperty(welfareID, propertyValue, start, count, orderProps);
-	}
-
-	@Override
-	public int getCountByWelfareID(String welfareID,Object value) {
-		return this.doGetCountByProperty(welfareID,value);
-	}
-	
-	
-	
-	
-	
 }
