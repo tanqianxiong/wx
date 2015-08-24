@@ -43,11 +43,10 @@ public class EmployeeServiceImp implements EmployeeService{
 	}
 
 	@Override
-	public List<Employee> getListByProperties(Map<String, Object> like,
+	public List<Employee> getListByProperties(Map<String, Object> like,Map<String, Object> and,
 			int startIndex, int itemsPerPage, Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.employeeDao.getListByProperties(like,
-				startIndex, itemsPerPage, orderMap);
+		return this.employeeDao.getListByProperties(like,and,startIndex, itemsPerPage, orderMap);
 	}
 
 	@Override

@@ -43,10 +43,9 @@ public class EmployeeDaoImp extends HibernateDaoImp<Employee> implements Employe
 	}
 
 	@Override
-	public List<Employee> getListByProperties(Map<String, Object> like,
-			int startIndex, int itemsPerpage, Map<String, String> orderMap) {
+	public List<Employee> getListByProperties(Map<String, Object> like,Map<String, Object> and,int startIndex, int itemsPerpage, Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.doGetListByProperties(like, null, startIndex, itemsPerpage, orderMap);
+		return this.doGetListByProperties(like, and, startIndex, itemsPerpage, orderMap);
 	}
 
 	@Override

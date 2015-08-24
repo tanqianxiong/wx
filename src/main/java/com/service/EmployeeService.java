@@ -25,7 +25,7 @@ public interface EmployeeService {
 	public void delete(String id);
 	public void update(Employee employee);
 	public Employee getById(String id);
-	public List<Employee> getListByProperties(Map<String, Object> like, int startIndex,
+	public List<Employee> getListByProperties(Map<String, Object> like, Map<String, Object> and ,int startIndex,
 			int itemsPerPage, Map<String, String> orderMap);
 	public int getCountByProperties(Map<String, Object> like);
 	public List<Employee> getListByProperties(int startIndex, int itemsPerpage, Map<String, String> orderMap);

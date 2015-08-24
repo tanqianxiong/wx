@@ -24,7 +24,7 @@ public interface EmployeeDao extends BaseDao<Employee>{
 	public void delete(String id);
 	public Employee getById(String id);
 	public void update(Employee employee);
-	public List<Employee> getListByProperties(Map<String, Object> like,
+	public List<Employee> getListByProperties(Map<String, Object> like,Map<String, Object> and,
 			int startIndex, int itemsPerPage, Map<String, String> orderMap);
 	public int getCountByProperties(Map<String, Object> like);
 	public List<Employee> getListByProperties(int startIndex, int itemsPerpage,
