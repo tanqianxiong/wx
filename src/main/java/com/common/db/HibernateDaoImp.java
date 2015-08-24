@@ -17,7 +17,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
+import com.common.util.GBKOrder;
 
 public class HibernateDaoImp<T> extends HibernateDaoSupport {
 
@@ -242,9 +242,9 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 		if(orderProps!=null && !orderProps.isEmpty()){
 			for (String key : orderProps.keySet()) {
 				if(orderProps.get(key).equals("desc")){
-					criteria.addOrder(Order.desc(key));
+					criteria.addOrder(GBKOrder.desc(key));
 				}else{
-					criteria.addOrder(Order.asc(key));
+					criteria.addOrder(GBKOrder.asc(key));
 				}				
 			}	
 		}

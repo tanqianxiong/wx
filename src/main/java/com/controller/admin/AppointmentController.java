@@ -47,7 +47,7 @@ public class AppointmentController {
 			r.put("name", welfareList.get(i).getName());
 			r.put("welfareId", welfareList.get(i).getId());
 			int num=0;
-			num=this.appointmentService.getNumByWelfare(welfareList.get(i));
+			num=this.appointmentService.getCountByProperty("welfare",welfareList.get(i));
 			count+=num;
 			r.put("number", num);
 			list.add(r);
@@ -75,17 +75,32 @@ public class AppointmentController {
 	
 	//详情
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response) throws IOException{
+	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response,HttpServletRequest request) throws IOException{
 		int num=0;		
-		Welfare wf=this.welfareService.get(welfareId);		
-		List<Appointment> list=this.appointmentService.getEntityListByWelfareID("welfare", wf, pageIndex*itemsPerPage,itemsPerPage, null);
-		num=this.appointmentService.getCountByWelfareID("welfare", wf);
+		Welfare wf=this.welfareService.get(welfareId);
+		Map<String,Object> andProps=new HashMap<String,Object>();
+		Map<String,String> orderMap = new HashMap<String,String>();
+		andProps.put("welfare", wf);
+		String orderProp =request.getParameter("orderProp");
+		if(orderProp!=null && !orderProp.isEmpty()){
+			if(orderProp.equals("applyTime")){
+				orderMap.put(orderProp, "desc");
+			}
+			else{
+				orderMap.put(orderProp, "asc");
+			}
+		}
+		else {
+			orderMap.put("applyTime", "desc");
+		}
+		List<Appointment> list=this.appointmentService.getListByProperties(andProps, pageIndex*itemsPerPage,itemsPerPage,orderMap);
+		num=this.appointmentService.getCountByProperty("welfare",wf);
 		int count=0;//未处理请求数
 		if(list!=null&&!list.isEmpty()){
-		for(int i=0;i<num;i++){
-			if(list.get(i).getState().equals("申请中"))
-				count++;
-		}
+			for(int i=0;i<num;i++){
+				if(list.get(i).getState().equals("申请中"))
+					count++;
+			}
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);

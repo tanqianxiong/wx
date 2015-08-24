@@ -8,6 +8,14 @@ import java.util.Map;
 
 
 
+
+
+
+
+
+
+
+
 //import com.entity.Book;
 import com.entity.Employee;
 
@@ -15,13 +23,13 @@ public interface EmployeeService {
 	public List<Employee> getAll();
 	public void add(Employee employee);
 	public void delete(String id);
-	public void alter(Employee employee);
-	public List<Employee> getByProperties(Map<String,Object> props);
+	public void update(Employee employee);
 	public Employee getById(String id);
-	public List<Employee> getByLikeProperties(Map<String, Object> like);
-	
-	public List<Employee> getPagination(int start, int count);
+	public List<Employee> getListByProperties(Map<String, Object> like, int startIndex,
+			int itemsPerPage, Map<String, String> orderMap);
+	public int getCountByProperties(Map<String, Object> like);
+	public List<Employee> getListByProperties(int startIndex, int itemsPerpage, Map<String, String> orderMap);
 	public int getCount();
-	List<Employee> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i, int itemsPerPage);
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and);
+	public List<Employee> getListByProperties(Map<String, Object> andProps);
+	
 }

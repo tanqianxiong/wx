@@ -49,54 +49,22 @@ public class AppointmentServiceImp implements AppointmentService {
 	}
 
 	@Override
-	public List<Appointment> getLikeProperty(Map<String, Object> map) {
+	public List<Appointment> getListByProperties(Map<String, Object> andProps, int startIndex, int itemsPerPage,
+			Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.appointmentDao.getListByProperties(andProps, startIndex, itemsPerPage,orderMap);
 	}
 
 	@Override
-	public List<Appointment> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
-		return this.appointmentDao.getLikeProperty(map, map2);
+	public int getCountByProperty(String propKey, Object propValue) {
+		// TODO Auto-generated method stub
+		return this.appointmentDao.getCountByProperty(propKey,propValue);
 	}
 
 	@Override
-	public int getNumByWelfare(Welfare welfare) {
-		return this.appointmentDao.getNumByWelfare(welfare);
-	}
-
-	@Override
-	public List<Appointment> getListByWelfare(Welfare wf) {
+	public List<Appointment> getListByProperty(String propKey, Object propValue) {
 		// TODO Auto-generated method stub
-		return this.appointmentDao.getListByWelfare(wf);
-	}
-	
-	@Override
-	public List<Appointment> getListByProperty(String propertyName, Object propertyValue){
-		// TODO Auto-generated method stub
-		return this.appointmentDao.getListByProperty(propertyName, propertyValue);
-	}
-
-	@Override
-	public List<Appointment> getPagination(int start, int count) {
-		// TODO Auto-generated method stub
-		return appointmentDao.getPagination(start, count);
-	}
-
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return appointmentDao.getCount();
-	}
-
-	@Override
-	public	List<Appointment> getEntityListByWelfareID(String welfareID, Object propertyValue, int start, int count, Map<String, String> orderProps){	
-		return this.appointmentDao.getEntityListByWelfareID(welfareID, propertyValue, start, count, orderProps);
-	}
-	
-	@Override
-	public int getCountByWelfareID(String welfareID,Object value) {
-		// TODO Auto-generated method stub
-		return this.appointmentDao.getCountByWelfareID(welfareID,value);
+		return this.appointmentDao.getListByProperty(propKey, propValue);
 	}
 
 }

@@ -24,17 +24,6 @@ public class EmployeeDaoImp extends HibernateDaoImp<Employee> implements Employe
 		this.doInsert(employee);
 	}
 
-	
-
-	@Override
-	public List<Employee> getListByLikeProperties(Map<String,Object> props){
-		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(props);
-	}
-
-	
-	
-
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
@@ -42,45 +31,47 @@ public class EmployeeDaoImp extends HibernateDaoImp<Employee> implements Employe
 	}
 
 	@Override
-	public void alter(Employee employee) {
-		// TODO Auto-generated method stub
-		this.doUpdate(employee);
-	}
-	@Override
 	public Employee getById(String id){
 		return this.doGetById(id);
 	}
 
 	@Override
-	public List<Employee> getByProperties(Map<String, Object> props) {
+	public void update(Employee employee) {
 		// TODO Auto-generated method stub
-		return this.doGetListByProperties(props, null);
+		this.doUpdate(employee);
+		
 	}
 
 	@Override
-	public List<Employee> getPagination(int start, int count) {
+	public List<Employee> getListByProperties(Map<String, Object> like,
+			int startIndex, int itemsPerpage, Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.doGetListByPage(null,start,count,null);
+		return this.doGetListByProperties(like, null, startIndex, itemsPerpage, orderMap);
 	}
+
 	@Override
-	public int getCount(){
+	public int getCountByProperties(Map<String, Object> like) {
+		// TODO Auto-generated method stub
+		return this.doGetCountByProperties(like, null);
+	}
+
+	@Override
+	public List<Employee> getListByProperties(int startIndex, int itemsPerpage,
+			Map<String, String> orderMap) {
+		// TODO Auto-generated method stub
+		return this.doGetListByProperties(null, null, startIndex, itemsPerpage, orderMap);
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
 		return this.doGetCount();
 	}
+
 	@Override
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+	public List<Employee> getListByProperties(Map<String, Object> andProps) {
 		// TODO Auto-generated method stub
-		return this.doGetCountByLikeProperty(like, and);
+		return this.doGetListByProperties(null,andProps);
 	}
-	@Override
-	public List<Employee> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage) {
-		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(like, and, i, itemsPerPage);
-	}
-	
+
 }
-
-
-
-
-

@@ -8,16 +8,18 @@ import com.common.db.BaseDao;
 
 public interface PolicyDao extends BaseDao<Policy>{
 
-	List<Policy> getAll();
+	
 	public void add(Policy policy);
-	List<Policy> getLikeProperties(Map<String,Object> map);
 	public void delete(String id);
 	public void alter(Policy policy);
 	public Policy get(String id);
-	public List<Policy> getPagination(int start, int count);
+	
+	public List<Policy> getListByProperties(int start, int count);
+
+	public List<Policy> getListByProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int startIndex,
+			int itemsPerpage);
 	public int getCount();
-	List<Policy> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i, int itemsPerPage);
-	int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and);
-	List<Policy> getLikeProperty(Map<String, Object> map, Map<String, Object> map2);
-	List<Policy> getListByProperty(Map<String, Object> prop);
+	
+	int getCountByProperties(Map<String, Object> like, Map<String, Object> and);
+	
 }

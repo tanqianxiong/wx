@@ -44,13 +44,13 @@ public class PolicyController {
 			like.put("name", "%"+keyword+"%");
 			like.put("content", "%"+keyword+"%");
 		
-				list=this.policyService.getLikeProperty(like);
-				list=this.policyService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
-				count=this.policyService.getCountByLikeProperty(like, null);
+			
+				list=this.policyService.getListByProperties(like, null,pageIndex*itemsPerPage,itemsPerPage);
+				count=this.policyService.getCountByProperties(like, null);
 			
 		}
 		else{
-			list=this.policyService.getPagination(pageIndex*itemsPerPage,itemsPerPage);
+			list=this.policyService.getListByProperties(pageIndex*itemsPerPage,itemsPerPage);
 			count=this.policyService.getCount();
 		}
 		map.put("success", true);
@@ -60,7 +60,7 @@ public class PolicyController {
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
-		List<Policy> list=this.policyService.getAll();
+		//List<Policy> list=this.policyService.getAll();
 		return null;
 	}
 	

@@ -22,11 +22,6 @@ public class WelfareServiceImp implements WelfareService{
 		return welfareDao.getAll();
 	}
 	@Override
-	public List<Welfare> getPagination(int start, int count) {
-		// TODO Auto-generated method stub
-		return welfareDao.getPagination(start,count);
-	}
-	@Override
 	public int getCount(){
 		return welfareDao.getCount();
 	}
@@ -36,10 +31,6 @@ public class WelfareServiceImp implements WelfareService{
 	}
 	
 	@Override
-	public List<Welfare> getLikeProperty(Map<String,Object> map){
-		return welfareDao.getLikeProperties(map);
-	}
-	@Override
 	public void delete(String id){
 		welfareDao.delete(id);
 	}
@@ -48,29 +39,35 @@ public class WelfareServiceImp implements WelfareService{
 		return welfareDao.get(id);
 	}
 	@Override
-	public void alter(Welfare welfare){
-		welfareDao.alter(welfare);
+	public void update(Welfare welfare){
+		welfareDao.update(welfare);
 	}
 	@Override
-	public List<Welfare> getLikeProperty(Map<String, Object> map, Map<String, Object> map2) {
+	public List<Welfare> getListByProperties(Map<String, Object> like,
+			int startIndex, int itemsPerPage) {
 		// TODO Auto-generated method stub
-	    return this.welfareDao.getLikeProperty(map, map2);	
+		return this.welfareDao.getListByProperties(like,
+				startIndex, itemsPerPage);
 	}
 	@Override
-	public List<Welfare> getListByProperty(Map<String, Object> prop) {
+	public int getCountByLikeProperties(Map<String, Object> like) {
 		// TODO Auto-generated method stub
-		return this.welfareDao.getListByProperty(prop);
+		return this.welfareDao.getCountByLikeProperties(like);
 	}
 	@Override
-	public List<Welfare> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage) {
+	public List<Welfare> getPagination(int i, int itemsPerPage) {
 		// TODO Auto-generated method stub
-		return this.welfareDao.getPaginationByLikeProperty(like, and, i, itemsPerPage);
+		return null;
 	}
 	@Override
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+	public int getCountByProperties(Map<String, Object> like) {
 		// TODO Auto-generated method stub
-		return this.welfareDao.getCountByLikeProperty(like, and);
+		return this.getCountByLikeProperties(like);
+	}
+	@Override
+	public List<Welfare> getListByProperties(Map<String, Object> andProps) {
+		// TODO Auto-generated method stub
+		return this.welfareDao.getListByProperties(andProps);
 	}
 
 }
