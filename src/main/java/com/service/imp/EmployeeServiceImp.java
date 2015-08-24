@@ -23,11 +23,6 @@ public class EmployeeServiceImp implements EmployeeService{
 	}
 	
 	@Override
-	public List<Employee> getByProperties(Map<String,Object> props) {
-		// TODO Auto-generated method stub
-		return this.employeeDao.getByProperties(props);
-	}
-	@Override
 	public void add(Employee employee){
 		employeeDao.add(employee);
 		
@@ -37,42 +32,42 @@ public class EmployeeServiceImp implements EmployeeService{
 		employeeDao.delete(id);
 	}
 	@Override
-	public void alter(Employee employee){
-		employeeDao.alter(employee);
-		
-		
-	}
-	@Override
 	public Employee getById(String id){
 		return employeeDao.getById(id);
 	}
 
 	@Override
-	public List<Employee> getByLikeProperties(Map<String, Object> like) {
+	public void update(Employee employee) {
 		// TODO Auto-generated method stub
-		return this.employeeDao.getListByLikeProperties(like);
+		this.employeeDao.update(employee);
 	}
-	
+
 	@Override
-	public List<Employee> getPagination(int start, int count) {
+	public List<Employee> getListByProperties(Map<String, Object> like,
+			int startIndex, int itemsPerPage, Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return employeeDao.getPagination(start,count);
+		return this.employeeDao.getListByProperties(like,
+				startIndex, itemsPerPage, orderMap);
 	}
+
 	@Override
-	public int getCount(){
-		return employeeDao.getCount();
-	}
-	@Override
-	public List<Employee> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage) {
+	public int getCountByProperties(Map<String, Object> like) {
 		// TODO Auto-generated method stub
-		return this.employeeDao.getPaginationByLikeProperty(like, and, i, itemsPerPage);
+		return this.employeeDao.getCountByProperties(like);
 	}
+
 	@Override
-	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
+	public List<Employee> getListByProperties(int startIndex, int itemsPerpage,Map<String, String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.employeeDao.getCountByLikeProperty(like, and);
+		return this.employeeDao.getListByProperties(startIndex, itemsPerpage, orderMap);
 	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return this.employeeDao.getCount();
+	}
+
 
 }
 
