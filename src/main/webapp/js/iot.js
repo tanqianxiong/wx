@@ -18,7 +18,7 @@ function getCookie(cname) {
 }
 //清除cookie
 function clearCookie(name) {  
-    setCookie(name, "", -1);  
+    setCookie(name, "", -1);
 }
 
 //获取url参数的正则函数
