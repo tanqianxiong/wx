@@ -14,27 +14,6 @@
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/iot.js"></script> 
-		
-		<style>
-		    input[type="range"] {
-		        background-color: #ccc;
-		        border-radius: 15px;
-		        width: 80%;
-		        -webkit-appearance: none;
-		        height:10px;
-		        margin:0 auto;
-		    }
-		    input[type="range"]::-webkit-slider-thumb {
-		        -webkit-appearance: none;
-		        cursor: pointer;
-		        height: 25px;
-		        width: 25px;
-		        transform: translateY(-2px);
-		        background-image: url("/wx/img/star.png");
-		        background-size: 25px 25px;
-		        border-radius: 100%;
-		    }	
-		</style>
 	</head>
 
 	<body>
@@ -48,80 +27,68 @@
 					我的借阅记录：
 				</div>
 			</div>
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne">
+			      <h4 class="panel-title az">
+			        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			          待归还书目
+			        </a>
+			      </h4>    
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+			      <div class="panel-body">
 
+					<table class="table table-striped table-hover individual-table borrowing_table"  id="borrowing">
+						<tr>
+							<th>书名</th>
+							<th>作者</th>
+							<th>出版社</th>
+							<th></th>
+						</tr>
+					</table>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingTwo">
+			      <h4 class="panel-title az">
+			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			          已归还书目
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			      <div class="panel-body">
 
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="headingOne">
-				      <h4 class="panel-title az">
-				        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				          待归还书目
-				        </a>
-				      </h4>    
-				    </div>
-				    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-				      <div class="panel-body">
+					<table class="table table-striped table-hover individual-table" id="borrowed">
+						<tr id="borrowed_th">
+							<th>书名</th>
+							<th>作者</th>
+							<th>出版社</th>		
+						</tr>
+					</table>
 
-						<table class="table table-striped table-hover individual-table borrowing_table"  id="borrowing">
-							<tr>
-								<th>书名</th>
-								<th>作者</th>
-								<th>出版社</th>
-								<th></th>
-							</tr>
-						</table>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="headingTwo">
-				      <h4 class="panel-title az">
-				        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				          已归还书目
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-				      <div class="panel-body">
-
-						<table class="table table-striped table-hover individual-table" id="borrowed">
-							<tr id="borrowed_th">
-								<th>书名</th>
-								<th>作者</th>
-								<th>出版社</th>		
-							</tr>
-						</table>
-
-				      </div>
-				    </div>
-				  </div>
-				</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</div>
-
 		<div id="masker-ind"></div>
 		<div id="popup-ind">
 			<br>
 			<b>归还确认</b><hr style="border-bottom:1px solid #999;"/>
-			<div>
-			
-			
+			<div>	
 			    <p>亲，评个分吧：<span style="color:#e00;font-weight:bold" id="showPoint">3分</span></p>
-			    <input type="range" id="trackBar" value="3" />
-			    
-			    
+			    <input type="range" id="trackBar" value="3" />	    
 				<br/>
 				<br/>
 				<span id="escheat-yes" class="btn goodbtn">确定</span>
 				<span id="escheat-no" class="btn goodbtn">再看看</span>
 			</div>	
 		</div>
-		
-		
-		
 		<script>
-			$(function(){
-				
-				
+			$(function(){			
 				//range评分控件的js
 		        var trackBar = document.getElementById("trackBar");
 		        //初始化trackBar
