@@ -62,9 +62,9 @@ public class BookServiceImp implements BookService{
 	}
 	@Override
 	public List<Book> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage) {
+			int itemsPerPage,Map<String,String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.bookDao.getPaginationByLikeProperty(like, and, i, itemsPerPage);
+		return this.bookDao.getPaginationByLikeProperty(like, and, i, itemsPerPage,orderMap);
 	}
 	@Override
 	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {

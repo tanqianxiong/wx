@@ -35,10 +35,21 @@ public class BookController {
 	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
-		Map<String,String> orderProps = new HashMap<String,String>();
+		Map<String,String> orderMap = new HashMap<String,String>();
 		List<Book> list=new ArrayList<Book>();
 		String keyword=request.getParameter("keyword");
 		String bookType=request.getParameter("bookType");
+		String orderProp =request.getParameter("orderProp");
+		if(orderProp!=null && !orderProp.isEmpty()){
+			if(orderProp.equals("publishTime")||orderProp.equals("points")){
+				orderMap.put(orderProp, "desc");
+			}
+			else
+				orderMap.put(orderProp, "asc");
+		}
+		else {
+			orderMap.put("bookInputTime", "desc");
+		}		
 		if(keyword!=null && !keyword.isEmpty()){
 			Map<String,Object> like=new HashMap<String,Object>();
 			like.put("bookName", "%"+keyword+"%");
@@ -47,17 +58,16 @@ public class BookController {
 			if(bookType!=null && !bookType.isEmpty()){
 				Map<String,Object> and=new HashMap<String,Object>();
 				and.put("type", bookType);
-				list=this.bookService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage);
+				list=this.bookService.getPaginationByLikeProperty(like, and,pageIndex*itemsPerPage,itemsPerPage,orderMap);
 				count=this.bookService.getCountByLikeProperty(like, and);
 			}
 			else{
-				list=this.bookService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage);
+				list=this.bookService.getPaginationByLikeProperty(like, null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
 				count=this.bookService.getCountByLikeProperty(like, null);
 			}
 		}
 		else{
-			orderProps.put("bookInputTime", "desc");
-			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage,orderProps);
+			list=this.bookService.getPagination(pageIndex*itemsPerPage,itemsPerPage,orderMap);
 			count=this.bookService.getCount();
 		}
 		map.put("success", true);

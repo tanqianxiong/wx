@@ -101,6 +101,7 @@ function pageselectCallback(page_index, jq){
 			keyword:window.keyword,
 			pageIndex : page_index,		
 			itemsPerPage : $('#itemsPerPage').val(),
+			orderProp:$('#order').val(),
 		},
 		dataType : "json",
 		success : function(result) {
@@ -143,6 +144,9 @@ $(function() {
 	initPagination();
 	$('#itemsPerPage').change(function(){
 		sessionStorage.itemsPerPage=$(this).val();
+		pageselectCallback(0,$("#pagination"));
+	});
+	$('#order').change(function(){
 		pageselectCallback(0,$("#pagination"));
 	});
 	/*$('#keyword').change(function(){

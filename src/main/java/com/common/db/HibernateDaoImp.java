@@ -14,6 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -476,6 +477,38 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 			seList.subList(0, 1).clear();
 			return Restrictions.or(se,orExpressionLink(seList));
 		}
+	}
+	@SuppressWarnings("unchecked")
+	public List<T> doGetListByLikeProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int i,
+			int itemsPerPage,Map<String,String> orderMap) {
+		Criteria criteria = this.getSession(true).createCriteria(this.entityName);
+		if(likeProps!=null && !likeProps.isEmpty()){
+			List<SimpleExpression> seList=new ArrayList<SimpleExpression>();
+			for (String key : likeProps.keySet()) {
+				seList.add(Restrictions.like(key,likeProps.get(key)));
+			}
+			if(likeProps.size()<2){
+				criteria.add(seList.get(0));
+			}
+			else{
+				criteria.add(orExpressionLink(seList));
+			}
+		}
+		if(andProps!=null && !andProps.isEmpty()){
+			criteria.add(Restrictions.allEq(andProps));
+		}
+		if(orderMap!=null && !orderMap.isEmpty()){
+			for (String key : orderMap.keySet()) {
+				if(orderMap.get(key).equals("desc")){
+					criteria.addOrder(Order.desc(key));
+				}else{
+					criteria.addOrder(Order.asc(key));
+				}				
+			}	
+		}
+		criteria.setFirstResult(i);
+		criteria.setMaxResults(itemsPerPage);
+		return criteria.list();
 	}
 	@SuppressWarnings("unchecked")
 	public List<T> doGetListByLikeProperties(Map<String, Object> likeProps, Map<String, Object> andProps, int i,

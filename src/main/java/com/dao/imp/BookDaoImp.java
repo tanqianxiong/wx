@@ -58,9 +58,9 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 	}
 	@Override
 	public List<Book> getPaginationByLikeProperty(Map<String, Object> like, Map<String, Object> and, int i,
-			int itemsPerPage) {
+			int itemsPerPage,Map<String,String> orderMap) {
 		// TODO Auto-generated method stub
-		return this.doGetListByLikeProperties(like, and, i, itemsPerPage);
+		return this.doGetListByLikeProperties(like, and, i, itemsPerPage,orderMap);
 	}
 	@Override
 	public int getCountByLikeProperty(Map<String, Object> like, Map<String, Object> and) {
