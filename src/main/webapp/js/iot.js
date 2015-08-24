@@ -316,6 +316,7 @@ $(function(){
 					setTimeout(function(){
 						$("#masker-welfare").fadeOut(200);
 						$(".popup-welfare").fadeOut(200);
+						window.location.href="/wx/pt/service/welfare.do";
 						$(".alreadyHandle").click();
 					},400);
 				}else{
