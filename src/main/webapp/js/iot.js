@@ -56,9 +56,8 @@ $(function(){
 			},
 			dataType: "json",
 			success: function(result){
-				console.log(result);
+				//console.log(result);
 				if (result.success) {
-					//setCookie("openId",openId,300);
 					setCookie("username",name,100);
 					setCookie("jobNumber",jobNumber,100);
 					$("#bindbtn").hide();
@@ -67,11 +66,11 @@ $(function(){
 						window.location.href="/wx/pt/book/index.do?openId="+openId;
 					},500);
 				} else {
-					alert("抱歉，信息不匹配，请重新输入");
+					alert("对不起，信息不匹配，请重输");
 				}  
 			},
 			error: function(jqXHR){     
-			   alert("发生错误：" + jqXHR.status);  
+			   alert("网络错误：" + jqXHR.status);  
 			},     
 		});
 	});
@@ -79,9 +78,9 @@ $(function(){
 //图书搜索、借阅模块
 	//图书搜索按钮，搜索内容不为空，则发起ajax的get方式请求
 	$(".search_book_btn").click(function(){
-		console.log("go 被按下");
 		if($("#user_search").val()==''){
-			console.log("搜索内容为空");
+			//console.log("搜索内容为空");
+			alert("请输入搜索内容");
 			return ;
 		}
 		var keyword = $("#user_search").val();
@@ -89,7 +88,7 @@ $(function(){
 		if(!reg.test(keyword)){
 			return ;
 		}		
-		console.log("搜索内容为:" + keyword);	
+		//console.log("搜索内容为:" + keyword);	
 		$.ajax({
 		    type: "POST",
 			url: "bookSearch.do",
@@ -106,7 +105,7 @@ $(function(){
 				}
 			},
 			error: function(jqXHR){  
-			   alert("图书ajax发生错误：" + jqXHR.status);  
+			   alert("网络错误：" + jqXHR.status);  
 			},
 		});
 	});
@@ -125,7 +124,7 @@ $(function(){
 			var td_object={};
 			$.each(v, function(k1, v1) {
 				td_object[''+k1+'']=v1;
-				console.log(k1+'  '+v1);
+				//console.log(k1+'  '+v1);
 			});
 			var tr=$("<tr/>");
 			tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td" >'+td_object.id+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
@@ -156,7 +155,7 @@ $(function(){
 		sessionStorage.points=points;		
 		var brief = tds.eq(9).text();
 		sessionStorage.brief=brief;		
-		console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
+		//console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 		//设好sessionStorage，跳转到detail页面
 		window.location.href="detail.do";
 	});
@@ -183,6 +182,7 @@ $(function(){
 						window.location.href="/wx/pt/book/index.do";
 					},1000);
 				} else {
+					//重复借阅
 					$(".popup-detail").text("您已借过这本书了哦");
 					$(".popup-detail").css("color","#93ebf5");
 					$("#masker").fadeIn(200);
@@ -193,7 +193,7 @@ $(function(){
 				}
 			},
 			error: function(jqXHR){  
-			   alert("图书借阅ajax发生错误：" + jqXHR.status);  
+			   alert("网络错误：" + jqXHR.status);  
 			},
 		});	
 	});
@@ -247,7 +247,7 @@ $(function(){
 				}  
 			},
 			error: function(jqXHR){     
-			   alert("ajax发生错误：" + jqXHR.status);  
+			   alert("网络错误：" + jqXHR.status);  
 			},
 		});
 	});
@@ -282,7 +282,7 @@ $(function(){
 			if(username==''||jobNumber==''){
 				alert("请输入姓名和工号");
 			}else{
-				alert("请正确输入姓名和工号");
+				alert("输入格式有误");
 			}
 			return;
 		}
@@ -292,9 +292,9 @@ $(function(){
             welfareIds.push(this.value);
         });
 		welfareIds = welfareIds.join(",");
-        console.log(welfareIds);
-        console.log(openId);
-        console.log(username+'  '+jobNumber);     
+        //console.log(welfareIds);
+        //console.log(openId);
+        //console.log(username+'  '+jobNumber);     
         if(welfareIds==''){
         	alert("请选择要办理的业务");
         	return;
@@ -316,15 +316,17 @@ $(function(){
 					setTimeout(function(){
 						$("#masker-welfare").fadeOut(200);
 						$(".popup-welfare").fadeOut(200);
-						window.location.refresh();
-						$(".collapsed").click();
-					},400);
+						$('input:text').val("");
+						$("input:checked").attr("checked",false);
+						$(".alreadyHandle").click();
+						$("#collapseTwo").addClass("in");
+					},500);
 				}else{
-					alert("信息输入有误或系统错误，请稍后再试");
+					alert("信息输入有误,请重输");
 				}
 			},
 			error: function(jqXHR){
-			   alert("ajax发生错误：" + jqXHR.status);  
+			   alert("对不起,网络错误：" + jqXHR.status);  
 			},
 		});
 	});
@@ -346,8 +348,8 @@ $(function(){
 						var p = $("<p/>");
 						welfareName = result.list[i].welfare.name;
 						welfareState = result.list[i].state;
-						p.html(welfareName + '<span style="float:right;margin-right:20px;">'+ welfareState +'</span>');
-						p.appendTo(myhandle);
+						p.html(welfareName + '<span style="float:right;margin-right:10px;">'+ welfareState +'</span>');
+						p.prependTo(myhandle);
 					}
 				}
 			},
