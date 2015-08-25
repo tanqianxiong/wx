@@ -1,5 +1,7 @@
 package com.dao.imp;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,5 +71,14 @@ public class BookDaoImp extends HibernateDaoImp<Book> implements BookDao{
 		// TODO Auto-generated method stub
 		return this.doGetListByProperties(likeProps);
 	}
+
+	@Override
+	public void updateBookState() {
+		// TODO Auto-generated method stub
+		Map<String,Object> props=new HashMap<String,Object>();
+		props.put("bookState", "旧书");
+		this.doUpdateProperty(props,"bookInputTime","time");
+	}
+
 	
 }

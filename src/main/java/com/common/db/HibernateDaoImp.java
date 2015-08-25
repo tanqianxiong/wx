@@ -374,5 +374,32 @@ public class HibernateDaoImp<T> extends HibernateDaoSupport {
 	public List<T> doGetListByProperties(Map<String, Object> likeProps,Map<String, Object> andProps){
 		return doGetCriteriaByProperties(likeProps,andProps,0,0,null).list();
 	}
-
+	/**
+	 * 根据条件，修改属性值,暂时只供定时更新图书状态使用
+	 * @param	props
+	 * 			<属性名,属性值>
+	 * @param	where
+	 * 			修改条件
+	 * @param	propType
+	 * 			属性类型
+	 */
+	public void doUpdateProperty(Map<String, Object> props, String whereProp,String propType) {
+		// TODO Auto-generated method stub
+		StringBuffer keys = new StringBuffer();
+		Object[] values = new Object[props.keySet().size()];
+		int i = 0;
+		for (String key : props.keySet()) {
+			if(i==props.keySet().size()-1){
+				keys.append("_t001." + key + "=? ");
+			}
+			else{
+				keys.append(" _t001." + key + "=?, ");
+			}
+			values[i] = props.get(key);
+			i++;
+		}
+		
+		String hql ="update "+this.entityName+" _t001 set "+keys.toString()+" where TO_DAYS(NOW())-TO_DAYS("+whereProp+")>=5";
+		this.getHibernateTemplate().bulkUpdate(hql, values);
+	}
 }

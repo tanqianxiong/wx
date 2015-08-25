@@ -67,6 +67,11 @@ public class BookServiceImp implements BookService{
 		// TODO Auto-generated method stub
 		return this.bookDao.getListByLikeProperties(likeProps);
 	}
+	@Override
+	public void updateBookState() {
+		// TODO Auto-generated method stub
+		this.bookDao.updateBookState();
+	}
 	
 
 }

@@ -20,4 +20,6 @@ public interface BookService {
 	public List<Book> getListByProperties(int startIndex, int itemsPerpage, Map<String, String> orderProps);
 
 	public List<Book> getListByLikeProperties(Map<String, Object> likeProps);
+
+	public void updateBookState();
 }
