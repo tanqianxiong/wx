@@ -56,7 +56,7 @@ public class EmployeeController {
 			Map<String,Object> like=new HashMap<String,Object>();
 			like.put("username", "%"+keyword+"%");
 			like.put("position", "%"+keyword+"%");
-			like.put("userNo", "%"+keyword+"%");
+			like.put("department", "%"+keyword+"%");
 			list=this.employeeService.getListByProperties(like,null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
 			count=this.employeeService.getCountByProperties(like);
 			
