@@ -97,10 +97,10 @@ $(function(){
 		sessionStorage.itemsPerPage=$(this).val();
 		pageselectCallback(0,$("#pagination"));
 	});
-	$('#order').change(function(){
+	/*$('#order').change(function(){
 		pageselectCallback(0,$("#pagination"));
 	});
-	/*$('#keyword').change(function(){
+	$('#keyword').change(function(){
 		initPagination();
 		pageselectCallback(0,$("#pagination"));
 	});*/
@@ -139,13 +139,10 @@ function pageselectCallback(page_index, jq){
 	$.ajax({
 		type : "POST",
 		url : "detail.do",
-		data : {
-			//keyword: $('#keyword').val(),
-			welfareId:welfareId,
-			//keyword:window.keyword,
+		data : {			
+			welfareId:welfareId,			
 			pageIndex : page_index,		
-			itemsPerPage : $('#itemsPerPage').val(),
-			orderProp:$('#order').val(),
+			itemsPerPage : $('#itemsPerPage').val(),		
 		},
 		dataType : "json",
 		success : function(result) {
