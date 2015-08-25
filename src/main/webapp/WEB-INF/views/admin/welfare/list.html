@@ -12,8 +12,7 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/manage.css" rel="stylesheet" type="text/css">
-        <link href="/wx/css/jquery.pagination.css" rel="stylesheet">
-        
+        <link href="/wx/css/jquery.pagination.css" rel="stylesheet">        
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
         <script src="/wx/js/app/welfare.js"></script>
@@ -21,10 +20,8 @@
         <script src="/wx/js/jquery.pagination.js"></script>
 	</head>
 	<body>
-
       <!-- Static navbar -->
       <div class="book_container">
-
         <nav class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -41,8 +38,7 @@
                 <li><a href="/wx/admin/employee/list.do">用户管理</a></li>
                 <li><a href="/wx/admin/appointment/list.do">预约办理</a></li>
 				<li class="active"><a href="/wx/admin/welfare/list.do">福利管理</a></li>
-                <li><a href="/wx/admin/policy/list.do">政策管理</a></li>
-				
+                <li><a href="/wx/admin/policy/list.do">政策管理</a></li>				
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id="currentTime"></a></li>
@@ -53,18 +49,17 @@
         </nav> 
 		<div><h2 align="center" class="font-yahei" >福利管理</h2></div>
 		<div>
-			<div class="float-left">
+			<div class="float-left min-width-230">
 				<button id="addBtn" type="button" class="btn btn-info " data-toggle="modal" data-target="#auModal">添加福利</button>
 				<h5 style="float:right"> &nbsp;&nbsp;当前福利数目：<kbd id="count" class="count">..</kbd></h5>
 			</div>
 			<div class="float-right ">
 			     <div class="navbar-form navbar-left search-margin" role="search" >
 					<div class="form-group">
-					  <input type="text" name="keyword" id="keyword" class="form-control " placeholder="福利">
+					  <input type="text" name="keyword" id="keyword" class="form-control " placeholder="输入福利名">
 					</div>
 					<button id="searchBtn" type="submit" class="btn btn-danger">搜索</button>
 				</div>
-
 			</div>
 		</div>
 		<br><br>
@@ -78,8 +73,7 @@
 	            <th>操作</th>
 	          </tr>
           </thead>
-          <tbody>
-          
+          <tbody>          
           </tbody>
         </table>
                 <div class="float-right">
@@ -101,12 +95,7 @@
 				 </select>	
         	</div>
         </div>
-        
-
 	</div>
-	
-	
-
 	<div class="modal fade" id="auModal" tabindex="-1" role="dialog" aria-labelledby="auModalLabel">
 	  <div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -114,8 +103,7 @@
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h2 class="modal-title font-yahei" id="auModalLabel" align="center" >福利信息</h2>
 		  </div>
-			<div class="modal-body">
-		  
+			<div class="modal-body">		  
 				<form class="form-horizontal">
 					<div class="form-group " hidden=true>
 						<label for="name" class="col-sm-3 control-label">ID</label>
@@ -147,7 +135,6 @@
 			</div>
 		</div>
 	  </div>
-	</div>
-	
+	</div>	
 	</body>
 </html>

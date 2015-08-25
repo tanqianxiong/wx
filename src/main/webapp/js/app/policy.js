@@ -1,9 +1,4 @@
-
-/*
- * 图书的私有js代码
- */
-window.url = "";// 用于add与update的转换
-
+window.url = "";
 function update(id) {
 	$.ajax({
 		type : "GET",
@@ -61,13 +56,8 @@ function setData2Table(policyList) {
 	}
 }
 function parse2Date(date){
-	
-	
 	 var time = new Date(parseInt(date.time, 10));
-   // alert(time.getMonth());
 	 var month = time.getMonth() + 1 < 10 ? "0" + (time.getMonth() + 1) : date.getMonth() + 1;
      var currentDate = time.getDate() < 10 ? "0" + time.getDate() : time.getDate();
      return time.getFullYear() + "-" + month + "-" + currentDate;
-
-	
 }

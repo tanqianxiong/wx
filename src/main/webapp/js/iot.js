@@ -20,15 +20,12 @@ function getCookie(cname) {
 function clearCookie(name) {  
     setCookie(name, "", -1);
 }
-
 //获取url参数的正则函数
 function getQueryString(name) { 
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]); return null;
 }
-
-
 $(function(){
 //用户绑定模块
 	//binding 页面 点击绑定按钮后，向服务器发送ajax，
@@ -211,7 +208,7 @@ $(function(){
 	//点击六大类,页面转向category.html,同时通过cookie的方式实现页面间传参
 	$(".thumbnail").click(function(){
 		var selected_category = $(this).data("category");
-		setCookie("selected_category",selected_category,0.001);
+		setCookie("selected_category",selected_category,0.005);
 	});
 	//点击还书(escheat点击区域变为整个tr) 弹出层出现,因为个人的借阅图书是从后台取得的，所以该事件应使用动态添加
 	$("table.borrowing_table").on('click','tr',function(){
@@ -267,7 +264,10 @@ $(function(){
 		$(".choosing td").eq(3).remove();
 		$("#borrowed_th").after($(".choosing"));
 		$("#borrowing .choosing").remove();	
-		$("tr").removeClass("choosing");	
+		$("tr").removeClass("choosing");
+		//还书后加分
+		var newScore = parseInt($("#score").text())+1;
+		$("#score").text(''+newScore+'');
 	}
 	//点击取消还书
 	$("#escheat-no").click(function(){
@@ -328,7 +328,7 @@ $(function(){
 						$("input:checked").attr("checked",false);
 						$(".alreadyHandle").click();
 						$("#collapseTwo").addClass("in");
-					},1000);
+					},2222);
 				}else{
 					alert("信息输入有误,请重输");
 				}

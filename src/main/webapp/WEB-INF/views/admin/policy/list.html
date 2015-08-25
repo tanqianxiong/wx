@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-    
 		<meta charset="utf-8">
 		<title>中移物联网员工服务</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,8 +12,7 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/manage.css" rel="stylesheet" type="text/css">
-	<link href="/wx/css/jquery.pagination.css" rel="stylesheet">
-
+	    <link href="/wx/css/jquery.pagination.css" rel="stylesheet">
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/app/common.js"></script>
@@ -22,10 +20,7 @@
 		<script src="/wx/js/jquery.pagination.js"></script>
 	</head>
 	<body>
-
-      <!-- Static navbar -->
       <div class="book_container">
-
         <nav class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -49,19 +44,19 @@
                 <li><a href="/wx/admin/logout.do">退出</a></li>
                  </li>
               </ul>
-            </div><!--/.nav-collapse -->
-          </div><!--/.container-fluid -->
+            </div>
+          </div>
         </nav> 
 		<div><h2 align="center" class="font-yahei" >政策管理</h2></div>
 		<div>
-			<div class="float-left">
+			<div class="float-left min-width-230">
 				<button id="addBtn" class="btn btn-info " data-toggle="modal" data-target="#auModal">添加新政策</button>
 				<h5 style="float:right"> &nbsp;&nbsp;当前政策数目：<kbd id="count" class="count">..</kbd></h5>
 			</div>
 			<div class="float-right ">
 			     <div class="navbar-form navbar-left search-margin" role="search" >
 					<div class="form-group">
-					  <input type="text" name="keyword"  id="keyword" class="form-control " placeholder="输入政策名">
+					  <input type="text" name="keyword"  id="keyword" class="form-control " placeholder="输入政策名/内容">
 					</div>
 					<button type="submit" id="searchBtn" class="btn btn-danger">搜索</button>
 				</div>
@@ -69,8 +64,6 @@
 			</div>
 		</div>
 		<br><br>
-		
-		
         <table class="table table-striped table-hover " id="listTable">
           <thead>
           <tr>
@@ -82,7 +75,6 @@
           </tr>
           </thead>
           <tbody>
-          
           </tbody>
           </table>
            <div class="float-right">
@@ -105,7 +97,6 @@
         	</div>
         </div>
          </div>
-	<!-- Modal -->
 	<div class="modal fade" id="auModal" tabindex="-1" role="dialog" aria-labelledby="auModalLabel">
 		<div class="modal-dialog role="document">
 			<div class="modal-content">
@@ -114,7 +105,6 @@
 					<h2 class="modal-title font-yahei" id="auModalLabel" align="center" >政策信息</h2>
 					  </div>
 			<div class="modal-body">
-		  
 				<form class="form-horizontal">
 					<div class="form-group " hidden>
 						<label for="name" class="col-sm-3 control-label">ID</label>
@@ -138,7 +128,6 @@
 					</div>
 				</form>
 			</div>
-		
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" id="saveBtn">保存</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -146,21 +135,5 @@
 		</div>
 	  </div>
 	</div>
-	
 	</body>
 </html>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-				
