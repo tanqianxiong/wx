@@ -1,7 +1,4 @@
-
-
 window.url = "";
-
 function update(id) {
 	$.ajax({
 		type : "GET",
