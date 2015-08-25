@@ -42,12 +42,14 @@ $(function(){
 		if(!reg1.test(name) || !reg2.test(jobNumber)){
 			return;
 		}
-		var openId = getCookie("openId");
+		//var openId = getCookie("openId");
+		var openId = getQueryString("openId");
+		
 		if( name=='' || jobNumber==''){
 			return;
 		}
 		$.ajax({
-		    type: "POST", 	
+		    type: "POST",
 			url: "binding.do",
 			data: {
 				openId: openId,
@@ -157,13 +159,16 @@ $(function(){
 		sessionStorage.brief=brief;		
 		//console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 		//设好sessionStorage，跳转到detail页面
-		window.location.href="detail.do";
+		
+		var openId = getQueryString("openId");
+		window.location.href="/wx/pt/book/detail.do?openId="+openId;
 	});
 	//借阅按钮
 	$("#borrow").click(function(){
-		//ajax 将用户信息传递给后台，使其更新数据库
 		var bookId = sessionStorage.bookId;
-		var openId = getCookie("openId");
+		//var openId = getCookie("openId");
+		var openId = getQueryString("openId");
+		
 		$.ajax({
 		    type: "POST",
 			url: "borrow.do",
@@ -179,7 +184,7 @@ $(function(){
 					$("#masker").fadeIn(200);
 					$(".popup-detail").fadeIn(200);
 					setTimeout(function(){
-						window.location.href="/wx/pt/book/index.do";
+						window.location.href="/wx/pt/book/index.do?openId="+openId;
 					},1000);
 				} else {
 					//重复借阅
@@ -188,7 +193,7 @@ $(function(){
 					$("#masker").fadeIn(200);
 					$(".popup-detail").fadeIn(200);
 					setTimeout(function(){
-						window.location.href="/wx/pt/book/category.do";
+						window.location.href="/wx/pt/book/category.do?openId="+openId;
 					},1000);
 				}
 			},
@@ -228,7 +233,8 @@ $(function(){
 		//发起ajax 更新个人的借阅信息
 		var tds = $("table.individual-table tr.choosing").find("td");
 		var bookId = tds.eq(4).text();
-		var openId = getCookie("openId");
+		//var openId = getCookie("openId");
+		var openId = getQueryString("openId");
 		var point = $("#trackBar").val();
 		$.ajax({
 		    type: "POST", 	
@@ -286,7 +292,9 @@ $(function(){
 			}
 			return;
 		}
-		var openId = getCookie("openId");
+		//var openId = getCookie("openId");
+		var openId = getQueryString("openId");
+		
 		var welfareIds = [];
 		$("input:checked").each(function(){
             welfareIds.push(this.value);
@@ -332,7 +340,9 @@ $(function(){
 	});
 	//用户点击已办理业务
 	$(".alreadyHandle").click(function(){
-		var openId = getCookie("openId");	
+		//var openId = getCookie("openId");
+		var openId = getQueryString("openId");
+		
 		$.ajax({
 			url:"hasHandled.do",
 			type:"POST",

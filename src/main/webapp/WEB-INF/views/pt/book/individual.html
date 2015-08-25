@@ -101,7 +101,9 @@
 		            showPoint.innerHTML = this.value + '分';
 		        });
 				//获取用户借阅记录
-				var openId = getCookie("openId");
+				//var openId = getCookie("openId");
+				var openId = getQueryString("openId");
+				
 				$.ajax({
 					type:"POST",
 					url:"individual.do",
