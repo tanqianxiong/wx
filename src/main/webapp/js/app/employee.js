@@ -37,10 +37,8 @@ function update(id) {
 						break;
 					case 'point':
 						$(this).val(item.point);
-						break;
-					
-					}
-					
+						break;					
+					}					
 					window.url = "update.do";
 				});
 			}
@@ -52,7 +50,6 @@ function update(id) {
 }
 function check(id){
 	sessionStorage.employeeId=id;
-	//alert(sessionStorage.employeeId);
 }
 function setData2Table(employeeList) {
 	var employeeTBody = $('#listTable tbody');

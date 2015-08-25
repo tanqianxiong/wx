@@ -1,12 +1,7 @@
 function setEmployeeInfo(employee){
 	var e = $('#employeeInfo');
-	e.html('');
-	
-		e.html('用户名：'+employee.username+'&nbsp;&nbsp;&nbsp;&nbsp;工号：'+employee.userNo+'&nbsp;&nbsp;&nbsp;&nbsp;部门：'+employee.department+'&nbsp;&nbsp;&nbsp;&nbsp;职位：'+employee.position);	
-
-					
-		
-	
+	e.html('');	
+		e.html('用户名：'+employee.username+'&nbsp;&nbsp;&nbsp;&nbsp;工号：'+employee.userNo+'&nbsp;&nbsp;&nbsp;&nbsp;部门：'+employee.department+'&nbsp;&nbsp;&nbsp;&nbsp;职位：'+employee.position);		
 }
 function setData2Table(borrowList) {
 	var borrowTBody = $('#listTable tbody');
@@ -15,22 +10,15 @@ function setData2Table(borrowList) {
 	for (var i = 0; i < borrowList.length; i++) {
 		var tr = $("<tr/>");
 		tr.html('<td>' +j
-				
-				+ '</td><td>' + borrowList[i].book.bookName
-				
+				+ '</td><td>' + borrowList[i].book.bookName				
 				+ '</td><td>' + DateFormat(borrowList[i].borrowTime)
 				+ '</td><td>' + DateFormat(borrowList[i].returnTime)
-				+ '</td>');
-				
-				
+				+ '</td>');			
 		tr.appendTo(borrowTBody);
 		j++;
 	}
 }
-
 $(function(){
-	
-	
 	$.ajax({
 		type : "POST",
 		url : "check.do",
@@ -43,10 +31,8 @@ $(function(){
 				var borrowList = result.list;
 				var employee=result.employee;
 				setEmployeeInfo(employee);
-				if (borrowList.length > 0) {
-					
-					setData2Table(borrowList);
-					
+				if (borrowList.length > 0) {	
+					setData2Table(borrowList);					
 				} else {
 					window.Modal.alert({msg:"没有数据"});
 				}
@@ -57,7 +43,6 @@ $(function(){
 		error : function(jqXHR) {
 			window.Modal.alert({msg:"发生错误：" + jqXHR.status});
 		},
-	});
-	
+	});	
 });
 
