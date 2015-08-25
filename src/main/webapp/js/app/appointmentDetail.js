@@ -87,34 +87,6 @@ $(function(){
 	//获取当前时间
 	window.setInterval("getCurrentTime($('#currentTime'));",100);
 	
-	/*var welfareId = getQueryString("welfareId");	
-	//开始向后台请求获取数据
-	$.ajax({
-		type : "POST",
-		url : "detail.do",
-		dataType : "json",
-		data:{
-			welfareId:welfareId
-		},
-		success : function(result) {
-			if (result.success) {
-				//加载福利类型到Detail页面
-				$('#welfareName').html(result.welfareName);
-				var bookList = result.list;
-				if (bookList.length > 0) {
-					setDataTable(bookList);
-				} else {
-					window.Modal.alert({msg:"没有数据"});
-				}
-			} else {
-				window.Modal.alert({msg:"抱歉，信息不匹配，请重新输入"});
-			}
-		},
-		error : function(jqXHR) {
-			window.Modal.alert({msg:"发生错误：" + jqXHR.status});
-		},
-	});*/
-
 	if(sessionStorage.itemsPerPage!=null){
 		//alert("session存在");
 		$('#itemsPerPage').val(sessionStorage.itemsPerPage);
@@ -123,6 +95,9 @@ $(function(){
 	initPagination();
 	$('#itemsPerPage').change(function(){
 		sessionStorage.itemsPerPage=$(this).val();
+		pageselectCallback(0,$("#pagination"));
+	});
+	$('#order').change(function(){
 		pageselectCallback(0,$("#pagination"));
 	});
 	/*$('#keyword').change(function(){
@@ -170,6 +145,7 @@ function pageselectCallback(page_index, jq){
 			//keyword:window.keyword,
 			pageIndex : page_index,		
 			itemsPerPage : $('#itemsPerPage').val(),
+			orderProp:$('#order').val(),
 		},
 		dataType : "json",
 		success : function(result) {
