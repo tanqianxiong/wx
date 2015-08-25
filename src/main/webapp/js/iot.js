@@ -154,11 +154,15 @@ $(function(){
 		sessionStorage.points=points;		
 		var brief = tds.eq(9).text();
 		sessionStorage.brief=brief;		
-		//console.log("用户点击了图书搜索的结果中的详情按钮，选中的书名为："+bookName+"，可借数量："+available);
 		//设好sessionStorage，跳转到detail页面
+	
 		
-		var openId = getQueryString("openId");
+		var openId = getCookie("openId");
+		//var openId = getQueryString("openId");
 		window.location.href="/wx/pt/book/detail.do?openId="+openId;
+		
+		
+		
 	});
 	//借阅按钮
 	$("#borrow").click(function(){
