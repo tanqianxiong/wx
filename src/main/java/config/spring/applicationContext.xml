@@ -47,8 +47,8 @@
 		<!-- 连接池配置 -->
 		<property name="houseKeepingSleepTime" value="30000" />
 		<property name="prototypeCount" value="5" />
-		<property name="maximumConnectionCount" value="100" />
-		<property name="minimumConnectionCount" value="2" />
+		<property name="maximumConnectionCount" value="1000" />
+		<property name="minimumConnectionCount" value="50" />
 		<property name="trace" value="true" />
 		<property name="verbose" value="true" />
 		<!--没有空闲连接可以分配而在队列中等候的最大请求数,超过这个请求数的用户连接就不会被接受 -->
