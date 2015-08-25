@@ -34,7 +34,6 @@ function DateFormat(d)
     //getFullYear得到4位数的年份 ，返回一串字符串
 	return date.getFullYear() + "-" + month + "-" + currentDate;
 }
-
 function del(id){
 	window.Modal.confirm({ msg: "确定删除这条记录？" }).on(function (e) {
         if (e) {
@@ -87,12 +86,10 @@ function initPagination() {
   	// 在指定区域创建分页,默认每页条数为10
     $("#pagination").pagination(init_num_entries, {
       callback: pageselectCallback,
-      //itemsPerPage:$('#itemsPerPage').val(),
      });
  }
 //page_index为第几页,第一页为0,jq是分页所在区域的Jquery对象
 function pageselectCallback(page_index, jq){
-	
 	$.ajax({
 		type : "POST",
 		url : "list.do",
@@ -119,7 +116,6 @@ function pageselectCallback(page_index, jq){
 					$("#count").html(result.count);
 					$("#count").attr('id','dontAlterMeAgain');
 					setData2Table(bookList);
-					
 				} else {
 					window.Modal.alert({msg:"没有找到相匹配的数据"});
 				}
@@ -133,7 +129,6 @@ function pageselectCallback(page_index, jq){
 	});
 	return false;
 }
-
 //初始化需要加载的数据
 $(function() {
 	if(sessionStorage.itemsPerPage!=null){
@@ -149,10 +144,6 @@ $(function() {
 	$('#order').change(function(){
 		pageselectCallback(0,$("#pagination"));
 	});
-	/*$('#keyword').change(function(){
-		initPagination();
-		pageselectCallback(0,$("#pagination"));
-	});*/
 	$('#getPage').click(function(){
 		var page = $('#page').val();
 		var re = /^\d+$/g;
@@ -176,58 +167,11 @@ $(function() {
 	});
 	//获取当前时间
 	window.setInterval("getCurrentTime($('#currentTime'));",100);
-	//开始向后台请求获取数据
-	/*$.ajax({
-		type : "POST",
-		url : "list.do",
-		dataType : "json",
-		success : function(result) {
-			if (result.success) {
-				var bookList = result.list;
-				if (bookList.length > 0) {
-					setData2Table(bookList);
-				} else {
-					window.Modal.alert({msg:"没有数据"});
-				}
-			} else {
-				window.Modal.alert({msg:"抱歉，信息不匹配，请重新输入"});
-			}
-		},
-		error : function(jqXHR) {
-			window.Modal.alert({msg:"发生错误：" + jqXHR.status});
-		},
-	});*/
 	//按关键字搜索			
 	$('#searchBtn').click(function() {
 		window.keyword=$('#keyword').val();
 		initPagination();
-		/*$.ajax({
-			type : "POST",
-			url : "list.do",
-			data : {
-				keyword : $('#keyword').val(),
-				pageIndex:1,
-				itemsPerPage:10
-			},
-			dataType : "json",
-			success : function(result) {
-				if (result.success) {
-					var bookList = result.list;
-					if (bookList.length > 0) {
-						setData2Table(bookList);
-					} else {
-						window.Modal.alert({msg:"没有找到相匹配的数据"});
-					}
-				} else {
-					window.Modal.alert({msg:"抱歉，信息不匹配，请重新输入"});
-				}
-			},
-			error : function(jqXHR) {
-				window.Modal.alert({msg:"发生错误：" + jqXHR.status});
-			},
-		});*/
 	});
-	
 	//自定义alert与confirm弹出框
 	window.Modal = function () {
 	    var divStr='<div id="ycf-alert" class="modal fade" tabindex="-1" role="dialog" >'+
@@ -266,7 +210,7 @@ $(function() {
 	            }
 	        };
 	    };
-
+	    
 	    var _confirm = function (options) {
 	        alr.html(ahtml); // 复原
 	        alr.find('.ok').removeClass('btn-primary').addClass('btn-success');
