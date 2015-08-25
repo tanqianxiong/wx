@@ -1,6 +1,10 @@
 body{
 	background-color: #efefef;
 }
+.min-width-230{
+	min-width:230px;
+}
+
 .margin-top-5{
 	margin-top:5px;
 }
