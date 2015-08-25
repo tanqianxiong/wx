@@ -52,7 +52,7 @@ public class BoundController {
 	}
 	
 	@RequestMapping(value = "/binding", method = RequestMethod.POST)
-	public void doLogin(String openId,String name,int jobNumber,HttpServletRequest request,HttpServletResponse response) {
+	public void doLogin(String openId,String name,String jobNumber,HttpServletRequest request,HttpServletResponse response) {
 		boolean res=false;
 		Map<String,Object> eProps=new HashMap<String,Object>();
 		eProps.put("username", name);

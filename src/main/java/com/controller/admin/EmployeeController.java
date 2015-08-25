@@ -57,6 +57,7 @@ public class EmployeeController {
 			like.put("username", "%"+keyword+"%");
 			like.put("position", "%"+keyword+"%");
 			like.put("department", "%"+keyword+"%");
+			like.put("userNo", "%"+keyword+"%");
 			list=this.employeeService.getListByProperties(like,null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
 			count=this.employeeService.getCountByProperties(like);
 			

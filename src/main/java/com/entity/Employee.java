@@ -18,7 +18,7 @@ public class Employee  implements Serializable{
 	// Fields
 	
 	private String id;
-	private int userNo;
+	private String userNo;
 	private String username;
 	private String gender;
 	private String department;
@@ -37,7 +37,7 @@ public class Employee  implements Serializable{
 	}
 
 	/** full constructor */
-	public Employee(int userNo,String username, String gender, String department, 
+	public Employee(String userNo,String username, String gender, String department, 
 	int point,String position) {
 		this.userNo = userNo;
 		this.username = username;
@@ -60,11 +60,11 @@ public class Employee  implements Serializable{
 		this.id = id;
 	}
 	@Column(name = "Employee_NO", unique = true, nullable = false, length = 10)
-	public int getUserNo() {
+	public String getUserNo() {
 		return this.userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
