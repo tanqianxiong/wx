@@ -1,4 +1,3 @@
-
 /*
  * 图书的私有js代码
  */
@@ -86,8 +85,8 @@ function setData2Table(bookList) {
 				+ '</td><td>' + bookList[i].type 
 				+ '</td><td>' + bookList[i].amount 
 				+ '</td><td>' + bookList[i].borrowed
-				+ '</td><td>' + bookList[i].points 
-				+ '</td><td>' + window.simplifyBrief(bookList[i].brief,8) + '</td><td>'
+				+ '</td><td>' + bookList[i].points
+				+ '</td><td data-toggle="tooltip" data-placement="right"  title=\"'+bookList[i].brief+'\">' + window.simplifyBrief(bookList[i].brief,8) + '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''
 				+ bookList[i].id + '\');" data-toggle="modal" data-target="#auModal">修改</a>'
 				+ '&nbsp;&nbsp;<a title="点击删除" href="#" onclick="javascript:del(\''
@@ -96,4 +95,3 @@ function setData2Table(bookList) {
 		j++;
 	}
 }
-
