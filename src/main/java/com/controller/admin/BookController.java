@@ -32,7 +32,7 @@ public class BookController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response){
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		Map<String,String> orderMap = new HashMap<String,String>();
@@ -73,14 +73,20 @@ public class BookController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public void add(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
-					String type,int amount,String brief) throws IOException{
+					String type,int amount,String brief){
 		Book book=new Book(id);
 		book.setISBN(ISBN);
 		book.setBookName(bookName);
@@ -98,38 +104,56 @@ public class BookController {
 		this.bookService.add(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteById(HttpServletResponse response,String id) throws IOException{
+	public void deleteById(HttpServletResponse response,String id){
 		//String id = request.getParameter("id");
 		System.out.println(id);
 		this.bookService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
-	public void get(HttpServletResponse response,String id) throws IOException{
+	public void get(HttpServletResponse response,String id) {
 		System.out.println(id);
 		Book book=this.bookService.get(id);
 		System.out.println(book.getBookName());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", book);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void update(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
-			String type,int amount,String brief,float points,int borrowed,int commentNum,String bookState) throws IOException{
+			String type,int amount,String brief,float points,int borrowed,int commentNum,String bookState){
 		Book book=new Book(id);
 		book.setISBN(ISBN);
 		book.setBookName(bookName);
@@ -146,7 +170,13 @@ public class BookController {
 		this.bookService.update(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

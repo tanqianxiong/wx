@@ -36,7 +36,7 @@ public class AppointmentController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response)  {
 	 
 		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		Map<String,Object> res=new HashMap<String,Object>();
@@ -56,8 +56,14 @@ public class AppointmentController {
 		res.put("success", true);
 		res.put("list", list);
 		res.put("count", count);
-		String response_json = JsonUtil.object2JsonStr(response, res);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(res);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -76,7 +82,7 @@ public class AppointmentController {
 	
 	//详情
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response,HttpServletRequest request) throws IOException{
+	public void getDetailInfo(int pageIndex,int itemsPerPage,String welfareId,HttpServletResponse response,HttpServletRequest request){
 		int num=0;		
 		Welfare wf=this.welfareService.get(welfareId);
 		Map<String,Object> andProps=new HashMap<String,Object>();
@@ -109,13 +115,19 @@ public class AppointmentController {
 		map.put("count", count);
 		//加载福利名称到detail页面
 		map.put("welfareName", wf.getName());
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//显示操作状态：通过或退回
 	@RequestMapping(value = "/agree",method = RequestMethod.POST)
-	public void agree(HttpServletResponse response,String id) throws IOException{
+	public void agree(HttpServletResponse response,String id) {
 		Appointment appointment=this.appointmentService.get(id);
 		appointment.setState("通过");
 		//加上审批时间
@@ -123,14 +135,20 @@ public class AppointmentController {
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 		
 	//显示操作状态：通过或退回
 	@RequestMapping(value = "/disAgree",method = RequestMethod.POST)
-	public void disAgree(HttpServletResponse response,String id) throws IOException{
+	public void disAgree(HttpServletResponse response,String id){
 		Appointment appointment=this.appointmentService.get(id);
 		appointment.setState("退回");
 		//加上审批时间
@@ -138,48 +156,76 @@ public class AppointmentController {
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(HttpServletResponse response,Appointment appointment) throws IOException{
+	public void add(HttpServletResponse response,Appointment appointment){
 		this.appointmentService.add(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteById(HttpServletResponse response,String id) throws IOException{
+	public void deleteById(HttpServletResponse response,String id) {
 		this.appointmentService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
-	public void get(HttpServletResponse response,String id) throws IOException{
+	public void get(HttpServletResponse response,String id){
 		Appointment appointment=this.appointmentService.get(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", appointment);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(HttpServletResponse response,Appointment appointment) throws IOException{
+	public void update(HttpServletResponse response,Appointment appointment){
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

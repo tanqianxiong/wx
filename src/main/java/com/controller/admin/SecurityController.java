@@ -40,7 +40,7 @@ public class SecurityController {
 		return mv;
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void doLogin(String username,String password,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void doLogin(String username,String password,HttpServletRequest request,HttpServletResponse response)  {
 		Map<String,Object> map=new HashMap<String,Object>();
 		if(username.equals("admin") && password.equals("123")){
 			request.getSession().setAttribute("user", "admin");
@@ -49,8 +49,14 @@ public class SecurityController {
 		else{
 			map.put("success", false);
 		}
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

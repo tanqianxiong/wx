@@ -34,7 +34,7 @@ public class EmployeeController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) {
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		List<Employee> list=new ArrayList<Employee>();
@@ -70,8 +70,14 @@ public class EmployeeController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -81,53 +87,76 @@ public class EmployeeController {
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(HttpServletResponse response,Employee employee) throws IOException{
+	public void add(HttpServletResponse response,Employee employee){
 		employee.setPoint(0);
 //		employee.setBorrowed(0);
 		this.employeeService.add(employee);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteById(HttpServletResponse response,String id) throws IOException{
+	public void deleteById(HttpServletResponse response,String id) {
 		//String id = request.getParameter("id");
 		System.out.println(id);
 		this.employeeService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
-	public void get(HttpServletResponse response,String id) throws IOException{
+	public void get(HttpServletResponse response,String id) {
 		System.out.println(id);
 		Employee employee=this.employeeService.getById(id);
 		System.out.println(employee.getUsername());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", employee);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(HttpServletResponse response,Employee employee) throws IOException{
+	public void update(HttpServletResponse response,Employee employee){
 		this.employeeService.update(employee);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//查询借书记录
 		@RequestMapping(value = "/check", method = RequestMethod.POST)
-		public void check(HttpServletResponse response,String userId) throws IOException{
+		public void check(HttpServletResponse response,String userId) {
 			Employee employee=this.employeeService.getById(userId);
 			
 			List<Borrow> list=this.borrowService.getListByEmployee(employee);//.getByUserID("employee",userId);
@@ -135,9 +164,14 @@ public class EmployeeController {
 			map.put("success", true);
 			map.put("employee", employee);
 			map.put("list", list);
-			String response_json = JsonUtil.object2JsonStr(response, map);
-			response.getWriter().write(response_json);
-			
+			try {
+				JsonUtil.setContentType(response);
+				String response_json = JsonUtil.object2JsonStr(map);
+				response.getWriter().write(response_json);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		@RequestMapping(value = {"/check"}, method = RequestMethod.GET)

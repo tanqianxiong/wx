@@ -33,7 +33,7 @@ public class PolicyController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) {
 		Map<String,Object> map=new HashMap<String,Object>();
 		int count=0;
 		List<Policy> list=new ArrayList<Policy>();
@@ -56,8 +56,14 @@ public class PolicyController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -67,7 +73,7 @@ public class PolicyController {
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	public void add(HttpServletRequest request,HttpServletResponse response) {
 		Policy policy=new Policy();
 		String name=request.getParameter("name");
 		String content=request.getParameter("content");
@@ -79,39 +85,55 @@ public class PolicyController {
 		this.policyService.add(policy);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteById(HttpServletResponse response,String id) throws IOException{
+	public void deleteById(HttpServletResponse response,String id){
 		//String id = request.getParameter("id");
 		System.out.println(id);
 		this.policyService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
-	public void get(HttpServletResponse response,String id) throws IOException{
+	public void get(HttpServletResponse response,String id) {
 		System.out.println(id);
 		Policy policy=this.policyService.get(id);
 		//System.out.println(book.getBookName());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", policy);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(HttpServletResponse response,String id,String name,String content) throws IOException{
+	public void update(HttpServletResponse response,String id,String name,String content) {
 		Policy policy = new Policy(id);
 		policy.setName(name);
 		policy.setContent(content);
@@ -120,7 +142,13 @@ public class PolicyController {
 		this.policyService.alter(policy);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

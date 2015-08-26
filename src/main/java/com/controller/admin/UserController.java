@@ -33,9 +33,15 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public void add(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void add(HttpServletRequest request,HttpServletResponse response) {
 		List<User> list=this.userService.getAll();
-		String response_json = JsonUtil.object2JsonStr(response, list);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(list);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

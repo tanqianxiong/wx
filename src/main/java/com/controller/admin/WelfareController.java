@@ -31,7 +31,7 @@ public class WelfareController {
 		return mv;
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response)  {
 		int count=0;
 		Map<String,Object> map=new HashMap<String,Object>();
 		Map<String,Object> like=new HashMap<String,Object>();
@@ -53,8 +53,14 @@ public class WelfareController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -64,44 +70,60 @@ public class WelfareController {
 	
 	//增加
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public void add(HttpServletResponse response,Welfare welfare) throws IOException{
+	public void add(HttpServletResponse response,Welfare welfare) {
 		welfare.setState("停用");
 		this.welfareService.add(welfare);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public void deleteById(HttpServletResponse response,String id) throws IOException{
+	public void deleteById(HttpServletResponse response,String id) {
 		//String id = request.getParameter("id");
 		System.out.println(id);
 		this.welfareService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
-	public void get(HttpServletResponse response,String id) throws IOException{
+	public void get(HttpServletResponse response,String id){
 		System.out.println(id);
 		Welfare welfare=this.welfareService.get(id);
 		System.out.println(welfare.getName());
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", welfare);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//显示操作状态：启用或者停用
 	@RequestMapping(value = "/use",method = RequestMethod.POST)
-	public void use(HttpServletResponse response,String id) throws IOException{
+	public void use(HttpServletResponse response,String id) {
 		System.out.println(id);
 		Welfare welfare=this.welfareService.get(id);
 		if(welfare.getState().equals("停用")){
@@ -113,18 +135,29 @@ public class WelfareController {
 		this.welfareService.update(welfare);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
-		
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public void update(HttpServletResponse response,Welfare welfare) throws IOException{
+	public void update(HttpServletResponse response,Welfare welfare){
 		this.welfareService.update(welfare);
 		welfare.setState("停用");
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		String response_json = JsonUtil.object2JsonStr(response, map);
-		response.getWriter().write(response_json);
+		try {
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
