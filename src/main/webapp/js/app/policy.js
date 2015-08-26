@@ -44,7 +44,7 @@ function setData2Table(policyList) {
 		var tr = $("<tr/>");
 		tr.html('<td>' +j
 				+ '</td><td>' + policyList[i].name
-				+ '</td><td>' + window.simplifyBrief(policyList[i].content,25)
+				+ '</td><td  data-toggle="tooltip" data-placement="right"  title=\"'+policyList[i].content+'\">' + window.simplifyBrief(policyList[i].content,25)
 				+ '</td><td>' + window.parse2Date(policyList[i].createTime)
 				+ '</td><td>'
 				+ '<a title="点击修改" href="#" onclick="javascript:update(\''

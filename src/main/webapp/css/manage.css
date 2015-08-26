@@ -5,6 +5,10 @@ body{
 	min-width:230px;
 }
 
+.min-width-operation{
+	min-width:80px;
+}
+
 .margin-top-5{
 	margin-top:5px;
 }
@@ -24,7 +28,7 @@ body{
 	margin: 0 auto;
 }
 .book_container{
-	width: 1000px;
+	width: 1100px;
 	margin: 0 auto;
 }
 .float-left{
