@@ -77,7 +77,7 @@ public class BoundController {
 		}
 	}
 
-	@RequestMapping(value = "/cancelBind", method = RequestMethod.POST)
+	@RequestMapping(value = "/cancelBind", method = RequestMethod.GET)
 	public void doCancelBind(String openId,HttpServletRequest request,HttpServletResponse response) {
 		boolean res=false;
 		if(openId!=null){

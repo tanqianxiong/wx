@@ -65,6 +65,7 @@ public class PtBookController {
 	@RequestMapping(value = {"/borrow"}, method = RequestMethod.POST)
 	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Boolean res=false;
+		Map<String,Object> map=new HashMap<String,Object>();
 		if(openId!=null){
 			BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 			Employee el=bi.getEmployee();
@@ -83,9 +84,16 @@ public class PtBookController {
 					this.bookService.update(book);
 					res=true;
 				}
+				else{
+					//已借未归还
+					map.put("flag", 2);
+				}
+			}
+			else{
+				//不可借
+				map.put("flag", 1);
 			}
 		}
-		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", res);
 		JsonUtil.writeCommonJson(response, map);
 	}
