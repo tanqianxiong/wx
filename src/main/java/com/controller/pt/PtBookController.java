@@ -69,18 +69,20 @@ public class PtBookController {
 			BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 			Employee el=bi.getEmployee();
 			Book book=this.bookService.get(bookId);
-			Borrow _br=this.borrowService.get(el, book);
-			if(_br==null || _br.getReturnTime()!=null){
-				Borrow br=new Borrow();
-				br.setBook(book);
-				br.setEmployee(el);
-				br.setBorrowTime(new Date());
-				//br.setReturnTime(new Date());
-				this.borrowService.add(br);
-				//图书借出数量相应加一
-				book.setBorrowed(book.getBorrowed()+1);
-				this.bookService.update(book);
-				res=true;
+			if(book.getAmount()-book.getBorrowed()>0){
+				Borrow _br=this.borrowService.get(el, book);
+				if(_br==null || _br.getReturnTime()!=null){
+					Borrow br=new Borrow();
+					br.setBook(book);
+					br.setEmployee(el);
+					br.setBorrowTime(new Date());
+					//br.setReturnTime(new Date());
+					this.borrowService.add(br);
+					//图书借出数量相应加一
+					book.setBorrowed(book.getBorrowed()+1);
+					this.bookService.update(book);
+					res=true;
+				}
 			}
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
