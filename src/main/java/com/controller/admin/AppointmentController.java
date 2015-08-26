@@ -56,7 +56,8 @@ public class AppointmentController {
 		res.put("success", true);
 		res.put("list", list);
 		res.put("count", count);
-		JsonUtil.writeCommonJson(response, res);
+		String response_json = JsonUtil.object2JsonStr(response, res);
+		response.getWriter().write(response_json);
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -108,7 +109,8 @@ public class AppointmentController {
 		map.put("count", count);
 		//加载福利名称到detail页面
 		map.put("welfareName", wf.getName());
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	
 	//显示操作状态：通过或退回
@@ -121,7 +123,8 @@ public class AppointmentController {
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);		
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 
 		
@@ -135,7 +138,8 @@ public class AppointmentController {
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);		
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	
 	//增加
@@ -144,7 +148,8 @@ public class AppointmentController {
 		this.appointmentService.add(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 		
 	}
 	//按ID删除
@@ -153,7 +158,8 @@ public class AppointmentController {
 		this.appointmentService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 		
 	//详细显示要修改的记录
@@ -163,7 +169,8 @@ public class AppointmentController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", appointment);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 		
 	}
 	//更新记录
@@ -172,6 +179,7 @@ public class AppointmentController {
 		this.appointmentService.update(appointment);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 }

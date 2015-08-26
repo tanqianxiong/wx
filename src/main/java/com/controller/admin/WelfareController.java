@@ -53,7 +53,8 @@ public class WelfareController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -68,7 +69,8 @@ public class WelfareController {
 		this.welfareService.add(welfare);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 		
 	}
 	//按ID删除
@@ -79,7 +81,8 @@ public class WelfareController {
 		this.welfareService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	
 	//详细显示要修改的记录
@@ -91,7 +94,8 @@ public class WelfareController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", welfare);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 		
 	}
 	
@@ -109,7 +113,8 @@ public class WelfareController {
 		this.welfareService.update(welfare);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 		
 	}
 	//更新记录
@@ -119,6 +124,7 @@ public class WelfareController {
 		welfare.setState("停用");
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 }
