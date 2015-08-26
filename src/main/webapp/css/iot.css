@@ -205,27 +205,29 @@ img{
 	font-size:2rem;
 	text-align:center;
 }
+
+
 /*图书评分range*/
 input[type="range"] {
-    background-color: #ccc;
+    background-color: #ddd;
     border-radius: 15px;
     width: 80%;
     -webkit-appearance: none;
     height:10px;
     margin:0 auto;
-    outline:none;
 }
+         
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     cursor: pointer;
     height: 25px;
     width: 25px;
-    transform: translateY(-2px);
     background-image: url("/wx/img/star.png");
     background-size: 25px 25px;
-    border-radius: 100%;
-    outline:none;
+    border:none;
+    background-color: transparent;
 }
+
 
 /*福利办理页面*/
 .checkbox{

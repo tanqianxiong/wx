@@ -23,17 +23,17 @@
 				<p class="text-center slim">为确保每一位中移物联网员工享受到更优质的服务，<strong>请绑定您的账户</strong></p>
 			</div>
 			<div class="row">
-				<div id="binding" class="likebtn"><a href="/wx/pt/binding.do">立即绑定</a></div>
+				<div id="binding" class="likebtn"><a href="#">立即绑定</a></div>
 			</div>
 		</div>
 		<script>
 			$(function(){
 				var openId = getQueryString("openId");
-				setCookie("openId", openId, 300);
+				//setCookie("openId", openId, 300);
 				$('#binding').click(function(){
 					window.location.href="/wx/pt/binding.do?openId="+openId;
 				});
-			});	
+			});	    
 		</script>
 	</body>
 </html>
