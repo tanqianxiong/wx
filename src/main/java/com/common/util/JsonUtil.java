@@ -95,11 +95,17 @@ public class JsonUtil {
 	 * @param object
 	 *            对象
 	 */
-	public static String object2JsonStr(HttpServletResponse response,
-			Object object) {
+	public static String object2JsonStr(Object object) {
 		JSONObject jsonObject = JSONObject.fromObject(object);
-		response.setContentType(CONTENT_TYPE);
 		return jsonObject.toString();
 	}
-
+	/**
+	 * 设置返回的头部编码
+	 * 
+	 * @param response
+	 * @return void           
+	 */
+	public static void setContentType(HttpServletResponse response) {
+		response.setContentType(CONTENT_TYPE);
+	}
 }

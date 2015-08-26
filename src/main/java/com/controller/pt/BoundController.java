@@ -65,11 +65,11 @@ public class BoundController {
 			//request.getSession().setAttribute("user", "pt");
 			res=true;
 		}
-		
 		Map<String,Boolean> map=new HashMap<String,Boolean>();
 		map.put("success", res);
 		try {
-			String response_json = JsonUtil.object2JsonStr(response, map);
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -88,7 +88,8 @@ public class BoundController {
 		Map<String,Boolean> map=new HashMap<String,Boolean>();
 		map.put("success", res);
 		try {
-			String response_json = JsonUtil.object2JsonStr(response, map);
+			JsonUtil.setContentType(response);
+			String response_json = JsonUtil.object2JsonStr(map);
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
