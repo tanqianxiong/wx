@@ -59,6 +59,7 @@ $(function(){
 				if (result.success) {
 					setCookie("username",name,100);
 					setCookie("jobNumber",jobNumber,100);
+					setCookie("openId",openId,100);
 					$("#bindbtn").hide();
 					$("<span class='btn btn-lg btn-success btn-block'>绑定成功！<br/>现在开始借阅吧~</span>").appendTo("#bindcontainer");
 					setTimeout(function(){
@@ -87,7 +88,7 @@ $(function(){
 		if(!reg.test(keyword)){
 			return ;
 		}		
-		//console.log("搜索内容为:" + keyword);	
+		console.log("搜索内容为:" + keyword);	
 		$.ajax({
 		    type: "POST",
 			url: "bookSearch.do",
@@ -103,7 +104,7 @@ $(function(){
 					alert("抱歉，您搜的图书不存在");
 				}
 			},
-			error: function(jqXHR){  
+			error: function(jqXHR){
 			   alert("网络错误：" + jqXHR.status);  
 			},
 		});
@@ -156,13 +157,10 @@ $(function(){
 		sessionStorage.brief=brief;		
 		//设好sessionStorage，跳转到detail页面
 	
-		
-		var openId = getCookie("openId");
-		//var openId = getQueryString("openId");
+		//var openId = getCookie("openId");
+		var openId = getQueryString("openId");
 		window.location.href="/wx/pt/book/detail.do?openId="+openId;
-		
-		
-		
+			
 	});
 	//借阅按钮
 	$("#borrow").click(function(){
@@ -213,7 +211,16 @@ $(function(){
 	$(".thumbnail").click(function(){
 		var selected_category = $(this).data("category");
 		setCookie("selected_category",selected_category,0.005);
+
+		
+		//重复绑定bug解决
+		var openId = getQueryString("openId");
+		window.location.href="/wx/pt/book/category.do?openId="+openId;
+		
 	});
+	
+	
+	
 	//点击还书(escheat点击区域变为整个tr) 弹出层出现,因为个人的借阅图书是从后台取得的，所以该事件应使用动态添加
 	$("table.borrowing_table").on('click','tr',function(){
 		//获取被点击的书目
@@ -332,7 +339,9 @@ $(function(){
 						$("input:checked").attr("checked",false);
 						$(".alreadyHandle").click();
 						$("#collapseTwo").addClass("in");
-					},2222);
+						$("#collapseTwo").attr("aria-expanded","true");
+						$("#collapseTwo").css("height","auto");
+					},3000);
 				}else{
 					alert("信息输入有误,请重输");
 				}

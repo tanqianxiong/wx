@@ -261,6 +261,7 @@ input[type="range"]::-webkit-slider-thumb {
 .welfare-help{
 	font-size:14px;
 	text-align:center;
+	margin-bottom:15px;
 }
 
 #masker-welfare{
@@ -286,6 +287,10 @@ input[type="range"]::-webkit-slider-thumb {
 	border-top:8px solid #666;
 	border-left:8px solid transparent;
 	border-right:8px solid transparent;
+}
+/*借阅记录中表格太窄*/
+.individual .panel-body:first-child{
+	padding:0;
 }
 
 
