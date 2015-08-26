@@ -60,7 +60,7 @@ public class ServiceController {
 		map.put("list", list);
 		JsonUtil.writeCommonJson(response, map);
 	}
-
+	//点击预约办理
 	@RequestMapping(value = {"/handle"}, method = RequestMethod.POST)
 	public void doWelfareHandle(String openId,String welfareIds,String jobNumber,String username,HttpServletResponse response) throws IOException {
 		Boolean res = false;		
@@ -78,7 +78,7 @@ public class ServiceController {
 					for(int k=0;k<li.size();k++){
 						Appointment app = li.get(k);
 						String id=app.getWelfare().getId();
-						if(id.equals(welIds[i])){
+						if(id.equals(welIds[i]) && !app.getWelfare().getState().equals("通过")){
 							j=1;
 							break;
 						}

@@ -76,4 +76,23 @@ public class BoundController {
 			e.printStackTrace();
 		}
 	}
+
+	@RequestMapping(value = "/cancelBind", method = RequestMethod.POST)
+	public void doCancelBind(String openId,HttpServletRequest request,HttpServletResponse response) {
+		boolean res=false;
+		if(openId!=null){
+			//删除绑定信息
+			this.boundInfoService.delete(this.boundInfoService.getByOpenId(openId).getId());
+			res=true;
+		}
+		Map<String,Boolean> map=new HashMap<String,Boolean>();
+		map.put("success", res);
+		try {
+			String response_json = JsonUtil.object2JsonStr(response, map);
+			response.getWriter().write(response_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
