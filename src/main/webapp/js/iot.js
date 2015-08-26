@@ -186,13 +186,16 @@ $(function(){
 						window.location.href="/wx/pt/book/index.do?openId="+openId;
 					},1000);
 				} else {
-					//重复借阅
-					$(".popup-detail").text("您已借过这本书了哦");
+					if(result.flag=='1'){
+						$(".popup-detail").text("该书已全部借出");
+					}else{
+						$(".popup-detail").text("您已借过这本书了哦");
+					}
 					$(".popup-detail").css("color","#93ebf5");
 					$("#masker").fadeIn(200);
 					$(".popup-detail").fadeIn(200);
 					setTimeout(function(){
-						window.location.href="/wx/pt/book/category.do?openId="+openId;
+						window.location.href="/wx/pt/book/index.do?openId="+openId;
 					},1000);
 				}
 			},

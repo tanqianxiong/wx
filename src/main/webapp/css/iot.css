@@ -294,6 +294,9 @@ input[type="range"]::-webkit-slider-thumb {
 .individual .panel-body:first-child{
 	padding:0;
 }
+.borrowing_table td{
+	padding:3px!important;
+}
 
 
 
