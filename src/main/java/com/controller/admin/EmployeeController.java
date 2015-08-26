@@ -70,7 +70,8 @@ public class EmployeeController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 
 	public ModelAndView list(HttpServletRequest request) {
@@ -86,8 +87,8 @@ public class EmployeeController {
 		this.employeeService.add(employee);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
-		
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -97,7 +98,8 @@ public class EmployeeController {
 		this.employeeService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	
 	
@@ -110,7 +112,8 @@ public class EmployeeController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", employee);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 		
 	}
 	//更新记录
@@ -119,7 +122,8 @@ public class EmployeeController {
 		this.employeeService.update(employee);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	//查询借书记录
 		@RequestMapping(value = "/check", method = RequestMethod.POST)
@@ -131,7 +135,8 @@ public class EmployeeController {
 			map.put("success", true);
 			map.put("employee", employee);
 			map.put("list", list);
-			JsonUtil.writeCommonJson(response, map);
+			String response_json = JsonUtil.object2JsonStr(response, map);
+			response.getWriter().write(response_json);
 			
 		}
 		

@@ -35,6 +35,7 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public void add(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		List<User> list=this.userService.getAll();
-		JsonUtil.writeCommonJson(response, list);
+		String response_json = JsonUtil.object2JsonStr(response, list);
+		response.getWriter().write(response_json);
 	}
 }

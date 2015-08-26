@@ -73,7 +73,8 @@ public class BookController {
 		map.put("success", true);
 		map.put("list", list);
 		map.put("count",count);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	
 	//增加
@@ -97,8 +98,8 @@ public class BookController {
 		this.bookService.add(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
-		
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -108,7 +109,8 @@ public class BookController {
 		this.bookService.delete(id);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	
 	
@@ -121,8 +123,8 @@ public class BookController {
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		map.put("item", book);
-		JsonUtil.writeCommonJson(response, map);
-		
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -144,6 +146,7 @@ public class BookController {
 		this.bookService.update(book);
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 }

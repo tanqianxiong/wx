@@ -94,7 +94,6 @@ function pageselectCallback(page_index, jq){
 		type : "POST",
 		url : "list.do",
 		data : {
-			//keyword: $('#keyword').val(),
 			keyword:window.keyword,
 			pageIndex : page_index,		
 			itemsPerPage : $('#itemsPerPage').val(),
@@ -169,7 +168,8 @@ $(function() {
 	window.setInterval("getCurrentTime($('#currentTime'));",100);
 	//按关键字搜索			
 	$('#searchBtn').click(function() {
-		window.keyword=$('#keyword').val();
+		var key=$('#keyword').val();
+		window.keyword=key.replace(/(^\s*)|(\s*$)/g, "");
 		initPagination();
 	});
 	//自定义alert与confirm弹出框

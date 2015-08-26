@@ -49,7 +49,8 @@ public class SecurityController {
 		else{
 			map.put("success", false);
 		}
-		JsonUtil.writeCommonJson(response, map);
+		String response_json = JsonUtil.object2JsonStr(response, map);
+		response.getWriter().write(response_json);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
