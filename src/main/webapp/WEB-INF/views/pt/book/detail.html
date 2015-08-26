@@ -11,16 +11,11 @@
 		<link href="/wx/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="/wx/css/iot.css" rel="stylesheet" type="text/css">
-
 		<script src="/wx/js/jquery.js"></script>
 		<script src="/wx/js/bootstrap.js"></script>
 		<script src="/wx/js/iot.js"></script>
 	</head>
-
-
-
 	<body>
-	
 		<div  class="container-fluid"> 
 			<h4 style="text-align:center;">图书详情：</h4>
 			<table class="table detail-table">
@@ -30,59 +25,52 @@
 				</tr>
 				<tr>
 					<td class="items">作者:</td>
-					<td id="author">吴承恩</td>
+					<td id="author"></td>
 				</tr>
 				<tr>
 					<td class="items">出版社:</td>
-					<td id="publisher">party</td>
+					<td id="publisher"></td>
 				</tr>
 				<tr>
 					<td class="items">出版年份:</td>
-					<td id="publishTime">2012</td>
+					<td id="publishTime"></td>
 				</tr>
 				<tr>
 					<td class="items">馆藏总量:</td>
-					<td id="amount">10</td>
+					<td id="amount"></td>
 				</tr>
 				<tr>
 					<td class="items">可借数量:</td>
-					<td id="available">5</td>
+					<td id="available"></td>
 				</tr>
-				
 				<tr>
 					<td class="items">评分:</td>
-					<td id="points">4.9</td>
+					<td id="points"></td>
 				</tr>
 				<tr>
 					<td class="items">简介:</td>
-					<td id="brief">..</td>
+					<td id="brief"></td>
 				</tr>
 			</table>
-
 			<div style="text-align:center;">
 				<span id="borrow" class="btn goodbtn">现在借阅</span><br/><br/>
 			</div>
-			
- 
 		</div>
-
 		<div id="masker"></div>
 		<div class="popup-detail">
 			借阅成功
 		</div>
-
-	<script>
-		$(function(){
-			$("#bookName").text(sessionStorage.bookName);
-			$("#author").text(sessionStorage.author);
-			$("#publisher").text(sessionStorage.publisher);
-			$("#publishTime").text(sessionStorage.publishTime);
-			$("#amount").text(sessionStorage.amount);
-			$("#available").text(sessionStorage.available);
-			$("#points").text(sessionStorage.points);
-			$("#brief").text(sessionStorage.brief);
-		});
-	</script>
-
+		<script>
+			$(function(){
+				$("#bookName").text(sessionStorage.bookName);
+				$("#author").text(sessionStorage.author);
+				$("#publisher").text(sessionStorage.publisher);
+				$("#publishTime").text(sessionStorage.publishTime);
+				$("#amount").text(sessionStorage.amount);
+				$("#available").text(sessionStorage.available);
+				$("#points").text(sessionStorage.points);
+				$("#brief").text(sessionStorage.brief);
+			});
+		</script>
 	</body>
 </html>

@@ -84,16 +84,13 @@ $(function(){
 			return ;
 		}
 		var keyword = $("#user_search").val();
-		var reg = /^[\u0391-\uFFE5|\w]+$/g;
-		if(!reg.test(keyword)){
-			return ;
-		}		
+		keyword = keyword.replace(/(^\s*)|(\s*$)/g, "");
 		console.log("搜索内容为:" + keyword);	
 		$.ajax({
 		    type: "POST",
 			url: "bookSearch.do",
 			data: {
-				keyword :  $("#user_search").val()
+				keyword : keyword
 			},
 			dataType: "json",
 			success: function(result){
@@ -156,7 +153,6 @@ $(function(){
 		var brief = tds.eq(9).text();
 		sessionStorage.brief=brief;		
 		//设好sessionStorage，跳转到detail页面
-	
 		//var openId = getCookie("openId");
 		var openId = getQueryString("openId");
 		window.location.href="/wx/pt/book/detail.do?openId="+openId;
@@ -214,16 +210,10 @@ $(function(){
 	$(".thumbnail").click(function(){
 		var selected_category = $(this).data("category");
 		setCookie("selected_category",selected_category,0.005);
-
-		
-		//重复绑定bug解决
 		var openId = getQueryString("openId");
 		window.location.href="/wx/pt/book/category.do?openId="+openId;
 		
 	});
-	
-	
-	
 	//点击还书(escheat点击区域变为整个tr) 弹出层出现,因为个人的借阅图书是从后台取得的，所以该事件应使用动态添加
 	$("table.borrowing_table").on('click','tr',function(){
 		//获取被点击的书目
@@ -269,9 +259,6 @@ $(function(){
 		});
 	});
 	function updateRecord(result){
-		//从表格中删除该书
-		//若归还成功，则
-		//alert(result.msg);
 		$("#masker-ind").fadeOut(100);
 		$("#popup-ind").fadeOut(100);
 		//删除选中的书
@@ -289,7 +276,6 @@ $(function(){
 		$("#popup-ind").fadeOut(100);
 		$("tr").removeClass("choosing");		
 	});
-
 //福利办理模块
 	//点击办理按钮，发送ajax
 	//用户点击提交按钮，发送ajax请求
@@ -308,15 +294,11 @@ $(function(){
 		}
 		//var openId = getCookie("openId");
 		var openId = getQueryString("openId");
-		
 		var welfareIds = [];
 		$("input:checked").each(function(){
             welfareIds.push(this.value);
         });
-		welfareIds = welfareIds.join(",");
-        //console.log(welfareIds);
-        //console.log(openId);
-        //console.log(username+'  '+jobNumber);     
+		welfareIds = welfareIds.join(",");    
         if(welfareIds==''){
         	alert("请选择要办理的业务");
         	return;
