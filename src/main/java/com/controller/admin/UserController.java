@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import com.common.util.JsonUtil;
 public class UserController {
 	@Autowired
 	public UserService userService;
+	Logger logger  =  Logger.getLogger(UserController.class);
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request) {
@@ -41,7 +43,8 @@ public class UserController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 }

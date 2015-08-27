@@ -54,7 +54,7 @@
 		<!-- 连接池配置 -->
 		<property name="houseKeepingSleepTime" value="30000" />
 		<property name="prototypeCount" value="5" />
-		<property name="maximumConnectionCount" value="1000" />
+		<property name="maximumConnectionCount" value="100000" />
 		<property name="minimumConnectionCount" value="50" />
 		<property name="trace" value="true" />
 		<property name="verbose" value="true" />

@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class AppointmentController {
 	public AppointmentService appointmentService;
 	@Autowired
 	public WelfareService welfareService;
+	Logger logger  =  Logger.getLogger(AppointmentController.class);
 	//全查
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView showListPage(HttpServletRequest request) {
@@ -62,7 +64,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 
@@ -121,7 +124,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	
@@ -141,7 +145,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 
@@ -162,7 +167,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	
@@ -178,7 +184,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	//按ID删除
@@ -193,7 +200,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 		
@@ -210,7 +218,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	//更新记录
@@ -225,7 +234,8 @@ public class AppointmentController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 }
