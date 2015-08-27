@@ -68,6 +68,9 @@ function addOrUpdate(){
 				window.Modal.alert({msg:'操作成功！'});
 				window.location.reload();
 			}
+			else{
+				alert("输入格式有误！");
+			}
 		},
 		error : function(jqXHR) {
 			window.Modal.alert({msg:"发生错误：" + jqXHR.status});

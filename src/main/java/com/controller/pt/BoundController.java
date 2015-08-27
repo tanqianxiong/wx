@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.common.util.JsonUtil;
+import com.common.util.RegCheck;
 import com.entity.BoundInfo;
 import com.entity.Employee;
 
@@ -58,7 +59,7 @@ public class BoundController {
 		eProps.put("username", name);
 		eProps.put("userNo", jobNumber);
 		List<Employee> epList=this.employeeService.getListByProperties(eProps);
-		if(epList!=null && epList.size()>0 && openId!=null){
+		if(epList!=null && epList.size()>0 && openId!=null && RegCheck.CheckLetterAndNum(openId)){
 			//添加绑定信息
 			BoundInfo boundInfo=new BoundInfo(epList.get(0),openId);
 			this.boundInfoService.add(boundInfo);
@@ -80,7 +81,7 @@ public class BoundController {
 	@RequestMapping(value = "/cancelBind", method = RequestMethod.GET)
 	public void doCancelBind(String openId,HttpServletRequest request,HttpServletResponse response) {
 		boolean res=false;
-		if(openId!=null){
+		if(openId!=null && RegCheck.CheckLetterAndNum(openId)){
 			//删除绑定信息
 			this.boundInfoService.delete(this.boundInfoService.getByOpenId(openId).getId());
 			res=true;

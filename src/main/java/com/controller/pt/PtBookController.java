@@ -26,6 +26,7 @@ import com.service.BorrowService;
 import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.common.util.JsonUtil;
+import com.common.util.RegCheck;
 
 @Controller
 @RequestMapping("/pt/book")
@@ -66,7 +67,7 @@ public class PtBookController {
 	public void borrow(String openId,String bookId,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		Boolean res=false;
 		Map<String,Object> map=new HashMap<String,Object>();
-		if(openId!=null){
+		if(openId!=null && RegCheck.CheckLetterAndNum(openId)){
 			BoundInfo bi=this.boundInfoService.getByOpenId(openId);
 			Employee el=bi.getEmployee();
 			Book book=this.bookService.get(bookId);
@@ -130,23 +131,26 @@ public class PtBookController {
 	 */
 	@RequestMapping(value = "/individual", method = RequestMethod.POST)
 	public void doGetBorrowRecord(String openId, HttpServletRequest request,HttpServletResponse response) {
-		Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
-		List<Borrow> list =this.borrowService.getListByEmployee(employee);
-		List<Book> borrowing=new ArrayList<Book>();
-		List<Book> borrowed=new ArrayList<Book>();
-		for(Borrow br:list){
-			if(br.getReturnTime()!=null){
-				borrowed.add(br.getBook());
-			}
-			else{
-				borrowing.add(br.getBook());
-			}
+		Boolean success=false;
+		Map<String,Object> map=new HashMap<String,Object>();		
+		if(success=RegCheck.CheckLetterAndNum(openId)){
+			Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
+			List<Borrow> list =this.borrowService.getListByEmployee(employee);
+			List<Book> borrowing=new ArrayList<Book>();
+			List<Book> borrowed=new ArrayList<Book>();
+			for(Borrow br:list){
+				if(br.getReturnTime()!=null){
+					borrowed.add(br.getBook());
+				}
+				else{
+					borrowing.add(br.getBook());
+				}
+			}		
+			map.put("score", employee.getPoint());
+			map.put("borrowing", borrowing);
+			map.put("borrowed", borrowed);
 		}
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
-		map.put("score", employee.getPoint());
-		map.put("borrowing", borrowing);
-		map.put("borrowed", borrowed);
+		map.put("success", success);
 		try {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {
@@ -160,25 +164,28 @@ public class PtBookController {
 	 */
 	@RequestMapping(value = "/escheat", method = RequestMethod.POST)
 	public void doReturnBook(String openId, String bookId,int point, HttpServletRequest request,HttpServletResponse response) {
-		Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
-		Book book=this.bookService.get(bookId);
-		Borrow br=this.borrowService.get(employee,book);
-		br.setReturnTime(new Date());
-		this.borrowService.update(br);
-		//更新员工的得分
-		employee.setPoint(employee.getPoint()+1);
-		this.employeeService.update(employee);
-		//图书评分进行更新
-		DecimalFormat df = new DecimalFormat("######.0");
-		double _point=(book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1);
-		book.setPoints(Double.parseDouble(df.format(_point)));
-		//这一句一定要放在后面
-		book.setCommentNum(book.getCommentNum()+1);
-		//图书借出数相应减一
-		book.setBorrowed(book.getBorrowed()-1);
-		this.bookService.update(book);
+		Boolean success=false;
+		if(success=RegCheck.CheckLetterAndNum(openId)){
+			Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
+			Book book=this.bookService.get(bookId);
+			Borrow br=this.borrowService.get(employee,book);
+			br.setReturnTime(new Date());
+			this.borrowService.update(br);
+			//更新员工的得分
+			employee.setPoint(employee.getPoint()+1);
+			this.employeeService.update(employee);
+			//图书评分进行更新
+			DecimalFormat df = new DecimalFormat("######.0");
+			double _point=(book.getPoints()*book.getCommentNum()+point)/(book.getCommentNum()+1);
+			book.setPoints(Double.parseDouble(df.format(_point)));
+			//这一句一定要放在后面
+			book.setCommentNum(book.getCommentNum()+1);
+			//图书借出数相应减一
+			book.setBorrowed(book.getBorrowed()-1);
+			this.bookService.update(book);
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
+		map.put("success", success);
 		try {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {

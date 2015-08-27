@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.util.JsonUtil;
+import com.common.util.RegCheck;
 import com.entity.Borrow;
 import com.entity.Employee;
 import com.service.BorrowService;
@@ -90,9 +91,14 @@ public class EmployeeController {
 	public void add(HttpServletResponse response,Employee employee){
 		employee.setPoint(0);
 //		employee.setBorrowed(0);
-		this.employeeService.add(employee);
+		Boolean success=false;
+		if (success=RegCheck.CheckChinese(employee.getUsername())){
+			if(success=RegCheck.CheckNum(employee.getUserNo())){
+				this.employeeService.add(employee);
+			}
+		}		
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
+		map.put("success", success);
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);

@@ -21,6 +21,7 @@ import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.service.WelfareService;
 import com.common.util.JsonUtil;
+import com.common.util.RegCheck;
 import com.entity.Appointment;
 import com.entity.Book;
 import com.entity.Borrow;
@@ -64,41 +65,43 @@ public class ServiceController {
 	@RequestMapping(value = {"/handle"}, method = RequestMethod.POST)
 	public void doWelfareHandle(String openId,String welfareIds,String jobNumber,String username,HttpServletResponse response) throws IOException {
 		Boolean res = false;		
-		String[] welIds =  welfareIds.split(",");		
-		BoundInfo bi=this.boundInfoService.getByOpenId(openId);
-		Employee em=bi.getEmployee();
-		//String user_id = em.getId();
-		if(em.getUsername().equals(username) && em.getUserNo().equals(jobNumber )){
-			for(int i=0;i<welIds.length;i++){
-				Appointment ap = new Appointment();			
-				Welfare wel = this.welfareService.get(welIds[i]);
-				List<Appointment> li = this.appointmentService.getListByProperty("employee",em);
-				if(li!=null && !li.isEmpty()){
-					int j=0;
-					for(int k=0;k<li.size();k++){
-						Appointment app = li.get(k);
-						String id=app.getWelfare().getId();
-						if(id.equals(welIds[i]) && !app.getWelfare().getState().equals("通过")){
-							j=1;
-							break;
+		if(RegCheck.CheckLetterAndNum(openId)){
+			String[] welIds =  welfareIds.split(",");		
+			BoundInfo bi=this.boundInfoService.getByOpenId(openId);
+			Employee em=bi.getEmployee();
+			//String user_id = em.getId();
+			if(em.getUsername().equals(username) && em.getUserNo().equals(jobNumber )){
+				for(int i=0;i<welIds.length;i++){
+					Appointment ap = new Appointment();			
+					Welfare wel = this.welfareService.get(welIds[i]);
+					List<Appointment> li = this.appointmentService.getListByProperty("employee",em);
+					if(li!=null && !li.isEmpty()){
+						int j=0;
+						for(int k=0;k<li.size();k++){
+							Appointment app = li.get(k);
+							String id=app.getWelfare().getId();
+							if(id.equals(welIds[i]) && !app.getWelfare().getState().equals("通过")){
+								j=1;
+								break;
+							}
 						}
-					}
-					if(j==0){
+						if(j==0){
+							ap.setWelfare(wel);
+							ap.setEmployee(em);
+							ap.setApplyTime(new Date());
+							ap.setState("申请中");
+							this.appointmentService.add(ap);	
+						}
+					}else{
 						ap.setWelfare(wel);
 						ap.setEmployee(em);
 						ap.setApplyTime(new Date());
 						ap.setState("申请中");
-						this.appointmentService.add(ap);	
+						this.appointmentService.add(ap);					
 					}
-				}else{
-					ap.setWelfare(wel);
-					ap.setEmployee(em);
-					ap.setApplyTime(new Date());
-					ap.setState("申请中");
-					this.appointmentService.add(ap);					
 				}
+				res = true;
 			}
-			res = true;
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", res);
@@ -110,7 +113,7 @@ public class ServiceController {
 	public void doHasHandled(String openId,HttpServletResponse response) throws IOException {
 		Boolean res = false;
 		Map<String,Object> map=new HashMap<String,Object>();		
-		if(openId!=null){
+		if(openId!=null && RegCheck.CheckLetterAndNum(openId)){
 			Employee employee=this.boundInfoService.getByOpenId(openId).getEmployee();
 			List<Appointment> alist=this.appointmentService.getListByProperty("employee", employee);
 			List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
