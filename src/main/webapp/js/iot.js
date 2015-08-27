@@ -37,7 +37,7 @@ $(function(){
 		var reg1 = /^[\u0391-\uFFE5|\w]+$/g;
 		var reg2 = /^\d+$/g;
 		if(!reg1.test(name) || !reg2.test(jobNumber)){
-			alert("输入格式有误");
+			alert("输入格式有误，请重输");
 			return;
 		}
 		//var openId = getCookie("openId");
