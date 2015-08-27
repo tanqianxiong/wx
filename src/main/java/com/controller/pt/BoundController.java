@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.common.util.JsonUtil;
 import com.common.util.RegCheck;
+import com.controller.admin.WelfareController;
 import com.entity.BoundInfo;
 import com.entity.Employee;
 
@@ -28,6 +30,7 @@ public class BoundController {
 	public BoundInfoService boundInfoService;
 	@Autowired
 	public EmployeeService employeeService;
+	Logger logger  =  Logger.getLogger(BoundController.class);
 
 	/*@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.GET)
 	public void checkWeChat(HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -74,7 +77,8 @@ public class BoundController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 
@@ -94,7 +98,8 @@ public class BoundController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 }

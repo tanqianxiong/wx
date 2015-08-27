@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,8 @@ public class PtBookController {
 	
 	@Autowired
 	public EmployeeService employeeService;
-	
+
+	Logger logger  =  Logger.getLogger(PtBookController.class);
 	
 	/*
 	 * 跳转到个人借阅记录页面
@@ -122,7 +124,8 @@ public class PtBookController {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 		//return mv;
 	}
@@ -155,7 +158,8 @@ public class PtBookController {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 		//return mv;
 	}
@@ -190,7 +194,8 @@ public class PtBookController {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 		//return mv;
 	}
@@ -222,7 +227,8 @@ public class PtBookController {
 			JsonUtil.writeCommonJson(response, map);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 		//return mv;
 	}

@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import com.service.WelfareService;
 public class WelfareController {
 	@Autowired
 	public WelfareService welfareService;
+	Logger logger  =  Logger.getLogger(WelfareController.class);
 	//全查
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView showListPage(HttpServletRequest request) {
@@ -59,7 +61,8 @@ public class WelfareController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 
@@ -81,7 +84,8 @@ public class WelfareController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	//按ID删除
@@ -98,7 +102,8 @@ public class WelfareController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	
@@ -117,7 +122,8 @@ public class WelfareController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	
@@ -141,7 +147,8 @@ public class WelfareController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 	//更新记录
@@ -157,7 +164,8 @@ public class WelfareController {
 			response.getWriter().write(response_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error(e.getStackTrace().toString());
 		}
 	}
 }
