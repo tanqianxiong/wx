@@ -43,7 +43,7 @@
 						<tr>
 							<th>书名</th>
 							<th>作者</th>
-							<th>出版社</th>
+							<th></th>
 							<th></th>
 						</tr>
 					</table>
@@ -62,10 +62,10 @@
 			      <div class="panel-body">
 
 					<table class="table table-striped table-hover individual-table" id="borrowed">
-						<tr id="borrowed_th">
+						<tr id="borrowed_th"  style="background-color:#abc;">
 							<th>书名</th>
 							<th>作者</th>
-							<th>出版社</th>		
+							<th></th>	
 						</tr>
 					</table>
 
@@ -137,7 +137,7 @@
 							console.log(k1+'  '+v1);
 						});
 						var tr=$("<tr/>");
-						tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td style="width:50px;"><span class="go-popup escheat btn-success">归还</span></td><td style="display:none">'+td_object.id+'</td>');
+						tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td style="display:none">'+td_object.publisher+'</td><td style="width:50px;"><span class="go-popup escheat btn-success">归还</span></td><td style="display:none">'+td_object.id+'</td>');
 						tr.appendTo(borrowingTable);
 					});
 					//显示已经归还书目列表

@@ -19,10 +19,10 @@
 		<div  class="container-fluid">
 			<h3 class="category_info">书目：</h3>
 			<table class="table table-striped table-hover" id="category_table">
-				<tr>
+				<tr style="background-color:#abc;">
 					<th>书名</th>
 					<th>作者</th>
-					<th>出版社</th>
+					<th></th>
 					<th></th>
 				</tr>
 			</table>
@@ -88,7 +88,7 @@
 							console.log(k1+'  '+v1);
 						});
 						var tr=$("<tr/>");
-						tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td>'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td">'+td_object.id+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
+						tr.html('<td>'+td_object.bookName+'</td><td>'+td_object.author+'</td><td class="hide_td">'+td_object.publisher+'</td><td><span class="go-popup detail btn-success">详情</span></td><td class="hide_td">'+td_object.id+'</td><td class="hide_td">'+td_object.publishTime+'</td><td class="hide_td">'+td_object.amount+'</td><td class="hide_td">'+td_object.borrowed+'</td><td class="hide_td">'+td_object.points+'</td><td class="hide_td">'+td_object.brief+'</td>');
 						tr.appendTo(table);
 					});		
 				}
