@@ -35,8 +35,9 @@ $(function(){
 		var name = $("#username").val();
 		var jobNumber = $("#jobNumber").val();
 		var reg1 = /^[\u0391-\uFFE5|\w]+$/g;
-		var reg2 = /^\d+$/g; 
+		var reg2 = /^\d+$/g;
 		if(!reg1.test(name) || !reg2.test(jobNumber)){
+			alert("输入格式有误");
 			return;
 		}
 		//var openId = getCookie("openId");
