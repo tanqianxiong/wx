@@ -90,7 +90,7 @@ $(function(){
 		    type: "POST",
 			url: "bookSearch.do",
 			data: {
-				keyword : keyword
+				keyword: keyword
 			},
 			dataType: "json",
 			success: function(result){
@@ -139,9 +139,13 @@ $(function(){
 		var author = tds.eq(1).text();
 		sessionStorage.author=author;		
 		var publisher = tds.eq(2).text();
-		sessionStorage.publisher=publisher;
+		sessionStorage.publisher=publisher;		
 		var bookId = tds.eq(4).text();
-		sessionStorage.bookId=bookId;		
+		sessionStorage.bookId=bookId;
+		
+		var publishTime = tds.eq(5).text();
+		sessionStorage.publishTime=publishTime;
+		
 		var amount = tds.eq(6).text();
 		sessionStorage.amount=amount;		
 		var borrowed = tds.eq(7).text();
