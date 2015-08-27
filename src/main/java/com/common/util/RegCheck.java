@@ -23,4 +23,13 @@ public class RegCheck {
 			String reg="^[A-Za-z0-9]+$";
 			return Check(reg,str);
 		}
+		public static boolean CheckKeyword(String str){
+			String reg="^[\u4E00-\u9FA5A-Za-z0-9]*·{0,1}[\u4E00-\u9FA5A-Za-z0-9]*$";
+			return Check(reg,str);
+		}
+		public static boolean CheckEnglish(String str){
+			String reg="^[A-Za-z]*$";
+			return Check(reg,str);
+		}
+		
 }

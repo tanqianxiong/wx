@@ -122,7 +122,9 @@ function pageselectCallback(page_index, jq){
 					window.Modal.alert({msg:"没有找到相匹配的数据"});
 				}
 			} else {
-				window.Modal.alert({msg:"抱歉，信息不匹配，请重新输入"});
+				$('#keyword').val("");
+				window.Modal.alert({msg:"抱歉，输入格式有误，请重新输入"});
+				window.keyword="";
 			}
 		},
 		error : function(jqXHR) {
