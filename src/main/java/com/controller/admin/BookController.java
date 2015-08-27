@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.util.JsonUtil;
+import com.common.util.RegCheck;
 import com.entity.Book;
 import com.service.BookService;
 
@@ -87,23 +88,26 @@ public class BookController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public void add(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
 					String type,int amount,String brief){
-		Book book=new Book(id);
-		book.setISBN(ISBN);
-		book.setBookName(bookName);
-		book.setAuthor(author);
-		book.setPublisher(publisher);
-		book.setPublishTime(publishTime);
-		book.setType(type);
-		book.setAmount(amount);
-		book.setBrief(brief);
-		book.setPoints((float) 0);
-		book.setBorrowed(0);
-		book.setCommentNum(0);
-		book.setBookState("新书");
-		book.setBookInputTime(new Date());
-		this.bookService.add(book);
+		Boolean success=false;
+		if(success=RegCheck.CheckNum(ISBN)){
+			Book book=new Book(id);
+			book.setISBN(ISBN);
+			book.setBookName(bookName);
+			book.setAuthor(author);
+			book.setPublisher(publisher);
+			book.setPublishTime(publishTime);
+			book.setType(type);
+			book.setAmount(amount);
+			book.setBrief(brief);
+			book.setPoints((float) 0);
+			book.setBorrowed(0);
+			book.setCommentNum(0);
+			book.setBookState("新书");
+			book.setBookInputTime(new Date());
+			this.bookService.add(book);
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
+		map.put("success", success);
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);
@@ -154,22 +158,25 @@ public class BookController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void update(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
 			String type,int amount,String brief,float points,int borrowed,int commentNum,String bookState){
-		Book book=new Book(id);
-		book.setISBN(ISBN);
-		book.setBookName(bookName);
-		book.setAuthor(author);
-		book.setPublisher(publisher);
-		book.setPublishTime(publishTime);
-		book.setType(type);
-		book.setAmount(amount);
-		book.setBrief(brief);
-		book.setPoints(points);
-		book.setBorrowed(borrowed);
-		book.setCommentNum(commentNum);
-		book.setBookState(bookState);
-		this.bookService.update(book);
+		Boolean success=false;
+		if(success=RegCheck.CheckNum(ISBN)){
+			Book book=new Book(id);
+			book.setISBN(ISBN);
+			book.setBookName(bookName);
+			book.setAuthor(author);
+			book.setPublisher(publisher);
+			book.setPublishTime(publishTime);
+			book.setType(type);
+			book.setAmount(amount);
+			book.setBrief(brief);
+			book.setPoints(points);
+			book.setBorrowed(borrowed);
+			book.setCommentNum(commentNum);
+			book.setBookState(bookState);
+			this.bookService.update(book);
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
+		map.put("success", success);
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);

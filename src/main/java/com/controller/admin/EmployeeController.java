@@ -148,9 +148,14 @@ public class EmployeeController {
 	//更新记录
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public void update(HttpServletResponse response,Employee employee){
-		this.employeeService.update(employee);
+		Boolean success=false;
+		if (success=RegCheck.CheckChinese(employee.getUsername())){
+			if(success=RegCheck.CheckNum(employee.getUserNo())){
+				this.employeeService.update(employee);
+			}
+		}			
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
+		map.put("success", success);
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);
