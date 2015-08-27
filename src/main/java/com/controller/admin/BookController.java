@@ -27,7 +27,7 @@ import com.service.BookService;
 public class BookController {
 	@Autowired
 	public BookService bookService;
-
+	
 	Logger logger  =  Logger.getLogger(BookController.class);
 	
 	//全查
@@ -39,45 +39,49 @@ public class BookController {
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public void getListData(int pageIndex,int itemsPerPage,HttpServletRequest request,HttpServletResponse response){
 		int count=0;
+		Boolean success=false;
 		Map<String,Object> map=new HashMap<String,Object>();
-		Map<String,String> orderMap = new HashMap<String,String>();
-		List<Book> list=new ArrayList<Book>();
 		String keyword=request.getParameter("keyword");
-		String bookType=request.getParameter("bookType");
 		String orderProp =request.getParameter("orderProp");
-		if(orderProp!=null && !orderProp.isEmpty()){
-			if(orderProp.equals("publishTime")||orderProp.equals("points")){
-				orderMap.put(orderProp, "desc");
+		if(RegCheck.CheckKeyword(keyword)&&RegCheck.CheckEnglish(orderProp)){			
+			Map<String,String> orderMap = new HashMap<String,String>();
+			List<Book> list=new ArrayList<Book>();			
+			String bookType=request.getParameter("bookType");			
+			if(orderProp!=null && !orderProp.isEmpty()){
+				if(orderProp.equals("publishTime")||orderProp.equals("points")){
+					orderMap.put(orderProp, "desc");
+				}
+				else
+					orderMap.put(orderProp, "asc");
 			}
-			else
-				orderMap.put(orderProp, "asc");
-		}
-		else {
-			orderMap.put("bookInputTime", "desc");
-		}		
-		if(keyword!=null && !keyword.isEmpty()){
-			Map<String,Object> like=new HashMap<String,Object>();
-			like.put("bookName", "%"+keyword+"%");
-			like.put("author", "%"+keyword+"%");
-			like.put("publisher", "%"+keyword+"%");
-			if(bookType!=null && !bookType.isEmpty()){
-				Map<String,Object> and=new HashMap<String,Object>();
-				and.put("type", bookType);
-				list=this.bookService.getListByProperties(like, and,pageIndex*itemsPerPage,itemsPerPage,orderMap);
-				count=this.bookService.getCountByProperties(like, and);
+			else {
+				orderMap.put("bookInputTime", "desc");
+			}		
+			if(keyword!=null && !keyword.isEmpty()){
+				Map<String,Object> like=new HashMap<String,Object>();
+				like.put("bookName", "%"+keyword+"%");
+				like.put("author", "%"+keyword+"%");
+				like.put("publisher", "%"+keyword+"%");
+				if(bookType!=null && !bookType.isEmpty()){
+					Map<String,Object> and=new HashMap<String,Object>();
+					and.put("type", bookType);
+					list=this.bookService.getListByProperties(like, and,pageIndex*itemsPerPage,itemsPerPage,orderMap);
+					count=this.bookService.getCountByProperties(like, and);
+				}
+				else{
+					list=this.bookService.getListByProperties(like, null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
+					count=this.bookService.getCountByProperties(like, null);
+				}
 			}
 			else{
-				list=this.bookService.getListByProperties(like, null,pageIndex*itemsPerPage,itemsPerPage,orderMap);
-				count=this.bookService.getCountByProperties(like, null);
+				list=this.bookService.getListByProperties(pageIndex*itemsPerPage,itemsPerPage,orderMap);
+				count=this.bookService.getCount();
 			}
+			success=true;
+			map.put("list", list);
+			map.put("count",count);
 		}
-		else{
-			list=this.bookService.getListByProperties(pageIndex*itemsPerPage,itemsPerPage,orderMap);
-			count=this.bookService.getCount();
-		}
-		map.put("success", true);
-		map.put("list", list);
-		map.put("count",count);
+		map.put("success", success);				
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);
@@ -94,7 +98,7 @@ public class BookController {
 	public void add(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
 					String type,int amount,String brief){
 		Boolean success=false;
-		if(success=RegCheck.CheckNum(ISBN)){
+		if(RegCheck.CheckNum(ISBN)){
 			Book book=new Book(id);
 			book.setISBN(ISBN);
 			book.setBookName(bookName);
@@ -110,6 +114,7 @@ public class BookController {
 			book.setBookState("新书");
 			book.setBookInputTime(new Date());
 			this.bookService.add(book);
+			success=true;
 		}
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", success);
@@ -126,11 +131,13 @@ public class BookController {
 	//按ID删除
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public void deleteById(HttpServletResponse response,String id){
-		//String id = request.getParameter("id");
-		System.out.println(id);
-		this.bookService.delete(id);
+		Boolean success=false;
+		if(RegCheck.CheckLetterAndNum(id)){
+				this.bookService.delete(id);
+				success=true;
+		}
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
+		map.put("success", success);
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);
@@ -146,12 +153,14 @@ public class BookController {
 	//详细显示要修改的记录
 	@RequestMapping(value = "/get",method = RequestMethod.GET)
 	public void get(HttpServletResponse response,String id) {
-		System.out.println(id);
-		Book book=this.bookService.get(id);
-		System.out.println(book.getBookName());
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("success", true);
-		map.put("item", book);
+		Boolean success=false;
+		if(RegCheck.CheckLetterAndNum(id)){
+			Book book=this.bookService.get(id);
+			map.put("item", book);
+			success=true;
+		}			
+		map.put("success", success);		
 		try {
 			JsonUtil.setContentType(response);
 			String response_json = JsonUtil.object2JsonStr(map);
@@ -167,7 +176,7 @@ public class BookController {
 	public void update(HttpServletResponse response,String id,String ISBN,String bookName,String author,String publisher,int publishTime,
 			String type,int amount,String brief,float points,int borrowed,int commentNum,String bookState){
 		Boolean success=false;
-		if(success=RegCheck.CheckNum(ISBN)){
+		if(success=RegCheck.CheckNum(ISBN)&&RegCheck.CheckLetterAndNum(id)){
 			Book book=new Book(id);
 			book.setISBN(ISBN);
 			book.setBookName(bookName);
