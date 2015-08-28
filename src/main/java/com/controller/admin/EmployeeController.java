@@ -21,6 +21,7 @@ import com.common.util.RegCheck;
 import com.entity.Borrow;
 import com.entity.Employee;
 import com.service.BorrowService;
+import com.service.BoundInfoService;
 import com.service.EmployeeService;
 @Controller
 @RequestMapping("/admin/employee")
@@ -29,6 +30,9 @@ public class EmployeeController {
 	public EmployeeService employeeService;
 	@Autowired
 	public BorrowService borrowService;
+	@Autowired
+	public BoundInfoService boundInfoService;
+	
 	Logger logger  =  Logger.getLogger(EmployeeController.class);
 	//全查
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -117,7 +121,14 @@ public class EmployeeController {
 	public void deleteById(HttpServletResponse response,String id) {
 		//String id = request.getParameter("id");
 		System.out.println(id);
+		Map<String,Object> props=new HashMap<String,Object>();
+		props.put("employee", this.employeeService.getById(id));
+		String bId=this.boundInfoService.getByProperties(props).getId();
+		if(bId!=null){
+			this.boundInfoService.delete(bId);
+		}
 		this.employeeService.delete(id);
+		
 		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("success", true);
 		try {

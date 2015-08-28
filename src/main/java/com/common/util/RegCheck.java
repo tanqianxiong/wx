@@ -20,8 +20,8 @@ public class RegCheck {
 			return Check(reg,str);
 		}
 		public static boolean CheckLetterAndNum(String str){
-			String reg="^[A-Za-z0-9]+$";
-			return Check(reg,str);
+			//String reg="^[A-Za-z0-9]*_{0,1}[A-Za-z0-9]*$";
+			return true;//Check(reg,str);
 		}
 		public static boolean CheckKeyword(String str){
 			String reg="^[\u4E00-\u9FA5A-Za-z0-9]*·{0,1}[\u4E00-\u9FA5A-Za-z0-9]*$";
