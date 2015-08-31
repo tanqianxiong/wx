@@ -152,13 +152,13 @@ function pageselectCallback(page_index, jq){
 				var bookList = result.list;
 				if (bookList.length > 0) {
 					//重新加载分页
-					$("#pagination").pagination(result.count, {
+					$("#pagination").pagination(result.count2, {
 						callback: pageselectCallback,
 				        load_first_page:false,
 				        current_page:page_index,
 				        items_per_page:$('#itemsPerPage').val(),
 				     });
-					$('#searchInfo').html('共'+result.count+'条记录');
+					$('#searchInfo').html('共'+result.count2+'条记录');
 					$("#count").html(result.count);
 					$("#count").attr('id','dontAlterMeAgain');
 					setDataTable(bookList);

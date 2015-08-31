@@ -103,12 +103,13 @@ public class AppointmentController {
 		else {
 			orderMap.put("applyTime", "desc");
 		}
-		List<Appointment> list=this.appointmentService.getListByProperties(andProps, pageIndex*itemsPerPage,itemsPerPage,orderMap);
-		num=this.appointmentService.getCountByProperty("welfare",wf);
+		List<Appointment> list=this.appointmentService.getListByProperties(andProps, pageIndex*itemsPerPage,itemsPerPage,orderMap);//分页计算
+		List<Appointment> list2=this.appointmentService.getListByProperty("welfare", wf);//不分页，按照福利ID查找所得数据
+		int count2=this.appointmentService.getCountByProperty("welfare",wf);//分页计算
 		int count=0;//未处理请求数
-		if(list!=null&&!list.isEmpty()){
-			for(int i=0;i<num;i++){
-				if(list.get(i).getState().equals("申请中"))
+		if(list2!=null&&!list2.isEmpty()){
+			for(int i=0;i<list2.size();i++){
+				if(list2.get(i).getState().equals("申请中"))
 					count++;
 			}
 		}
@@ -116,6 +117,7 @@ public class AppointmentController {
 		map.put("success", true);
 		map.put("list",list);
 		map.put("count", count);
+		map.put("count2", count2);
 		//加载福利名称到detail页面
 		map.put("welfareName", wf.getName());
 		try {
