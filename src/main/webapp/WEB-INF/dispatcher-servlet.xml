@@ -40,6 +40,7 @@
 						<value>/tobind.do</value>
 						<value>/binding.do</value>
 						<value>/checkWeChat.do</value>
+						<value>/linkWeChat.do</value>
 					</list>
 				</property>
   			</bean>

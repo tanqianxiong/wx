@@ -19,6 +19,7 @@ import com.service.BoundInfoService;
 import com.service.EmployeeService;
 import com.common.util.JsonUtil;
 import com.common.util.RegCheck;
+import com.common.util.WeChatUtil;
 import com.controller.admin.WelfareController;
 import com.entity.BoundInfo;
 import com.entity.Employee;
@@ -32,17 +33,22 @@ public class BoundController {
 	public EmployeeService employeeService;
 	Logger logger  =  Logger.getLogger(BoundController.class);
 
-	/*@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.GET)
 	public void checkWeChat(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		WeChatUtil.check(request, response);
-	}*/
+	}
+	@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.POST)
+	public void doWeChat(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		response.setContentType("text/xml;charset=UTF-8");
+		response.getWriter().print(WeChatUtil.responseMsg(request, response));
+	}
 	
-	/*@RequestMapping(value = {"/checkWeChat"}, method = RequestMethod.GET)
-	public void checkWeChat(String code, HttpServletRequest request,HttpServletResponse response) throws IOException {
+	@RequestMapping(value = {"/linkWeChat"}, method = RequestMethod.GET)
+	public void linkWeChat(String code, String w_type,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		String openId=WeChatUtil.httpGetOpenId(code);
 		String basePath = request.getContextPath();
-		response.sendRedirect(basePath + "/pt/book/list.do?openId="+openId);
-	}*/
+		response.sendRedirect(basePath + "/pt/"+w_type+"?openId="+openId);
+	}
 	@RequestMapping(value = {"/binding"}, method = RequestMethod.GET)
 	public ModelAndView showBoundPage(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pt/binding");

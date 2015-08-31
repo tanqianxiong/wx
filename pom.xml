@@ -155,6 +155,11 @@
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
+	    <dependency>
+	    	<groupId>com.thoughtworks.xstream</groupId>
+	    	<artifactId>xstream</artifactId>
+	    	<version>1.4.7</version>
+	    </dependency>
   </dependencies>
   <repositories>
 		<repository>
