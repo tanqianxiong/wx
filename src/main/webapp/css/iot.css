@@ -97,7 +97,8 @@ img{
 	padding: 2px;
 }
 .escheat{
-	padding: 3px 0;
+	padding: 3px;
+	vertival-align:middle;
 }
 #escheat-no{
 	background-color: #aaa;
