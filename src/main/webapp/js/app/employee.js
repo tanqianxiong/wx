@@ -39,6 +39,7 @@ function update(id) {
 						$(this).val(item.point);
 						break;					
 					}					
+					$('#gender').val(item.gender);
 					window.url = "update.do";
 				});
 			}
